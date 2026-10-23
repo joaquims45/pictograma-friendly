@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'core/providers.dart';
@@ -15,6 +16,17 @@ class App extends ConsumerWidget {
       title: 'Pictogramas',
       debugShowCheckedModeBanner: false,
       theme: buildAppTheme(),
+      builder: (context, child) {
+        // En celulares la pantalla queda siempre vertical: girar el teléfono
+        // cambiaría de lugar los pictogramas. Las tablets pueden girar.
+        final phone = MediaQuery.sizeOf(context).shortestSide < 600;
+        SystemChrome.setPreferredOrientations(
+          phone
+              ? const [DeviceOrientation.portraitUp]
+              : DeviceOrientation.values,
+        );
+        return child ?? const SizedBox.shrink();
+      },
       home: boot.when(
         loading: () => const Scaffold(),
         error: (e, _) => Scaffold(body: Center(child: Text('Error: $e'))),

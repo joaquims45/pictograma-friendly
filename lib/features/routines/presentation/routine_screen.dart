@@ -36,41 +36,43 @@ class RoutineScreen extends ConsumerWidget {
     final steps = ref.watch(routineStepsProvider(routine.id));
     final all = steps.value;
     final hasDone = all != null && all.any((e) => e.step.done);
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(routine.name),
-        backgroundColor: Colors.transparent,
-        actions: [
-          // Arriba y aparte de "Listo": un doble toque no puede deshacer.
-          if (hasDone)
-            IconButton(
-              tooltip: 'Volver al paso anterior',
-              icon: const Icon(Icons.undo),
-              onPressed: () =>
-                  _setDone(ref, all.lastWhere((e) => e.step.done), false),
-            ),
-        ],
-      ),
-      body: SafeArea(
-        child: steps.when(
-          loading: () => const SizedBox.shrink(),
-          error: (e, _) => Center(child: Text('Error: $e')),
-          data: (list) {
-            final progress = RoutineProgress(list);
-            if (progress.isEmpty) {
-              return const Center(
-                child: Text('Esta rutina todavía no tiene pasos'),
+    return MediaQuery.withNoTextScaling(
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(routine.name),
+          backgroundColor: Colors.transparent,
+          actions: [
+            // Arriba y aparte de "Listo": un doble toque no puede deshacer.
+            if (hasDone)
+              IconButton(
+                tooltip: 'Volver al paso anterior',
+                icon: const Icon(Icons.undo),
+                onPressed: () =>
+                    _setDone(ref, all.lastWhere((e) => e.step.done), false),
+              ),
+          ],
+        ),
+        body: SafeArea(
+          child: steps.when(
+            loading: () => const SizedBox.shrink(),
+            error: (e, _) => Center(child: Text('Error: $e')),
+            data: (list) {
+              final progress = RoutineProgress(list);
+              if (progress.isEmpty) {
+                return const Center(
+                  child: Text('Esta rutina todavía no tiene pasos'),
+                );
+              }
+              if (progress.finished) {
+                return _Finished(onRestart: () => _restart(ref));
+              }
+              return _Active(
+                progress: progress,
+                onDone: () => _setDone(ref, progress.current!, true),
+                onSpeak: (p) => ref.read(speakerProvider).speakPictogram(p),
               );
-            }
-            if (progress.finished) {
-              return _Finished(onRestart: () => _restart(ref));
-            }
-            return _Active(
-              progress: progress,
-              onDone: () => _setDone(ref, progress.current!, true),
-              onSpeak: (p) => ref.read(speakerProvider).speakPictogram(p),
-            );
-          },
+            },
+          ),
         ),
       ),
     );

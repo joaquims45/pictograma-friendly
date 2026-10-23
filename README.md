@@ -52,7 +52,7 @@ flutter run -d emulator-5554
 
 ## Modo adulto (etapa 2)
 Desde la pantalla "¿Quién usa la app?" tocar el candado → crear un PIN de 4 dígitos (la primera vez) o ingresarlo.
-Por perfil se puede: cambiar el tamaño de grilla (1x1 a 4x4), activar la barra de frases, ordenar (arrastrando), ocultar o quitar pictogramas, agregar existentes, crear pictogramas propios con foto y voz grabada, y crear/ordenar/ocultar categorías.
+Por perfil se puede: cambiar el tamaño de grilla (1x1 a 4x4; con 1x1 se ve de a uno y se pasa deslizando hacia arriba), activar la barra de frases, ordenar (arrastrando), ocultar o quitar pictogramas, agregar existentes, crear pictogramas propios con foto y voz grabada, y crear/ordenar/ocultar categorías.
 Si se olvida el PIN: borrar los datos de la app (Ajustes → Apps → Pictogramas → Almacenamiento) reinicia todo, incluidas las fotos y audios propios.
 
 ## Rutinas / agenda visual (etapa 3)
@@ -63,3 +63,8 @@ En el tablero del chico aparece el botón "Rutinas": muestra "Primero", "Despué
 Modo adulto → "Copia de seguridad": **Crear copia** guarda un `.zip` con todo (perfiles, tableros, pictogramas propios con fotos y voces, rutinas y registro de uso) donde elijas, por ejemplo en Descargas. **Restaurar copia** reemplaza todos los datos del teléfono por los de la copia (pide confirmación). Para pasar la app a otro teléfono: instalar el APK, crear la copia en el viejo, copiar el `.zip` al nuevo y restaurarlo. El PIN no se copia: se crea uno nuevo.
 
 Modo adulto → "Registro de uso": opcional y apagado por defecto. Anota qué pictograma se toca y cuándo, solo en el teléfono. Muestra un resumen de los últimos 7 días, se exporta a CSV (para planilla) y se puede borrar.
+
+## Detalles de uso para los chicos
+- El botón "Atrás" de Android no sale del tablero: se sale manteniendo 3 segundos el candado de la esquina.
+- En la barra de frases, "Borrar" quita el último pictograma; mantenido presionado, vacía toda la frase.
+- En celulares la pantalla queda siempre vertical.

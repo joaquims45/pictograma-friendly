@@ -10,7 +10,7 @@
 - Riverpod 3.x, drift 2.x (versiones exactas en `pubspec.lock`).
 - Archivos generados de drift (`*.g.dart`) se versionan para poder compilar sin build_runner.
 - Toolchain instalado en `D:\dev` (flutter, android-sdk, pub-cache, gradle) por falta de espacio en C:.
-- "upa" no tiene un pictograma ARASAAC claro (la búsqueda devuelve brazo/levantar objetos). Queda sin pictograma automático; se cubre con foto propia en la Etapa 2.
+- "upa" se resuelve con el pictograma ARASAAC 38713 ("llevar en brazos": un adulto con un bebé en la cadera), encontrado al buscar ese término. La búsqueda directa de "upa" no sirve (devuelve "chupar", "lupa"). Igual se puede reemplazar por una foto propia en el modo adulto.
 - Script `tools/fetch_arasaac.py` baja ~184 pictogramas (PNG 500px) a `assets/pictograms/` y genera `assets/pictograms.json`.
 - Etapa 2: el modo adulto se abre con el candado del selector de perfiles (fuera del fijado de pantalla, así los chicos no llegan). PIN de 4 dígitos, hash SHA-256 con sal en flutter_secure_storage. Sin bloqueo por intentos fallidos (los chicos no pueden llegar a esa pantalla).
 - Esquema v2: tabla `profile_categories` (orden y ocultar por perfil). Migración v1→v2 rellena desde `board_items`.
@@ -33,3 +33,9 @@
 - El registro se guarda en segundo plano y nunca retrasa la voz.
 - Permisos verificados en el APK de release: solo RECORD_AUDIO y ACCESS_NETWORK_STATE (lo agrega el reproductor de audio; solo consulta el estado de red). No declara INTERNET, así que la app no puede enviar ni recibir datos.
 - Dependencias nuevas: `archive` (zip) y `file_picker` (guardar/abrir archivos).
+- Repaso final: el botón "Atrás" de Android no saca al chico del tablero (`PopScope`); la única salida es mantener 3 segundos el candado. Antes un chico podía volver al selector de perfiles.
+- Las pantallas de los chicos (tablero, rutinas) ignoran el tamaño de fuente del sistema: la etiqueta escala con el ancho de la tarjeta, no con un ajuste del teléfono que rompería el diseño. Las pantallas de adultos sí respetan el tamaño de fuente del sistema.
+- En celulares (lado corto < 600 dp) la app queda siempre vertical: girar el teléfono movería los pictogramas y rompe la planificación motora. Las tablets pueden girar.
+- Grilla: si el tablero tiene hasta 4 filas, todos los pictogramas entran en pantalla sin scroll y ocupan el alto disponible (cada uno siempre en el mismo lugar). Con más, hay scroll con tarjetas de tamaño fijo. Con 1x1 se muestra de a uno y se pasa deslizando hacia arriba (una página por pictograma).
+- En la barra de frases, "Borrar" quita el último pictograma y, mantenido presionado, vacía toda la frase.
+- Las skills de diseño disponibles son para sitios web y pantallas web; su flujo (inspector con Chrome, páginas de aterrizaje) no aplica a Flutter. Se usaron solo los principios compatibles: color plano, separar por tono y no por líneas ni sombras, jerarquía por tamaño y márgenes parejos, junto con los criterios sensoriales de la app.

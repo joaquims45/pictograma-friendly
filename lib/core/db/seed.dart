@@ -22,6 +22,7 @@ const _twinsBoard = [
   'quiero comer',
   'quiero jugar',
   'me duele',
+  'upa',
   'más',
   'terminado',
 ];

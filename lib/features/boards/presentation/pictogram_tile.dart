@@ -47,7 +47,7 @@ class _PictogramTileState extends State<PictogramTile> {
             // Todo escala con el ancho: en grillas densas el dibujo sigue mandando.
             final w = box.maxWidth;
             final pad = (w * 0.06).clamp(6.0, 12.0);
-            final font = (w * 0.115).clamp(11.0, 22.0);
+            final font = (w * 0.115).clamp(11.0, 30.0);
             final labelHeight = font * 1.15 * 2;
             return Container(
               decoration: BoxDecoration(

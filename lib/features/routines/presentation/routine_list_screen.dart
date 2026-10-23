@@ -26,46 +26,48 @@ class RoutineListScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final routines = ref.watch(routinesProvider(profile.id));
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Rutinas'),
-        backgroundColor: Colors.transparent,
-      ),
-      body: routines.when(
-        loading: () => const SizedBox.shrink(),
-        error: (e, _) => Center(child: Text('Error: $e')),
-        data: (list) => ListView(
-          padding: const EdgeInsets.all(16),
-          children: [
-            for (var i = 0; i < list.length; i++)
-              Padding(
-                padding: const EdgeInsets.only(bottom: 16),
-                child: GestureDetector(
-                  onTap: () => Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (_) => RoutineScreen(routine: list[i]),
-                    ),
-                  ),
-                  child: Container(
-                    height: 110,
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      color: AppColors.pastels.values.elementAt(
-                        i % AppColors.pastels.length,
+    return MediaQuery.withNoTextScaling(
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Rutinas'),
+          backgroundColor: Colors.transparent,
+        ),
+        body: routines.when(
+          loading: () => const SizedBox.shrink(),
+          error: (e, _) => Center(child: Text('Error: $e')),
+          data: (list) => ListView(
+            padding: const EdgeInsets.all(16),
+            children: [
+              for (var i = 0; i < list.length; i++)
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 16),
+                  child: GestureDetector(
+                    onTap: () => Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (_) => RoutineScreen(routine: list[i]),
                       ),
-                      borderRadius: BorderRadius.circular(24),
                     ),
-                    child: Text(
-                      list[i].name,
-                      style: const TextStyle(
-                        fontSize: 28,
-                        fontWeight: FontWeight.w700,
+                    child: Container(
+                      height: 110,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        color: AppColors.pastels.values.elementAt(
+                          i % AppColors.pastels.length,
+                        ),
+                        borderRadius: BorderRadius.circular(24),
+                      ),
+                      child: Text(
+                        list[i].name,
+                        style: const TextStyle(
+                          fontSize: 28,
+                          fontWeight: FontWeight.w700,
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
-          ],
+            ],
+          ),
         ),
       ),
     );

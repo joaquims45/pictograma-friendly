@@ -48,6 +48,10 @@ class PhraseBar extends ConsumerWidget {
             onPressed: phrase.isEmpty
                 ? null
                 : () => ref.read(phraseProvider.notifier).removeLast(),
+            // Mantener presionado vacía toda la frase.
+            onLongPress: phrase.isEmpty
+                ? null
+                : () => ref.read(phraseProvider.notifier).clear(),
             icon: const Icon(Icons.backspace_outlined),
             label: const Text('Borrar'),
           ),

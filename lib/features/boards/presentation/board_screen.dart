@@ -59,58 +59,60 @@ class _BoardScreenState extends ConsumerState<BoardScreen> {
     final grid = board.when(
       loading: () => const SizedBox.shrink(),
       error: (e, _) => Center(child: Text('Error: $e')),
-      data: (items) => GridView.builder(
-        padding: const EdgeInsets.all(12),
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: profile.gridSize,
-          mainAxisSpacing: 12,
-          crossAxisSpacing: 12,
-          childAspectRatio: profile.gridSize >= 3 ? 0.78 : 0.9,
-        ),
-        itemCount: items.length,
-        itemBuilder: (_, i) =>
-            PictogramTile(pictogram: items[i], onTap: () => _onTap(items[i])),
-      ),
+      data: (items) => items.isEmpty
+          ? const SizedBox.shrink()
+          : _PictogramGrid(
+              items: items,
+              columns: profile.gridSize,
+              onTap: _onTap,
+            ),
     );
 
-    return Scaffold(
-      body: SafeArea(
-        child: Column(
-          children: [
-            Row(
+    // El botón "Atrás" no saca al chico del tablero: se sale solo con el candado.
+    return PopScope(
+      canPop: false,
+      child: MediaQuery.withNoTextScaling(
+        child: Scaffold(
+          body: SafeArea(
+            child: Column(
               children: [
-                if (routines.isNotEmpty)
-                  TextButton.icon(
-                    onPressed: () => openRoutines(context, profile, routines),
-                    icon: const Icon(Icons.checklist, size: 28),
-                    label: const Text('Rutinas'),
-                    style: TextButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 16,
-                        vertical: 10,
+                Row(
+                  children: [
+                    if (routines.isNotEmpty)
+                      TextButton.icon(
+                        onPressed: () =>
+                            openRoutines(context, profile, routines),
+                        icon: const Icon(Icons.checklist, size: 28),
+                        label: const Text('Rutinas'),
+                        style: TextButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 16,
+                            vertical: 10,
+                          ),
+                          textStyle: const TextStyle(fontSize: 18),
+                        ),
                       ),
-                      textStyle: const TextStyle(fontSize: 18),
-                    ),
+                    const Spacer(),
+                    _ExitLock(onExit: _exit),
+                  ],
+                ),
+                if (profile.phraseBarEnabled) const PhraseBar(),
+                Expanded(
+                  child: Row(
+                    children: [
+                      if (cats.isNotEmpty)
+                        _CategoryRail(
+                          categories: cats,
+                          selected: activeCat,
+                          onSelect: (id) => setState(() => _categoryId = id),
+                        ),
+                      Expanded(child: grid),
+                    ],
                   ),
-                const Spacer(),
-                _ExitLock(onExit: _exit),
+                ),
               ],
             ),
-            if (profile.phraseBarEnabled) const PhraseBar(),
-            Expanded(
-              child: Row(
-                children: [
-                  if (cats.isNotEmpty)
-                    _CategoryRail(
-                      categories: cats,
-                      selected: activeCat,
-                      onSelect: (id) => setState(() => _categoryId = id),
-                    ),
-                  Expanded(child: grid),
-                ],
-              ),
-            ),
-          ],
+          ),
         ),
       ),
     );
@@ -189,6 +191,73 @@ class _ExitLock extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 16, vertical: 6),
         child: Icon(Icons.lock_outline, size: 28, color: Color(0x668A93A0)),
       ),
+    );
+  }
+}
+
+/// Grilla de pictogramas.
+/// - 1x1: de a uno por pantalla, con salto de a una página.
+/// - Pocos pictogramas (hasta 4 filas): todos entran en pantalla sin scroll,
+///   así cada uno queda siempre en el mismo lugar (planificación motora).
+/// - Muchos: scroll con tarjetas de tamaño fijo.
+class _PictogramGrid extends StatelessWidget {
+  const _PictogramGrid({
+    required this.items,
+    required this.columns,
+    required this.onTap,
+  });
+
+  final List<Pictogram> items;
+  final int columns;
+  final ValueChanged<Pictogram> onTap;
+
+  static const _pad = 12.0;
+  static const _gap = 12.0;
+
+  @override
+  Widget build(BuildContext context) {
+    if (columns == 1) {
+      return PageView.builder(
+        scrollDirection: Axis.vertical,
+        itemCount: items.length,
+        itemBuilder: (_, i) => Padding(
+          padding: const EdgeInsets.all(_pad),
+          child: PictogramTile(
+            pictogram: items[i],
+            onTap: () => onTap(items[i]),
+          ),
+        ),
+      );
+    }
+
+    return LayoutBuilder(
+      builder: (context, box) {
+        final rows = (items.length / columns).ceil();
+        var ratio = columns >= 3 ? 0.78 : 0.9;
+        var fits = false;
+        if (rows <= 4) {
+          final w = (box.maxWidth - _pad * 2 - _gap * (columns - 1)) / columns;
+          final h = (box.maxHeight - _pad * 2 - _gap * (rows - 1)) / rows;
+          final fit = w / h;
+          if (fit >= 0.6 && fit <= 1.25) {
+            ratio = fit;
+            fits = true;
+          }
+        }
+        return GridView.builder(
+          padding: const EdgeInsets.all(_pad),
+          physics: fits ? const NeverScrollableScrollPhysics() : null,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: columns,
+            mainAxisSpacing: _gap,
+            crossAxisSpacing: _gap,
+            childAspectRatio: ratio,
+          ),
+          itemCount: items.length,
+          itemBuilder: (_, i) =>
+              PictogramTile(pictogram: items[i], onTap: () => onTap(items[i])),
+        );
+      },
     );
   }
 }

@@ -62,6 +62,7 @@ class PhraseNotifier extends Notifier<List<Pictogram>> {
   @override
   List<Pictogram> build() => const [];
   void add(Pictogram p) => state = [...state, p];
+  void clear() => state = const [];
   void removeLast() {
     if (state.isNotEmpty) state = state.sublist(0, state.length - 1);
   }

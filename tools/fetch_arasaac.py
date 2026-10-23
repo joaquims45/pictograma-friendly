@@ -6,7 +6,7 @@ Genera assets/pictograms/<id>.png y assets/pictograms.json.
 Solo usa la biblioteca estándar. Es reanudable (salta lo ya descargado).
 Pictogramas: ARASAAC (https://arasaac.org), Gobierno de Aragón, autor Sergio Palao.
 
-Nota: "upa" no tiene pictograma ARASAAC claro; se resuelve con foto propia (etapa 2).
+Nota: "upa" se busca como "llevar en brazos" (ARASAAC 38713, un adulto con un bebé en la cadera).
 """
 import json
 import time
@@ -30,7 +30,7 @@ COLORS = {
 TERMS = {
     "necesidades": [
         ("agua", "quiero agua"), ("comer", "quiero comer"), ("jugar", "quiero jugar"),
-        ("dolor", "me duele"), ("más", "más"), ("terminar", "terminado"),
+        ("dolor", "me duele"), ("llevar en brazos", "upa"), ("más", "más"), ("terminar", "terminado"),
         ("baño", "quiero ir al baño"), ("dormir", "quiero dormir"), ("ayuda", "ayuda"),
         ("sí", "sí"), ("no", "no"), ("pañal", "pañal"), ("frío", "tengo frío"),
         ("calor", "tengo calor"), ("tengo hambre", "tengo hambre"), ("sed", "tengo sed"),
