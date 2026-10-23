@@ -68,3 +68,6 @@ Modo adulto → "Registro de uso": opcional y apagado por defecto. Anota qué pi
 - El botón "Atrás" de Android no sale del tablero: se sale manteniendo 3 segundos el candado de la esquina.
 - En la barra de frases, "Borrar" quita el último pictograma; mantenido presionado, vacía toda la frase.
 - En celulares la pantalla queda siempre vertical.
+
+## Ícono y nombre de la app
+El ícono sale de `app-icon.png` (raíz del proyecto, 1254x1254 con fondo transparente). Para cambiarlo: reemplazar ese archivo y correr `dart run flutter_launcher_icons`. La configuración está al final de `pubspec.yaml` (fondo `#F7F3EC` y un margen de 21% para que el logo no se recorte con la máscara circular de Android). El nombre bajo el ícono es "PictoFriendly" (`android:label` en `AndroidManifest.xml`).

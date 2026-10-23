@@ -190,7 +190,9 @@ Future<String?> askForText(
   required String title,
   String initial = '',
 }) {
-  final controller = TextEditingController(text: initial);
+  // El texto viene seleccionado: al escribir se reemplaza el nombre actual.
+  final controller = TextEditingController(text: initial)
+    ..selection = TextSelection(baseOffset: 0, extentOffset: initial.length);
   return showDialog<String>(
     context: context,
     builder: (_) => StatefulBuilder(
