@@ -10,3 +10,5 @@
 - Riverpod 3.x, drift 2.x (versiones exactas en `pubspec.lock`).
 - Archivos generados de drift (`*.g.dart`) se versionan para poder compilar sin build_runner.
 - Toolchain instalado en `D:\dev` (flutter, android-sdk, pub-cache, gradle) por falta de espacio en C:.
+- "upa" no tiene un pictograma ARASAAC claro (la búsqueda devuelve brazo/levantar objetos). Queda sin pictograma automático; se cubre con foto propia en la Etapa 2.
+- Script `tools/fetch_arasaac.py` baja ~184 pictogramas (PNG 500px) a `assets/pictograms/` y genera `assets/pictograms.json`.

@@ -1,0 +1,1303 @@
+{
+  "source": "ARASAAC (CC BY-NC-SA) - Gobierno de Aragon, Sergio Palao",
+  "categories": {
+    "necesidades": "#CFE0EC",
+    "comida": "#F2DDC4",
+    "bebida": "#CDE6E3",
+    "juegos": "#E3D6EC",
+    "emociones": "#F2D5D9",
+    "cuerpo": "#F0E3C6",
+    "personas": "#D9E7CF",
+    "acciones": "#DADDE6"
+  },
+  "pictograms": [
+    {
+      "id": 32464,
+      "text": "quiero agua",
+      "category": "necesidades",
+      "color": "#CFE0EC",
+      "asset": "assets/pictograms/32464.png"
+    },
+    {
+      "id": 6456,
+      "text": "quiero comer",
+      "category": "necesidades",
+      "color": "#CFE0EC",
+      "asset": "assets/pictograms/6456.png"
+    },
+    {
+      "id": 23392,
+      "text": "quiero jugar",
+      "category": "necesidades",
+      "color": "#CFE0EC",
+      "asset": "assets/pictograms/23392.png"
+    },
+    {
+      "id": 2367,
+      "text": "me duele",
+      "category": "necesidades",
+      "color": "#CFE0EC",
+      "asset": "assets/pictograms/2367.png"
+    },
+    {
+      "id": 3220,
+      "text": "más",
+      "category": "necesidades",
+      "color": "#CFE0EC",
+      "asset": "assets/pictograms/3220.png"
+    },
+    {
+      "id": 28429,
+      "text": "terminado",
+      "category": "necesidades",
+      "color": "#CFE0EC",
+      "asset": "assets/pictograms/28429.png"
+    },
+    {
+      "id": 15905,
+      "text": "quiero ir al baño",
+      "category": "necesidades",
+      "color": "#CFE0EC",
+      "asset": "assets/pictograms/15905.png"
+    },
+    {
+      "id": 6479,
+      "text": "quiero dormir",
+      "category": "necesidades",
+      "color": "#CFE0EC",
+      "asset": "assets/pictograms/6479.png"
+    },
+    {
+      "id": 19524,
+      "text": "ayuda",
+      "category": "necesidades",
+      "color": "#CFE0EC",
+      "asset": "assets/pictograms/19524.png"
+    },
+    {
+      "id": 5584,
+      "text": "sí",
+      "category": "necesidades",
+      "color": "#CFE0EC",
+      "asset": "assets/pictograms/5584.png"
+    },
+    {
+      "id": 5526,
+      "text": "no",
+      "category": "necesidades",
+      "color": "#CFE0EC",
+      "asset": "assets/pictograms/5526.png"
+    },
+    {
+      "id": 22017,
+      "text": "pañal",
+      "category": "necesidades",
+      "color": "#CFE0EC",
+      "asset": "assets/pictograms/22017.png"
+    },
+    {
+      "id": 4652,
+      "text": "tengo frío",
+      "category": "necesidades",
+      "color": "#CFE0EC",
+      "asset": "assets/pictograms/4652.png"
+    },
+    {
+      "id": 35561,
+      "text": "tengo calor",
+      "category": "necesidades",
+      "color": "#CFE0EC",
+      "asset": "assets/pictograms/35561.png"
+    },
+    {
+      "id": 7272,
+      "text": "tengo hambre",
+      "category": "necesidades",
+      "color": "#CFE0EC",
+      "asset": "assets/pictograms/7272.png"
+    },
+    {
+      "id": 7273,
+      "text": "tengo sed",
+      "category": "necesidades",
+      "color": "#CFE0EC",
+      "asset": "assets/pictograms/7273.png"
+    },
+    {
+      "id": 35537,
+      "text": "estoy cansado",
+      "category": "necesidades",
+      "color": "#CFE0EC",
+      "asset": "assets/pictograms/35537.png"
+    },
+    {
+      "id": 4550,
+      "text": "quiero un abrazo",
+      "category": "necesidades",
+      "color": "#CFE0EC",
+      "asset": "assets/pictograms/4550.png"
+    },
+    {
+      "id": 8195,
+      "text": "por favor",
+      "category": "necesidades",
+      "color": "#CFE0EC",
+      "asset": "assets/pictograms/8195.png"
+    },
+    {
+      "id": 8129,
+      "text": "gracias",
+      "category": "necesidades",
+      "color": "#CFE0EC",
+      "asset": "assets/pictograms/8129.png"
+    },
+    {
+      "id": 36914,
+      "text": "esperar",
+      "category": "necesidades",
+      "color": "#CFE0EC",
+      "asset": "assets/pictograms/36914.png"
+    },
+    {
+      "id": 5441,
+      "text": "quiero",
+      "category": "necesidades",
+      "color": "#CFE0EC",
+      "asset": "assets/pictograms/5441.png"
+    },
+    {
+      "id": 37162,
+      "text": "otra vez",
+      "category": "necesidades",
+      "color": "#CFE0EC",
+      "asset": "assets/pictograms/37162.png"
+    },
+    {
+      "id": 2494,
+      "text": "pan",
+      "category": "comida",
+      "color": "#F2DDC4",
+      "asset": "assets/pictograms/2494.png"
+    },
+    {
+      "id": 8312,
+      "text": "galleta",
+      "category": "comida",
+      "color": "#F2DDC4",
+      "asset": "assets/pictograms/8312.png"
+    },
+    {
+      "id": 2462,
+      "text": "manzana",
+      "category": "comida",
+      "color": "#F2DDC4",
+      "asset": "assets/pictograms/2462.png"
+    },
+    {
+      "id": 10218,
+      "text": "banana",
+      "category": "comida",
+      "color": "#F2DDC4",
+      "asset": "assets/pictograms/10218.png"
+    },
+    {
+      "id": 2888,
+      "text": "naranja",
+      "category": "comida",
+      "color": "#F2DDC4",
+      "asset": "assets/pictograms/2888.png"
+    },
+    {
+      "id": 2561,
+      "text": "pera",
+      "category": "comida",
+      "color": "#F2DDC4",
+      "asset": "assets/pictograms/2561.png"
+    },
+    {
+      "id": 2400,
+      "text": "frutilla",
+      "category": "comida",
+      "color": "#F2DDC4",
+      "asset": "assets/pictograms/2400.png"
+    },
+    {
+      "id": 3247,
+      "text": "uva",
+      "category": "comida",
+      "color": "#F2DDC4",
+      "asset": "assets/pictograms/3247.png"
+    },
+    {
+      "id": 2618,
+      "text": "yogur",
+      "category": "comida",
+      "color": "#F2DDC4",
+      "asset": "assets/pictograms/2618.png"
+    },
+    {
+      "id": 2541,
+      "text": "queso",
+      "category": "comida",
+      "color": "#F2DDC4",
+      "asset": "assets/pictograms/2541.png"
+    },
+    {
+      "id": 2427,
+      "text": "huevo",
+      "category": "comida",
+      "color": "#F2DDC4",
+      "asset": "assets/pictograms/2427.png"
+    },
+    {
+      "id": 2316,
+      "text": "carne",
+      "category": "comida",
+      "color": "#F2DDC4",
+      "asset": "assets/pictograms/2316.png"
+    },
+    {
+      "id": 2533,
+      "text": "pollo",
+      "category": "comida",
+      "color": "#F2DDC4",
+      "asset": "assets/pictograms/2533.png"
+    },
+    {
+      "id": 2519,
+      "text": "pescado",
+      "category": "comida",
+      "color": "#F2DDC4",
+      "asset": "assets/pictograms/2519.png"
+    },
+    {
+      "id": 8584,
+      "text": "fideos",
+      "category": "comida",
+      "color": "#F2DDC4",
+      "asset": "assets/pictograms/8584.png"
+    },
+    {
+      "id": 6911,
+      "text": "arroz",
+      "category": "comida",
+      "color": "#F2DDC4",
+      "asset": "assets/pictograms/6911.png"
+    },
+    {
+      "id": 2573,
+      "text": "sopa",
+      "category": "comida",
+      "color": "#F2DDC4",
+      "asset": "assets/pictograms/2573.png"
+    },
+    {
+      "id": 31146,
+      "text": "papa",
+      "category": "comida",
+      "color": "#F2DDC4",
+      "asset": "assets/pictograms/31146.png"
+    },
+    {
+      "id": 2619,
+      "text": "zanahoria",
+      "category": "comida",
+      "color": "#F2DDC4",
+      "asset": "assets/pictograms/2619.png"
+    },
+    {
+      "id": 2594,
+      "text": "tomate",
+      "category": "comida",
+      "color": "#F2DDC4",
+      "asset": "assets/pictograms/2594.png"
+    },
+    {
+      "id": 2377,
+      "text": "ensalada",
+      "category": "comida",
+      "color": "#F2DDC4",
+      "asset": "assets/pictograms/2377.png"
+    },
+    {
+      "id": 36999,
+      "text": "milanesa",
+      "category": "comida",
+      "color": "#F2DDC4",
+      "asset": "assets/pictograms/36999.png"
+    },
+    {
+      "id": 2527,
+      "text": "pizza",
+      "category": "comida",
+      "color": "#F2DDC4",
+      "asset": "assets/pictograms/2527.png"
+    },
+    {
+      "id": 35209,
+      "text": "helado",
+      "category": "comida",
+      "color": "#F2DDC4",
+      "asset": "assets/pictograms/35209.png"
+    },
+    {
+      "id": 25940,
+      "text": "chocolate",
+      "category": "comida",
+      "color": "#F2DDC4",
+      "asset": "assets/pictograms/25940.png"
+    },
+    {
+      "id": 10234,
+      "text": "torta",
+      "category": "comida",
+      "color": "#F2DDC4",
+      "asset": "assets/pictograms/10234.png"
+    },
+    {
+      "id": 2686,
+      "text": "caramelo",
+      "category": "comida",
+      "color": "#F2DDC4",
+      "asset": "assets/pictograms/2686.png"
+    },
+    {
+      "id": 2328,
+      "text": "cereales",
+      "category": "comida",
+      "color": "#F2DDC4",
+      "asset": "assets/pictograms/2328.png"
+    },
+    {
+      "id": 2787,
+      "text": "tostada",
+      "category": "comida",
+      "color": "#F2DDC4",
+      "asset": "assets/pictograms/2787.png"
+    },
+    {
+      "id": 2433,
+      "text": "jamón",
+      "category": "comida",
+      "color": "#F2DDC4",
+      "asset": "assets/pictograms/2433.png"
+    },
+    {
+      "id": 4626,
+      "text": "desayuno",
+      "category": "comida",
+      "color": "#F2DDC4",
+      "asset": "assets/pictograms/4626.png"
+    },
+    {
+      "id": 28207,
+      "text": "almuerzo",
+      "category": "comida",
+      "color": "#F2DDC4",
+      "asset": "assets/pictograms/28207.png"
+    },
+    {
+      "id": 4695,
+      "text": "merienda",
+      "category": "comida",
+      "color": "#F2DDC4",
+      "asset": "assets/pictograms/4695.png"
+    },
+    {
+      "id": 4592,
+      "text": "cena",
+      "category": "comida",
+      "color": "#F2DDC4",
+      "asset": "assets/pictograms/4592.png"
+    },
+    {
+      "id": 2445,
+      "text": "leche",
+      "category": "bebida",
+      "color": "#CDE6E3",
+      "asset": "assets/pictograms/2445.png"
+    },
+    {
+      "id": 11461,
+      "text": "jugo",
+      "category": "bebida",
+      "color": "#CDE6E3",
+      "asset": "assets/pictograms/11461.png"
+    },
+    {
+      "id": 6625,
+      "text": "té",
+      "category": "bebida",
+      "color": "#CDE6E3",
+      "asset": "assets/pictograms/6625.png"
+    },
+    {
+      "id": 31035,
+      "text": "mate",
+      "category": "bebida",
+      "color": "#CDE6E3",
+      "asset": "assets/pictograms/31035.png"
+    },
+    {
+      "id": 6510,
+      "text": "gaseosa",
+      "category": "bebida",
+      "color": "#CDE6E3",
+      "asset": "assets/pictograms/6510.png"
+    },
+    {
+      "id": 2610,
+      "text": "vaso",
+      "category": "bebida",
+      "color": "#CDE6E3",
+      "asset": "assets/pictograms/2610.png"
+    },
+    {
+      "id": 2288,
+      "text": "botella",
+      "category": "bebida",
+      "color": "#CDE6E3",
+      "asset": "assets/pictograms/2288.png"
+    },
+    {
+      "id": 2582,
+      "text": "taza",
+      "category": "bebida",
+      "color": "#CDE6E3",
+      "asset": "assets/pictograms/2582.png"
+    },
+    {
+      "id": 4577,
+      "text": "mamadera",
+      "category": "bebida",
+      "color": "#CDE6E3",
+      "asset": "assets/pictograms/4577.png"
+    },
+    {
+      "id": 4599,
+      "text": "chupete",
+      "category": "bebida",
+      "color": "#CDE6E3",
+      "asset": "assets/pictograms/4599.png"
+    },
+    {
+      "id": 3241,
+      "text": "pelota",
+      "category": "juegos",
+      "color": "#E3D6EC",
+      "asset": "assets/pictograms/3241.png"
+    },
+    {
+      "id": 26238,
+      "text": "muñeca",
+      "category": "juegos",
+      "color": "#E3D6EC",
+      "asset": "assets/pictograms/26238.png"
+    },
+    {
+      "id": 4921,
+      "text": "bloques",
+      "category": "juegos",
+      "color": "#E3D6EC",
+      "asset": "assets/pictograms/4921.png"
+    },
+    {
+      "id": 26403,
+      "text": "rompecabezas",
+      "category": "juegos",
+      "color": "#E3D6EC",
+      "asset": "assets/pictograms/26403.png"
+    },
+    {
+      "id": 8088,
+      "text": "dibujar",
+      "category": "juegos",
+      "color": "#E3D6EC",
+      "asset": "assets/pictograms/8088.png"
+    },
+    {
+      "id": 2348,
+      "text": "pintar",
+      "category": "juegos",
+      "color": "#E3D6EC",
+      "asset": "assets/pictograms/2348.png"
+    },
+    {
+      "id": 24791,
+      "text": "música",
+      "category": "juegos",
+      "color": "#E3D6EC",
+      "asset": "assets/pictograms/24791.png"
+    },
+    {
+      "id": 6052,
+      "text": "bailar",
+      "category": "juegos",
+      "color": "#E3D6EC",
+      "asset": "assets/pictograms/6052.png"
+    },
+    {
+      "id": 6960,
+      "text": "cantar",
+      "category": "juegos",
+      "color": "#E3D6EC",
+      "asset": "assets/pictograms/6960.png"
+    },
+    {
+      "id": 25498,
+      "text": "tele",
+      "category": "juegos",
+      "color": "#E3D6EC",
+      "asset": "assets/pictograms/25498.png"
+    },
+    {
+      "id": 9165,
+      "text": "tablet",
+      "category": "juegos",
+      "color": "#E3D6EC",
+      "asset": "assets/pictograms/9165.png"
+    },
+    {
+      "id": 2364,
+      "text": "cuento",
+      "category": "juegos",
+      "color": "#E3D6EC",
+      "asset": "assets/pictograms/2364.png"
+    },
+    {
+      "id": 25191,
+      "text": "libro",
+      "category": "juegos",
+      "color": "#E3D6EC",
+      "asset": "assets/pictograms/25191.png"
+    },
+    {
+      "id": 6184,
+      "text": "plaza",
+      "category": "juegos",
+      "color": "#E3D6EC",
+      "asset": "assets/pictograms/6184.png"
+    },
+    {
+      "id": 4608,
+      "text": "columpio",
+      "category": "juegos",
+      "color": "#E3D6EC",
+      "asset": "assets/pictograms/4608.png"
+    },
+    {
+      "id": 4759,
+      "text": "tobogán",
+      "category": "juegos",
+      "color": "#E3D6EC",
+      "asset": "assets/pictograms/4759.png"
+    },
+    {
+      "id": 6945,
+      "text": "burbujas",
+      "category": "juegos",
+      "color": "#E3D6EC",
+      "asset": "assets/pictograms/6945.png"
+    },
+    {
+      "id": 4945,
+      "text": "peluche",
+      "category": "juegos",
+      "color": "#E3D6EC",
+      "asset": "assets/pictograms/4945.png"
+    },
+    {
+      "id": 2408,
+      "text": "globo",
+      "category": "juegos",
+      "color": "#E3D6EC",
+      "asset": "assets/pictograms/2408.png"
+    },
+    {
+      "id": 2529,
+      "text": "plastilina",
+      "category": "juegos",
+      "color": "#E3D6EC",
+      "asset": "assets/pictograms/2529.png"
+    },
+    {
+      "id": 6935,
+      "text": "bicicleta",
+      "category": "juegos",
+      "color": "#E3D6EC",
+      "asset": "assets/pictograms/6935.png"
+    },
+    {
+      "id": 30516,
+      "text": "pileta",
+      "category": "juegos",
+      "color": "#E3D6EC",
+      "asset": "assets/pictograms/30516.png"
+    },
+    {
+      "id": 4565,
+      "text": "arena",
+      "category": "juegos",
+      "color": "#E3D6EC",
+      "asset": "assets/pictograms/4565.png"
+    },
+    {
+      "id": 8608,
+      "text": "instrumento",
+      "category": "juegos",
+      "color": "#E3D6EC",
+      "asset": "assets/pictograms/8608.png"
+    },
+    {
+      "id": 9813,
+      "text": "juguete",
+      "category": "juegos",
+      "color": "#E3D6EC",
+      "asset": "assets/pictograms/9813.png"
+    },
+    {
+      "id": 31892,
+      "text": "jugar a la pelota",
+      "category": "juegos",
+      "color": "#E3D6EC",
+      "asset": "assets/pictograms/31892.png"
+    },
+    {
+      "id": 5480,
+      "text": "cosquillas",
+      "category": "juegos",
+      "color": "#E3D6EC",
+      "asset": "assets/pictograms/5480.png"
+    },
+    {
+      "id": 2578,
+      "text": "tambor",
+      "category": "juegos",
+      "color": "#E3D6EC",
+      "asset": "assets/pictograms/2578.png"
+    },
+    {
+      "id": 35547,
+      "text": "contento",
+      "category": "emociones",
+      "color": "#F2D5D9",
+      "asset": "assets/pictograms/35547.png"
+    },
+    {
+      "id": 35545,
+      "text": "triste",
+      "category": "emociones",
+      "color": "#F2D5D9",
+      "asset": "assets/pictograms/35545.png"
+    },
+    {
+      "id": 35535,
+      "text": "asustado",
+      "category": "emociones",
+      "color": "#F2D5D9",
+      "asset": "assets/pictograms/35535.png"
+    },
+    {
+      "id": 7040,
+      "text": "enfermo",
+      "category": "emociones",
+      "color": "#F2D5D9",
+      "asset": "assets/pictograms/7040.png"
+    },
+    {
+      "id": 35531,
+      "text": "aburrido",
+      "category": "emociones",
+      "color": "#F2D5D9",
+      "asset": "assets/pictograms/35531.png"
+    },
+    {
+      "id": 35529,
+      "text": "sorprendido",
+      "category": "emociones",
+      "color": "#F2D5D9",
+      "asset": "assets/pictograms/35529.png"
+    },
+    {
+      "id": 31310,
+      "text": "tranquilo",
+      "category": "emociones",
+      "color": "#F2D5D9",
+      "asset": "assets/pictograms/31310.png"
+    },
+    {
+      "id": 30391,
+      "text": "nervioso",
+      "category": "emociones",
+      "color": "#F2D5D9",
+      "asset": "assets/pictograms/30391.png"
+    },
+    {
+      "id": 37826,
+      "text": "me gusta",
+      "category": "emociones",
+      "color": "#F2D5D9",
+      "asset": "assets/pictograms/37826.png"
+    },
+    {
+      "id": 11178,
+      "text": "amor",
+      "category": "emociones",
+      "color": "#F2D5D9",
+      "asset": "assets/pictograms/11178.png"
+    },
+    {
+      "id": 25823,
+      "text": "vergüenza",
+      "category": "emociones",
+      "color": "#F2D5D9",
+      "asset": "assets/pictograms/25823.png"
+    },
+    {
+      "id": 7147,
+      "text": "llorar",
+      "category": "emociones",
+      "color": "#F2D5D9",
+      "asset": "assets/pictograms/7147.png"
+    },
+    {
+      "id": 13354,
+      "text": "reír",
+      "category": "emociones",
+      "color": "#F2D5D9",
+      "asset": "assets/pictograms/13354.png"
+    },
+    {
+      "id": 26985,
+      "text": "preocupado",
+      "category": "emociones",
+      "color": "#F2D5D9",
+      "asset": "assets/pictograms/26985.png"
+    },
+    {
+      "id": 31408,
+      "text": "orgulloso",
+      "category": "emociones",
+      "color": "#F2D5D9",
+      "asset": "assets/pictograms/31408.png"
+    },
+    {
+      "id": 2673,
+      "text": "cabeza",
+      "category": "cuerpo",
+      "color": "#F0E3C6",
+      "asset": "assets/pictograms/2673.png"
+    },
+    {
+      "id": 2786,
+      "text": "panza",
+      "category": "cuerpo",
+      "color": "#F0E3C6",
+      "asset": "assets/pictograms/2786.png"
+    },
+    {
+      "id": 3332,
+      "text": "garganta",
+      "category": "cuerpo",
+      "color": "#F0E3C6",
+      "asset": "assets/pictograms/3332.png"
+    },
+    {
+      "id": 39498,
+      "text": "oído",
+      "category": "cuerpo",
+      "color": "#F0E3C6",
+      "asset": "assets/pictograms/39498.png"
+    },
+    {
+      "id": 10267,
+      "text": "diente",
+      "category": "cuerpo",
+      "color": "#F0E3C6",
+      "asset": "assets/pictograms/10267.png"
+    },
+    {
+      "id": 2928,
+      "text": "mano",
+      "category": "cuerpo",
+      "color": "#F0E3C6",
+      "asset": "assets/pictograms/2928.png"
+    },
+    {
+      "id": 25327,
+      "text": "pie",
+      "category": "cuerpo",
+      "color": "#F0E3C6",
+      "asset": "assets/pictograms/25327.png"
+    },
+    {
+      "id": 8666,
+      "text": "pierna",
+      "category": "cuerpo",
+      "color": "#F0E3C6",
+      "asset": "assets/pictograms/8666.png"
+    },
+    {
+      "id": 2669,
+      "text": "brazo",
+      "category": "cuerpo",
+      "color": "#F0E3C6",
+      "asset": "assets/pictograms/2669.png"
+    },
+    {
+      "id": 6573,
+      "text": "ojo",
+      "category": "cuerpo",
+      "color": "#F0E3C6",
+      "asset": "assets/pictograms/6573.png"
+    },
+    {
+      "id": 2887,
+      "text": "nariz",
+      "category": "cuerpo",
+      "color": "#F0E3C6",
+      "asset": "assets/pictograms/2887.png"
+    },
+    {
+      "id": 2663,
+      "text": "boca",
+      "category": "cuerpo",
+      "color": "#F0E3C6",
+      "asset": "assets/pictograms/2663.png"
+    },
+    {
+      "id": 2748,
+      "text": "espalda",
+      "category": "cuerpo",
+      "color": "#F0E3C6",
+      "asset": "assets/pictograms/2748.png"
+    },
+    {
+      "id": 32530,
+      "text": "fiebre",
+      "category": "cuerpo",
+      "color": "#F0E3C6",
+      "asset": "assets/pictograms/32530.png"
+    },
+    {
+      "id": 35585,
+      "text": "tos",
+      "category": "cuerpo",
+      "color": "#F0E3C6",
+      "asset": "assets/pictograms/35585.png"
+    },
+    {
+      "id": 2777,
+      "text": "vomitar",
+      "category": "cuerpo",
+      "color": "#F0E3C6",
+      "asset": "assets/pictograms/2777.png"
+    },
+    {
+      "id": 5484,
+      "text": "herida",
+      "category": "cuerpo",
+      "color": "#F0E3C6",
+      "asset": "assets/pictograms/5484.png"
+    },
+    {
+      "id": 6561,
+      "text": "médico",
+      "category": "cuerpo",
+      "color": "#F0E3C6",
+      "asset": "assets/pictograms/6561.png"
+    },
+    {
+      "id": 32051,
+      "text": "termómetro",
+      "category": "cuerpo",
+      "color": "#F0E3C6",
+      "asset": "assets/pictograms/32051.png"
+    },
+    {
+      "id": 8977,
+      "text": "lavarse las manos",
+      "category": "cuerpo",
+      "color": "#F0E3C6",
+      "asset": "assets/pictograms/8977.png"
+    },
+    {
+      "id": 2694,
+      "text": "lavarse los dientes",
+      "category": "cuerpo",
+      "color": "#F0E3C6",
+      "asset": "assets/pictograms/2694.png"
+    },
+    {
+      "id": 2458,
+      "text": "mamá",
+      "category": "personas",
+      "color": "#D9E7CF",
+      "asset": "assets/pictograms/2458.png"
+    },
+    {
+      "id": 23710,
+      "text": "abuela",
+      "category": "personas",
+      "color": "#D9E7CF",
+      "asset": "assets/pictograms/23710.png"
+    },
+    {
+      "id": 23718,
+      "text": "abuelo",
+      "category": "personas",
+      "color": "#D9E7CF",
+      "asset": "assets/pictograms/23718.png"
+    },
+    {
+      "id": 2423,
+      "text": "hermano",
+      "category": "personas",
+      "color": "#D9E7CF",
+      "asset": "assets/pictograms/2423.png"
+    },
+    {
+      "id": 2422,
+      "text": "hermana",
+      "category": "personas",
+      "color": "#D9E7CF",
+      "asset": "assets/pictograms/2422.png"
+    },
+    {
+      "id": 30255,
+      "text": "tío",
+      "category": "personas",
+      "color": "#D9E7CF",
+      "asset": "assets/pictograms/30255.png"
+    },
+    {
+      "id": 30271,
+      "text": "tía",
+      "category": "personas",
+      "color": "#D9E7CF",
+      "asset": "assets/pictograms/30271.png"
+    },
+    {
+      "id": 30340,
+      "text": "primo",
+      "category": "personas",
+      "color": "#D9E7CF",
+      "asset": "assets/pictograms/30340.png"
+    },
+    {
+      "id": 25790,
+      "text": "amigo",
+      "category": "personas",
+      "color": "#D9E7CF",
+      "asset": "assets/pictograms/25790.png"
+    },
+    {
+      "id": 2456,
+      "text": "maestra",
+      "category": "personas",
+      "color": "#D9E7CF",
+      "asset": "assets/pictograms/2456.png"
+    },
+    {
+      "id": 6060,
+      "text": "bebé",
+      "category": "personas",
+      "color": "#D9E7CF",
+      "asset": "assets/pictograms/6060.png"
+    },
+    {
+      "id": 7176,
+      "text": "niño",
+      "category": "personas",
+      "color": "#D9E7CF",
+      "asset": "assets/pictograms/7176.png"
+    },
+    {
+      "id": 27509,
+      "text": "niña",
+      "category": "personas",
+      "color": "#D9E7CF",
+      "asset": "assets/pictograms/27509.png"
+    },
+    {
+      "id": 6632,
+      "text": "yo",
+      "category": "personas",
+      "color": "#D9E7CF",
+      "asset": "assets/pictograms/6632.png"
+    },
+    {
+      "id": 2262,
+      "text": "vos",
+      "category": "personas",
+      "color": "#D9E7CF",
+      "asset": "assets/pictograms/2262.png"
+    },
+    {
+      "id": 7202,
+      "text": "perro",
+      "category": "personas",
+      "color": "#D9E7CF",
+      "asset": "assets/pictograms/7202.png"
+    },
+    {
+      "id": 7114,
+      "text": "gato",
+      "category": "personas",
+      "color": "#D9E7CF",
+      "asset": "assets/pictograms/7114.png"
+    },
+    {
+      "id": 38778,
+      "text": "terapeuta",
+      "category": "personas",
+      "color": "#D9E7CF",
+      "asset": "assets/pictograms/38778.png"
+    },
+    {
+      "id": 24825,
+      "text": "abrir",
+      "category": "acciones",
+      "color": "#DADDE6",
+      "asset": "assets/pictograms/24825.png"
+    },
+    {
+      "id": 24976,
+      "text": "cerrar",
+      "category": "acciones",
+      "color": "#DADDE6",
+      "asset": "assets/pictograms/24976.png"
+    },
+    {
+      "id": 28431,
+      "text": "dar",
+      "category": "acciones",
+      "color": "#DADDE6",
+      "asset": "assets/pictograms/28431.png"
+    },
+    {
+      "id": 10148,
+      "text": "tomar",
+      "category": "acciones",
+      "color": "#DADDE6",
+      "asset": "assets/pictograms/10148.png"
+    },
+    {
+      "id": 6564,
+      "text": "mirar",
+      "category": "acciones",
+      "color": "#DADDE6",
+      "asset": "assets/pictograms/6564.png"
+    },
+    {
+      "id": 6572,
+      "text": "escuchar",
+      "category": "acciones",
+      "color": "#DADDE6",
+      "asset": "assets/pictograms/6572.png"
+    },
+    {
+      "id": 6044,
+      "text": "caminar",
+      "category": "acciones",
+      "color": "#DADDE6",
+      "asset": "assets/pictograms/6044.png"
+    },
+    {
+      "id": 6465,
+      "text": "correr",
+      "category": "acciones",
+      "color": "#DADDE6",
+      "asset": "assets/pictograms/6465.png"
+    },
+    {
+      "id": 39052,
+      "text": "saltar",
+      "category": "acciones",
+      "color": "#DADDE6",
+      "asset": "assets/pictograms/39052.png"
+    },
+    {
+      "id": 27268,
+      "text": "sentarse",
+      "category": "acciones",
+      "color": "#DADDE6",
+      "asset": "assets/pictograms/27268.png"
+    },
+    {
+      "id": 2806,
+      "text": "salir",
+      "category": "acciones",
+      "color": "#DADDE6",
+      "asset": "assets/pictograms/2806.png"
+    },
+    {
+      "id": 2742,
+      "text": "entrar",
+      "category": "acciones",
+      "color": "#DADDE6",
+      "asset": "assets/pictograms/2742.png"
+    },
+    {
+      "id": 32669,
+      "text": "venir",
+      "category": "acciones",
+      "color": "#DADDE6",
+      "asset": "assets/pictograms/32669.png"
+    },
+    {
+      "id": 8142,
+      "text": "ir",
+      "category": "acciones",
+      "color": "#DADDE6",
+      "asset": "assets/pictograms/8142.png"
+    },
+    {
+      "id": 2775,
+      "text": "ponerse los zapatos",
+      "category": "acciones",
+      "color": "#DADDE6",
+      "asset": "assets/pictograms/2775.png"
+    },
+    {
+      "id": 3351,
+      "text": "limpiar",
+      "category": "acciones",
+      "color": "#DADDE6",
+      "asset": "assets/pictograms/3351.png"
+    },
+    {
+      "id": 6485,
+      "text": "empujar",
+      "category": "acciones",
+      "color": "#DADDE6",
+      "asset": "assets/pictograms/6485.png"
+    },
+    {
+      "id": 36673,
+      "text": "tirar",
+      "category": "acciones",
+      "color": "#DADDE6",
+      "asset": "assets/pictograms/36673.png"
+    },
+    {
+      "id": 38900,
+      "text": "compartir",
+      "category": "acciones",
+      "color": "#DADDE6",
+      "asset": "assets/pictograms/38900.png"
+    },
+    {
+      "id": 34826,
+      "text": "lavar",
+      "category": "acciones",
+      "color": "#DADDE6",
+      "asset": "assets/pictograms/34826.png"
+    },
+    {
+      "id": 5975,
+      "text": "cortar",
+      "category": "acciones",
+      "color": "#DADDE6",
+      "asset": "assets/pictograms/5975.png"
+    },
+    {
+      "id": 24725,
+      "text": "subir",
+      "category": "acciones",
+      "color": "#DADDE6",
+      "asset": "assets/pictograms/24725.png"
+    },
+    {
+      "id": 24723,
+      "text": "bajar",
+      "category": "acciones",
+      "color": "#DADDE6",
+      "asset": "assets/pictograms/24723.png"
+    },
+    {
+      "id": 7196,
+      "text": "parar",
+      "category": "acciones",
+      "color": "#DADDE6",
+      "asset": "assets/pictograms/7196.png"
+    },
+    {
+      "id": 7038,
+      "text": "seguir",
+      "category": "acciones",
+      "color": "#DADDE6",
+      "asset": "assets/pictograms/7038.png"
+    },
+    {
+      "id": 5514,
+      "text": "guardar",
+      "category": "acciones",
+      "color": "#DADDE6",
+      "asset": "assets/pictograms/5514.png"
+    },
+    {
+      "id": 8619,
+      "text": "prender la luz",
+      "category": "acciones",
+      "color": "#DADDE6",
+      "asset": "assets/pictograms/8619.png"
+    },
+    {
+      "id": 5907,
+      "text": "apagar",
+      "category": "acciones",
+      "color": "#DADDE6",
+      "asset": "assets/pictograms/5907.png"
+    },
+    {
+      "id": 6964,
+      "text": "casa",
+      "category": "acciones",
+      "color": "#DADDE6",
+      "asset": "assets/pictograms/6964.png"
+    },
+    {
+      "id": 2339,
+      "text": "auto",
+      "category": "acciones",
+      "color": "#DADDE6",
+      "asset": "assets/pictograms/2339.png"
+    },
+    {
+      "id": 25900,
+      "text": "cama",
+      "category": "acciones",
+      "color": "#DADDE6",
+      "asset": "assets/pictograms/25900.png"
+    },
+    {
+      "id": 3155,
+      "text": "silla",
+      "category": "acciones",
+      "color": "#DADDE6",
+      "asset": "assets/pictograms/3155.png"
+    },
+    {
+      "id": 3129,
+      "text": "mesa",
+      "category": "acciones",
+      "color": "#DADDE6",
+      "asset": "assets/pictograms/3129.png"
+    },
+    {
+      "id": 4872,
+      "text": "campera",
+      "category": "acciones",
+      "color": "#DADDE6",
+      "asset": "assets/pictograms/4872.png"
+    },
+    {
+      "id": 2475,
+      "text": "mochila",
+      "category": "acciones",
+      "color": "#DADDE6",
+      "asset": "assets/pictograms/2475.png"
+    }
+  ]
+}
