@@ -19,3 +19,9 @@
 - Pictogramas propios sin foto ni ARASAAC muestran un ícono de imagen vacío: conviene agregar siempre una foto.
 - Las frases de la barra se dicen con la voz del teléfono; el audio grabado se usa al tocar un pictograma suelto (reproducir audios en secuencia queda para más adelante).
 - El tamaño de etiqueta y de margen de cada tarjeta escala con su ancho para que en grillas de 3x3 y 4x4 el dibujo siga siendo lo principal.
+- Etapa 3: esquema v3 con `routines` y `routine_steps`. El progreso (`done`) se guarda en la base y sobrevive al cerrar la app; no se reinicia solo (ni por hora ni por día): "Empezar de nuevo" lo hace el adulto o quien acompaña.
+- La agenda se abre con el botón "Rutinas" arriba a la izquierda del tablero (solo si el perfil tiene rutinas); con una sola rutina abre directo.
+- Vista del chico: "Primero" grande, "Después" más chico, tira de miniaturas con tilde en los hechos, y un único botón "Listo". Al terminar: "Terminamos", sin sonido ni animación de premio.
+- "Volver al paso anterior" va en la barra superior, lejos de "Listo" y sin mover el layout: un doble toque no debe deshacer el avance (se detectó y corrigió en pruebas).
+- Un pictograma puede repetirse dentro de una rutina. Los pasos reutilizan los pictogramas existentes (incluidos los propios con foto y voz).
+- Las rutinas se crean y editan desde el modo adulto de cada perfil.

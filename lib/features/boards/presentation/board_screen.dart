@@ -7,6 +7,8 @@ import '../../../core/kiosk/kiosk.dart';
 import '../../../core/providers.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../phrase_bar/presentation/phrase_bar.dart';
+import '../../routines/presentation/routine_list_screen.dart';
+import '../../routines/presentation/routine_providers.dart';
 import 'pictogram_tile.dart';
 
 class BoardScreen extends ConsumerStatefulWidget {
@@ -47,6 +49,8 @@ class _BoardScreenState extends ConsumerState<BoardScreen> {
     final activeCat = profile.nestedCategories
         ? (_categoryId ?? (cats.isEmpty ? null : cats.first.id))
         : null;
+    final routines =
+        ref.watch(routinesProvider(profile.id)).value ?? const <Routine>[];
     final board = ref.watch(
       boardProvider((profileId: profile.id, categoryId: activeCat)),
     );
@@ -72,9 +76,24 @@ class _BoardScreenState extends ConsumerState<BoardScreen> {
       body: SafeArea(
         child: Column(
           children: [
-            Align(
-              alignment: Alignment.centerRight,
-              child: _ExitLock(onExit: _exit),
+            Row(
+              children: [
+                if (routines.isNotEmpty)
+                  TextButton.icon(
+                    onPressed: () => openRoutines(context, profile, routines),
+                    icon: const Icon(Icons.checklist, size: 28),
+                    label: const Text('Rutinas'),
+                    style: TextButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 10,
+                      ),
+                      textStyle: const TextStyle(fontSize: 18),
+                    ),
+                  ),
+                const Spacer(),
+                _ExitLock(onExit: _exit),
+              ],
             ),
             if (profile.phraseBarEnabled) const PhraseBar(),
             Expanded(

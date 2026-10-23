@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/db/admin_queries.dart';
+import '../../../core/db/routine_queries.dart';
 import '../../../core/providers.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../boards/presentation/pictogram_tile.dart';
 import 'adult_providers.dart';
+import '../../routines/presentation/routine_providers.dart';
 import 'board_editor_screen.dart';
+import 'routine_editor_screen.dart';
 
 /// Ajustes de un perfil: grilla, barra de frases y qué tableros/categorías tiene.
 class ProfileAdminScreen extends ConsumerWidget {
@@ -118,9 +121,66 @@ class ProfileAdminScreen extends ConsumerWidget {
             ),
           ] else
             ..._categorySection(context, ref),
+          const Divider(height: 32),
+          ..._routineSection(context, ref),
         ],
       ),
     );
+  }
+
+  Future<void> _newRoutine(BuildContext context, WidgetRef ref) async {
+    final name = await askForText(context, title: 'Nueva rutina');
+    if (name == null || !context.mounted) return;
+    final routine = await ref
+        .read(databaseProvider)
+        .createRoutine(profileId, name);
+    ref.invalidate(routinesProvider(profileId));
+    if (!context.mounted) return;
+    await Navigator.of(context).push(
+      MaterialPageRoute(builder: (_) => RoutineEditorScreen(routine: routine)),
+    );
+    ref.invalidate(routinesProvider(profileId));
+  }
+
+  List<Widget> _routineSection(BuildContext context, WidgetRef ref) {
+    final routines = ref.watch(routinesProvider(profileId));
+    return [
+      Row(
+        children: [
+          const Expanded(child: _SectionTitle('Rutinas')),
+          TextButton.icon(
+            onPressed: () => _newRoutine(context, ref),
+            icon: const Icon(Icons.add),
+            label: const Text('Nueva'),
+          ),
+        ],
+      ),
+      const Text('Agenda visual con "primero / después" y tilde de listo.'),
+      const SizedBox(height: 8),
+      routines.when(
+        loading: () => const SizedBox.shrink(),
+        error: (e, _) => Text('Error: $e'),
+        data: (list) => Column(
+          children: [
+            for (final r in list)
+              Card(
+                child: ListTile(
+                  title: Text(r.name),
+                  trailing: const Icon(Icons.chevron_right),
+                  onTap: () async {
+                    await Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (_) => RoutineEditorScreen(routine: r),
+                      ),
+                    );
+                    ref.invalidate(routinesProvider(profileId));
+                  },
+                ),
+              ),
+          ],
+        ),
+      ),
+    ];
   }
 
   List<Widget> _categorySection(BuildContext context, WidgetRef ref) {

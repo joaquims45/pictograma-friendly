@@ -54,3 +54,7 @@ flutter run -d emulator-5554
 Desde la pantalla "¿Quién usa la app?" tocar el candado → crear un PIN de 4 dígitos (la primera vez) o ingresarlo.
 Por perfil se puede: cambiar el tamaño de grilla (1x1 a 4x4), activar la barra de frases, ordenar (arrastrando), ocultar o quitar pictogramas, agregar existentes, crear pictogramas propios con foto y voz grabada, y crear/ordenar/ocultar categorías.
 Si se olvida el PIN: borrar los datos de la app (Ajustes → Apps → Pictogramas → Almacenamiento) reinicia todo, incluidas las fotos y audios propios.
+
+## Rutinas / agenda visual (etapa 3)
+Modo adulto → perfil → Rutinas → Nueva. Se agregan pasos (cualquier pictograma, también los propios) y se ordenan arrastrando.
+En el tablero del chico aparece el botón "Rutinas": muestra "Primero", "Después" y el botón "Listo". El progreso queda guardado; el adulto puede reiniciarlo con "Empezar de nuevo" (o "Reiniciar progreso" en el editor).

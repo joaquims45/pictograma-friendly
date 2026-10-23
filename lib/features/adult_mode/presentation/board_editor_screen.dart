@@ -7,6 +7,7 @@ import '../../../core/providers.dart';
 import '../../boards/presentation/pictogram_image.dart';
 import 'adult_providers.dart';
 import 'pictogram_editor_screen.dart';
+import 'pictogram_picker.dart';
 
 /// Edita un tablero: ordenar (arrastrando), ocultar, quitar, agregar y crear.
 class BoardEditorScreen extends ConsumerWidget {
@@ -75,7 +76,11 @@ class BoardEditorScreen extends ConsumerWidget {
     } else {
       final picked = await showDialog<Pictogram>(
         context: context,
-        builder: (_) => _ExistingPicker(profileId, categoryId),
+        builder: (_) => PictogramPickerDialog(
+          loader: () => ref
+              .read(databaseProvider)
+              .pictogramsNotOnBoard(profileId, categoryId),
+        ),
       );
       if (picked != null) {
         await ref
@@ -233,75 +238,4 @@ class _Badge extends StatelessWidget {
     padding: const EdgeInsets.only(right: 6),
     child: Icon(icon, size: 16),
   );
-}
-
-class _ExistingPicker extends ConsumerStatefulWidget {
-  const _ExistingPicker(this.profileId, this.categoryId);
-  final int profileId;
-  final int? categoryId;
-
-  @override
-  ConsumerState<_ExistingPicker> createState() => _ExistingPickerState();
-}
-
-class _ExistingPickerState extends ConsumerState<_ExistingPicker> {
-  List<Pictogram> _all = const [];
-  String _query = '';
-
-  @override
-  void initState() {
-    super.initState();
-    ref
-        .read(databaseProvider)
-        .pictogramsNotOnBoard(widget.profileId, widget.categoryId)
-        .then((v) {
-          if (mounted) setState(() => _all = v);
-        });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final q = _query.toLowerCase();
-    final shown = _all
-        .where((p) => p.labelEs.toLowerCase().contains(q))
-        .toList();
-    return AlertDialog(
-      title: const Text('Agregar pictograma'),
-      content: SizedBox(
-        width: double.maxFinite,
-        height: 420,
-        child: Column(
-          children: [
-            TextField(
-              decoration: const InputDecoration(
-                prefixIcon: Icon(Icons.search),
-                hintText: 'Buscar',
-              ),
-              onChanged: (v) => setState(() => _query = v),
-            ),
-            Expanded(
-              child: ListView.builder(
-                itemCount: shown.length,
-                itemBuilder: (_, i) => ListTile(
-                  leading: SizedBox(
-                    width: 44,
-                    height: 44,
-                    child: PictogramImage(shown[i]),
-                  ),
-                  title: Text(shown[i].labelEs),
-                  onTap: () => Navigator.pop(context, shown[i]),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-      actions: [
-        TextButton(
-          onPressed: () => Navigator.pop(context),
-          child: const Text('Cancelar'),
-        ),
-      ],
-    );
-  }
 }
