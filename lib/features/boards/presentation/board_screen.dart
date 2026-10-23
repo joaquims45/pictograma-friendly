@@ -60,7 +60,7 @@ class _BoardScreenState extends ConsumerState<BoardScreen> {
           crossAxisCount: profile.gridSize,
           mainAxisSpacing: 12,
           crossAxisSpacing: 12,
-          childAspectRatio: 0.9,
+          childAspectRatio: profile.gridSize >= 3 ? 0.78 : 0.9,
         ),
         itemCount: items.length,
         itemBuilder: (_, i) =>

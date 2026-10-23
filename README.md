@@ -49,3 +49,8 @@ set ANDROID_AVD_HOME=D:\devvd
 D:\devndroid-sdkmulatormulator.exe -avd medium_phone
 flutter run -d emulator-5554
 ```
+
+## Modo adulto (etapa 2)
+Desde la pantalla "¿Quién usa la app?" tocar el candado → crear un PIN de 4 dígitos (la primera vez) o ingresarlo.
+Por perfil se puede: cambiar el tamaño de grilla (1x1 a 4x4), activar la barra de frases, ordenar (arrastrando), ocultar o quitar pictogramas, agregar existentes, crear pictogramas propios con foto y voz grabada, y crear/ordenar/ocultar categorías.
+Si se olvida el PIN: borrar los datos de la app (Ajustes → Apps → Pictogramas → Almacenamiento) reinicia todo, incluidas las fotos y audios propios.

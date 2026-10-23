@@ -5,6 +5,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'db/app_database.dart';
 import 'db/queries.dart';
 import 'db/seed.dart';
+import 'media/media_store.dart';
+import 'security/pin_service.dart';
 import 'tts/speaker.dart';
 
 final databaseProvider = Provider<AppDatabase>((ref) {
@@ -57,3 +59,16 @@ final phraseProvider =
     NotifierProvider.autoDispose<PhraseNotifier, List<Pictogram>>(
       PhraseNotifier.new,
     );
+
+final pinServiceProvider = Provider<PinService>(
+  (ref) => PinService(const SecureKeyValueStore()),
+);
+
+final mediaStoreProvider = Provider<MediaStore>((ref) => MediaStore());
+
+/// Tras editar en modo adulto: los tableros de los chicos deben releerse.
+void refreshBoards(WidgetRef ref) {
+  ref.invalidate(profilesProvider);
+  ref.invalidate(profileCategoriesProvider);
+  ref.invalidate(boardProvider);
+}

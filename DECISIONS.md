@@ -12,3 +12,10 @@
 - Toolchain instalado en `D:\dev` (flutter, android-sdk, pub-cache, gradle) por falta de espacio en C:.
 - "upa" no tiene un pictograma ARASAAC claro (la búsqueda devuelve brazo/levantar objetos). Queda sin pictograma automático; se cubre con foto propia en la Etapa 2.
 - Script `tools/fetch_arasaac.py` baja ~184 pictogramas (PNG 500px) a `assets/pictograms/` y genera `assets/pictograms.json`.
+- Etapa 2: el modo adulto se abre con el candado del selector de perfiles (fuera del fijado de pantalla, así los chicos no llegan). PIN de 4 dígitos, hash SHA-256 con sal en flutter_secure_storage. Sin bloqueo por intentos fallidos (los chicos no pueden llegar a esa pantalla).
+- Esquema v2: tabla `profile_categories` (orden y ocultar por perfil). Migración v1→v2 rellena desde `board_items`.
+- Reordenar guarda posiciones explícitas; "Ocultar" no borra (queda en el editor). "Quitar" solo saca del tablero, no borra el pictograma.
+- Fotos y audios propios van a `<documentos de la app>/media/`; fotos reducidas a 1024px. Al reemplazar o descartar se borra el archivo viejo.
+- Pictogramas propios sin foto ni ARASAAC muestran un ícono de imagen vacío: conviene agregar siempre una foto.
+- Las frases de la barra se dicen con la voz del teléfono; el audio grabado se usa al tocar un pictograma suelto (reproducir audios en secuencia queda para más adelante).
+- El tamaño de etiqueta y de margen de cada tarjeta escala con su ancho para que en grillas de 3x3 y 4x4 el dibujo siga siendo lo principal.

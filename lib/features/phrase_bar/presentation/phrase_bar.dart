@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/providers.dart';
 import '../../../core/theme/app_theme.dart';
+import '../../boards/presentation/pictogram_image.dart';
 
 /// Barra de frases: pictogramas en orden, "Hablar" y "Borrar" separados y grandes.
 class PhraseBar extends ConsumerWidget {
@@ -27,11 +28,7 @@ class PhraseBar extends ConsumerWidget {
                       separatorBuilder: (_, _) => const SizedBox(width: 6),
                       itemBuilder: (_, i) => AspectRatio(
                         aspectRatio: 1,
-                        child: Image.asset(
-                          phrase[i].assetPath ?? '',
-                          fit: BoxFit.contain,
-                          errorBuilder: (_, _, _) => const SizedBox.shrink(),
-                        ),
+                        child: PictogramImage(phrase[i]),
                       ),
                     ),
             ),

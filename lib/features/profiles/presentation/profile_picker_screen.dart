@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/providers.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../about/presentation/about_screen.dart';
+import '../../adult_mode/presentation/pin_gate_screen.dart';
 import '../../boards/presentation/board_screen.dart';
 
 class ProfilePickerScreen extends ConsumerWidget {
@@ -17,6 +18,12 @@ class ProfilePickerScreen extends ConsumerWidget {
         title: const Text('¿Quién usa la app?'),
         backgroundColor: Colors.transparent,
         actions: [
+          IconButton(
+            tooltip: 'Modo adulto',
+            icon: const Icon(Icons.lock_outline),
+            onPressed: () => Navigator.of(context)
+                .push(MaterialPageRoute(builder: (_) => const PinGateScreen())),
+          ),
           IconButton(
             tooltip: 'Acerca de',
             icon: const Icon(Icons.info_outline),
