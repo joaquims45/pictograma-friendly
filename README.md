@@ -1,17 +1,24 @@
-# pictograma_friendly
+# Pictogramas
 
-A new Flutter project.
+App Android de comunicación aumentativa (pictogramas) para niños con TEA. 100% offline, sin analítica ni cuentas.
 
-## Getting Started
+## Requisitos (Windows, instalado en D:\dev)
+- Flutter estable, JDK 17, Android SDK (plataformas 35/36).
+- Variables: `ANDROID_HOME=D:\dev\android-sdk`, `PUB_CACHE=D:\dev\pub-cache`, `GRADLE_USER_HOME=D:\dev\gradle`.
+- Verificar con `flutter doctor`.
 
-This project is a starting point for a Flutter application.
+## Correr
+```
+flutter pub get
+dart run build_runner build --delete-conflicting-outputs
+flutter run
+```
 
-A few resources to get you started if this is your first Flutter project:
+## Build del APK
+```
+flutter build apk --release
+```
+Salida: `build/app/outputs/flutter-apk/app-release.apk`. Instalar por USB: `adb install -r app-release.apk`, o copiar el archivo al celular y abrirlo (permitir "orígenes desconocidos").
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Pictogramas
+Fuente: ARASAAC (CC BY-NC-SA). Ver pantalla "Acerca de" para la atribución.
