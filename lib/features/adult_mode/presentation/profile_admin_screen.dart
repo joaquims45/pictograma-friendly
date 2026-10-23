@@ -71,7 +71,25 @@ class ProfileAdminScreen extends ConsumerWidget {
     if (profile == null) return const Scaffold();
 
     return Scaffold(
-      appBar: AppBar(title: Text(profile.name)),
+      appBar: AppBar(
+        title: Text(profile.name),
+        actions: [
+          IconButton(
+            tooltip: 'Cambiar nombre',
+            icon: const Icon(Icons.edit_outlined),
+            onPressed: () async {
+              final name = await askForText(
+                context,
+                title: 'Nombre del perfil',
+                initial: profile.name,
+              );
+              if (name == null) return;
+              await ref.read(databaseProvider).renameProfile(profileId, name);
+              refreshBoards(ref);
+            },
+          ),
+        ],
+      ),
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [

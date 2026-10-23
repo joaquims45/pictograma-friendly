@@ -2,7 +2,7 @@
 
 - Navegación con `Navigator` simple (sin go_router).
 - PIN de 4 dígitos (etapa 2), guardado como hash+salt en flutter_secure_storage.
-- Perfiles iniciales creados al primer arranque: "Mellizas" y "Sobrino".
+- Perfiles iniciales creados al primer arranque con nombres neutros: "Perfil 1" (tablero simple y grande) y "Perfil 2" (grilla más densa, categorías y barra de frases). El nombre se cambia desde el modo adulto (lápiz en el perfil), así no hay nombres de personas en el código ni en la app instalada.
 - Voz: es-AR; si no está, es-US, luego es-ES.
 - `minSdk 26`. Solo plataforma Android.
 - Sin permiso INTERNET en release (el manifest principal no lo declara).

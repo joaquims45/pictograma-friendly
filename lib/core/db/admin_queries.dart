@@ -7,6 +7,11 @@ typedef CategoryLink = ({ProfileCategory link, Category category});
 
 /// Operaciones del modo adulto. Nada se reordena solo: solo lo que el adulto decide.
 extension AdminQueries on AppDatabase {
+  Future<void> renameProfile(int profileId, String name) =>
+      (update(profiles)..where((p) => p.id.equals(profileId))).write(
+        ProfilesCompanion(name: Value(name)),
+      );
+
   Future<void> updateProfileSettings(
     int profileId, {
     int? gridSize,

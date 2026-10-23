@@ -16,8 +16,8 @@ const _categoryNames = {
   'acciones': 'Acciones',
 };
 
-/// Tablero plano de las mellizas (orden fijo, pictogramas grandes).
-const _twinsBoard = [
+/// Tablero plano del perfil simple (orden fijo, pictogramas grandes).
+const _simpleBoard = [
   'quiero agua',
   'quiero comer',
   'quiero jugar',
@@ -28,6 +28,8 @@ const _twinsBoard = [
 ];
 
 /// Carga el paquete inicial y los perfiles la primera vez que se abre la app.
+/// Perfil 1: tablero simple y grande. Perfil 2: grilla más densa con categorías
+/// y barra de frases. Los nombres se cambian desde el modo adulto.
 Future<void> seedIfEmpty(AppDatabase db, {AssetBundle? bundle}) async {
   final existing = await db.select(db.profiles).get();
   if (existing.isNotEmpty) return;
@@ -69,16 +71,16 @@ Future<void> seedIfEmpty(AppDatabase db, {AssetBundle? bundle}) async {
       picByText.putIfAbsent(it['text'] as String, () => id);
     }
 
-    final twins = await db
+    final simple = await db
         .into(db.profiles)
         .insert(
-          ProfilesCompanion.insert(name: 'Mellizas', gridSize: const Value(2)),
+          ProfilesCompanion.insert(name: 'Perfil 1', gridSize: const Value(2)),
         );
-    final kid = await db
+    final dense = await db
         .into(db.profiles)
         .insert(
           ProfilesCompanion.insert(
-            name: 'Sobrino',
+            name: 'Perfil 2',
             gridSize: const Value(3),
             phraseBarEnabled: const Value(true),
             nestedCategories: const Value(true),
@@ -86,14 +88,14 @@ Future<void> seedIfEmpty(AppDatabase db, {AssetBundle? bundle}) async {
         );
 
     var pos = 0;
-    for (final text in _twinsBoard) {
+    for (final text in _simpleBoard) {
       final id = picByText[text];
       if (id == null) continue;
       await db
           .into(db.boardItems)
           .insert(
             BoardItemsCompanion.insert(
-              profileId: twins,
+              profileId: simple,
               pictogramId: id,
               position: pos++,
             ),
@@ -106,7 +108,7 @@ Future<void> seedIfEmpty(AppDatabase db, {AssetBundle? bundle}) async {
           .into(db.profileCategories)
           .insert(
             ProfileCategoriesCompanion.insert(
-              profileId: kid,
+              profileId: dense,
               categoryId: id,
               position: catPos++,
             ),
@@ -122,7 +124,7 @@ Future<void> seedIfEmpty(AppDatabase db, {AssetBundle? bundle}) async {
           .into(db.boardItems)
           .insert(
             BoardItemsCompanion.insert(
-              profileId: kid,
+              profileId: dense,
               categoryId: Value(catIds[cat]),
               pictogramId: picIds[it['id'] as int]!,
               position: p,

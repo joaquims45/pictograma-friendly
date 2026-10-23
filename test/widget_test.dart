@@ -16,18 +16,18 @@ void main() {
     await seedIfEmpty(db);
 
     final profiles = await db.allProfiles();
-    expect(profiles.map((p) => p.name), ['Mellizas', 'Sobrino']);
+    expect(profiles.map((p) => p.name), ['Perfil 1', 'Perfil 2']);
 
-    final twins = profiles.first;
-    final flat = await db.boardPictograms(twins.id, null);
+    final simple = profiles.first;
+    final flat = await db.boardPictograms(simple.id, null);
     expect(flat.length, inInclusiveRange(4, 8));
     expect(flat.first.labelEs, 'quiero agua');
-    expect(await db.categoriesForProfile(twins.id), isEmpty);
+    expect(await db.categoriesForProfile(simple.id), isEmpty);
 
-    final kid = profiles.last;
-    final cats = await db.categoriesForProfile(kid.id);
+    final dense = profiles.last;
+    final cats = await db.categoriesForProfile(dense.id);
     expect(cats.length, 8);
-    final first = await db.boardPictograms(kid.id, cats.first.id);
+    final first = await db.boardPictograms(dense.id, cats.first.id);
     expect(first, isNotEmpty);
   });
 }

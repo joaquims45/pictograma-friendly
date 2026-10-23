@@ -45,8 +45,8 @@ void main() {
   /// Arma un teléfono "A" con datos propios: foto, audio, categoría, rutina, uso.
   Future<void> populateA() async {
     await seedIfEmpty(dbA);
-    final twins = (await dbA.allProfiles()).first;
-    final kid = (await dbA.allProfiles()).last;
+    final simple = (await dbA.allProfiles()).first;
+    final dense = (await dbA.allProfiles()).last;
     final cat = (await dbA.select(dbA.categories).get()).first;
 
     final photo = File(p.join(rootA.path, 'photos', '111.jpg'))
@@ -62,17 +62,17 @@ void main() {
       photoPath: photo.path,
       audioPath: audio.path,
     );
-    await dbA.addToBoard(twins.id, null, upa.id);
-    await dbA.updateProfileSettings(twins.id, gridSize: 4);
+    await dbA.addToBoard(simple.id, null, upa.id);
+    await dbA.updateProfileSettings(simple.id, gridSize: 4);
     await dbA.createCategory(
-      profileId: kid.id,
+      profileId: dense.id,
       name: 'Escuela',
       colorHex: '#CFE0EC',
     );
-    final routine = await dbA.createRoutine(twins.id, 'Mañana');
+    final routine = await dbA.createRoutine(simple.id, 'Mañana');
     await dbA.addRoutineStep(routine.id, upa.id);
     await dbA.setUsageLogEnabled(true);
-    await dbA.logUsage(twins.id, upa.id, 'board');
+    await dbA.logUsage(simple.id, upa.id, 'board');
   }
 
   test('crear y restaurar en otro teléfono conserva datos y medios', () async {
@@ -89,7 +89,7 @@ void main() {
     await BackupService(dbB, mediaB).restore(bytes);
 
     final profiles = await dbB.allProfiles();
-    expect(profiles.map((e) => e.name), ['Mellizas', 'Sobrino']);
+    expect(profiles.map((e) => e.name), ['Perfil 1', 'Perfil 2']);
     expect(profiles.first.gridSize, 4);
 
     final board = await dbB.boardEntries(profiles.first.id, null);
@@ -165,8 +165,8 @@ void main() {
     }
     await BackupService(dbB, mediaB).restore(ZipEncoder().encodeBytes(trimmed));
 
-    final twins = (await dbB.allProfiles()).first;
-    final upa = (await dbB.boardEntries(twins.id, null)).last.pictogram;
+    final simple = (await dbB.allProfiles()).first;
+    final upa = (await dbB.boardEntries(simple.id, null)).last.pictogram;
     expect(upa.photoPath, isNull);
     expect(upa.audioPath, isNotNull);
   });
@@ -198,7 +198,7 @@ void main() {
     final lines = const LineSplitter().convert(csv);
     expect(lines.first, 'fecha_hora,perfil,pictograma,origen');
     expect(lines.length, 4);
-    expect(lines[1], contains('"Mellizas"'));
+    expect(lines[1], contains('"Perfil 1"'));
 
     await dbA.clearUsageLog();
     expect(await dbA.usageEventCount(), 0);

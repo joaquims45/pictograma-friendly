@@ -44,33 +44,33 @@ void main() {
   group('modo adulto', () {
     test('reordenar y ocultar respetan la posición elegida', () async {
       await seedIfEmpty(db);
-      final twins = (await db.allProfiles()).first;
-      final entries = await db.boardEntries(twins.id, null);
+      final simple = (await db.allProfiles()).first;
+      final entries = await db.boardEntries(simple.id, null);
       final ids = entries.map((e) => e.item.id).toList();
 
       await db.reorderItems(ids.reversed.toList());
-      final reordered = await db.boardEntries(twins.id, null);
+      final reordered = await db.boardEntries(simple.id, null);
       expect(reordered.map((e) => e.item.id), ids.reversed);
 
       await db.setItemHidden(ids.first, true);
-      final visible = await db.boardPictograms(twins.id, null);
+      final visible = await db.boardPictograms(simple.id, null);
       expect(visible.length, ids.length - 1);
     });
 
     test('crea pictograma propio y lo agrega al final del tablero', () async {
       await seedIfEmpty(db);
-      final twins = (await db.allProfiles()).first;
+      final simple = (await db.allProfiles()).first;
       final cat = (await db.select(db.categories).get()).first;
-      final before = await db.boardEntries(twins.id, null);
+      final before = await db.boardEntries(simple.id, null);
 
       final pic = await db.createCustomPictogram(
         label: 'upa',
         categoryId: cat.id,
         photoPath: '/tmp/foto.jpg',
       );
-      await db.addToBoard(twins.id, null, pic.id);
+      await db.addToBoard(simple.id, null, pic.id);
 
-      final after = await db.boardEntries(twins.id, null);
+      final after = await db.boardEntries(simple.id, null);
       expect(after.length, before.length + 1);
       expect(after.last.pictogram.labelEs, 'upa');
       expect(after.last.pictogram.isCustom, isTrue);
@@ -79,32 +79,40 @@ void main() {
 
     test('categorías propias: crear, ocultar y reordenar', () async {
       await seedIfEmpty(db);
-      final kid = (await db.allProfiles()).last;
+      final dense = (await db.allProfiles()).last;
       final cat = await db.createCategory(
-        profileId: kid.id,
+        profileId: dense.id,
         name: 'Escuela',
         colorHex: '#CFE0EC',
       );
 
-      var links = await db.profileCategoryLinks(kid.id);
+      var links = await db.profileCategoryLinks(dense.id);
       expect(links.last.category.id, cat.id);
       expect(links.last.category.isCustom, isTrue);
 
       await db.reorderCategories(
         links.map((l) => l.link.id).toList().reversed.toList(),
       );
-      links = await db.profileCategoryLinks(kid.id);
+      links = await db.profileCategoryLinks(dense.id);
       expect(links.first.category.id, cat.id);
 
       await db.setCategoryHidden(links.first.link.id, true);
-      final visible = await db.categoriesForProfile(kid.id);
+      final visible = await db.categoriesForProfile(dense.id);
       expect(visible.any((c) => c.id == cat.id), isFalse);
+    });
+
+    test('renombrar un perfil', () async {
+      await seedIfEmpty(db);
+      final first = (await db.allProfiles()).first;
+      await db.renameProfile(first.id, 'Luna');
+      expect((await db.allProfiles()).first.name, 'Luna');
+      expect((await db.allProfiles()).last.name, 'Perfil 2');
     });
 
     test('ajustes de perfil', () async {
       await seedIfEmpty(db);
-      final twins = (await db.allProfiles()).first;
-      await db.updateProfileSettings(twins.id, gridSize: 4);
+      final simple = (await db.allProfiles()).first;
+      await db.updateProfileSettings(simple.id, gridSize: 4);
       expect((await db.allProfiles()).first.gridSize, 4);
       expect((await db.allProfiles()).first.phraseBarEnabled, isFalse);
     });
