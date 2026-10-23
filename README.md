@@ -58,3 +58,8 @@ Si se olvida el PIN: borrar los datos de la app (Ajustes → Apps → Pictograma
 ## Rutinas / agenda visual (etapa 3)
 Modo adulto → perfil → Rutinas → Nueva. Se agregan pasos (cualquier pictograma, también los propios) y se ordenan arrastrando.
 En el tablero del chico aparece el botón "Rutinas": muestra "Primero", "Después" y el botón "Listo". El progreso queda guardado; el adulto puede reiniciarlo con "Empezar de nuevo" (o "Reiniciar progreso" en el editor).
+
+## Copia de seguridad y registro de uso (etapa 4)
+Modo adulto → "Copia de seguridad": **Crear copia** guarda un `.zip` con todo (perfiles, tableros, pictogramas propios con fotos y voces, rutinas y registro de uso) donde elijas, por ejemplo en Descargas. **Restaurar copia** reemplaza todos los datos del teléfono por los de la copia (pide confirmación). Para pasar la app a otro teléfono: instalar el APK, crear la copia en el viejo, copiar el `.zip` al nuevo y restaurarlo. El PIN no se copia: se crea uno nuevo.
+
+Modo adulto → "Registro de uso": opcional y apagado por defecto. Anota qué pictograma se toca y cuándo, solo en el teléfono. Muestra un resumen de los últimos 7 días, se exporta a CSV (para planilla) y se puede borrar.

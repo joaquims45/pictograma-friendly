@@ -37,6 +37,7 @@ class _BoardScreenState extends ConsumerState<BoardScreen> {
 
   void _onTap(Pictogram p) {
     ref.read(speakerProvider).speakPictogram(p);
+    ref.read(usageLoggerProvider).log(profile.id, p.id, 'board');
     if (profile.phraseBarEnabled) ref.read(phraseProvider.notifier).add(p);
   }
 

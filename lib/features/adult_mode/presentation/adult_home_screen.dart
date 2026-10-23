@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/providers.dart';
+import 'backup_screen.dart';
 import 'pin_gate_screen.dart';
 import 'profile_admin_screen.dart';
+import 'usage_log_screen.dart';
 
 class AdultHomeScreen extends ConsumerWidget {
   const AdultHomeScreen({super.key});
@@ -62,6 +64,32 @@ class AdultHomeScreen extends ConsumerWidget {
                   ),
                 ),
               ),
+            const Padding(
+              padding: EdgeInsets.only(top: 16, bottom: 12),
+              child: Text('Datos'),
+            ),
+            Card(
+              child: ListTile(
+                leading: const Icon(Icons.backup_outlined),
+                title: const Text('Copia de seguridad'),
+                subtitle: const Text('Guardar o restaurar todo en un archivo'),
+                trailing: const Icon(Icons.chevron_right),
+                onTap: () => Navigator.of(
+                  context,
+                ).push(MaterialPageRoute(builder: (_) => const BackupScreen())),
+              ),
+            ),
+            Card(
+              child: ListTile(
+                leading: const Icon(Icons.insights_outlined),
+                title: const Text('Registro de uso'),
+                subtitle: const Text('Opcional, para el adulto o el terapeuta'),
+                trailing: const Icon(Icons.chevron_right),
+                onTap: () => Navigator.of(context).push(
+                  MaterialPageRoute(builder: (_) => const UsageLogScreen()),
+                ),
+              ),
+            ),
           ],
         ),
       ),

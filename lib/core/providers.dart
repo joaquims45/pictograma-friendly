@@ -8,6 +8,8 @@ import 'db/seed.dart';
 import 'media/media_store.dart';
 import 'security/pin_service.dart';
 import 'tts/speaker.dart';
+import 'usage/usage_logger.dart';
+import 'backup/backup_service.dart';
 
 final databaseProvider = Provider<AppDatabase>((ref) {
   final db = AppDatabase();
@@ -21,9 +23,19 @@ final speakerProvider = Provider<Speaker>((ref) {
   return s;
 });
 
+final usageLoggerProvider = Provider<UsageLogger>(
+  (ref) => UsageLogger(ref.watch(databaseProvider)),
+);
+
+final backupServiceProvider = Provider<BackupService>(
+  (ref) =>
+      BackupService(ref.watch(databaseProvider), ref.watch(mediaStoreProvider)),
+);
+
 /// Siembra datos y prepara la voz antes de mostrar la app.
 final bootstrapProvider = FutureProvider<void>((ref) async {
   await seedIfEmpty(ref.read(databaseProvider));
+  await ref.read(usageLoggerProvider).load();
   // La voz se prepara en segundo plano: nunca debe bloquear el arranque.
   unawaited(ref.read(speakerProvider).init());
 });

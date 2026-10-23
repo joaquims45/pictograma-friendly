@@ -25,3 +25,11 @@
 - "Volver al paso anterior" va en la barra superior, lejos de "Listo" y sin mover el layout: un doble toque no debe deshacer el avance (se detectó y corrigió en pruebas).
 - Un pictograma puede repetirse dentro de una rutina. Los pasos reutilizan los pictogramas existentes (incluidos los propios con foto y voz).
 - Las rutinas se crean y editan desde el modo adulto de cada perfil.
+- Etapa 4: la copia de seguridad es un único `.zip` con `backup.json` (todas las tablas) y `media/` (fotos y audios propios). Incluye fotos y voces para que la copia sea completa. Se guarda y se lee con el selector de archivos de Android (sin permisos de almacenamiento).
+- El PIN NO va en la copia (queda en el almacenamiento seguro del teléfono); al restaurar en otro teléfono se crea un PIN nuevo.
+- Restaurar reemplaza todo y pide confirmación. Se valida el archivo antes de tocar nada (app, versión de formato, tablas) y la base se reemplaza en una transacción: si algo falla, los datos actuales quedan como estaban. Una copia de una versión más nueva de la app se rechaza.
+- Si a una copia le falta un archivo de foto o audio, se restaura el resto y ese pictograma queda sin ese archivo.
+- Esquema v4: `app_settings` (clave/valor) y `usage_log`. El registro de uso está APAGADO por defecto, solo guarda perfil, pictograma, origen (tablero o rutina) y hora; no se envía a ningún lado. Se puede exportar a CSV (UTF-8 con BOM, para Excel) y borrar. Entra en la copia de seguridad.
+- El registro se guarda en segundo plano y nunca retrasa la voz.
+- Permisos verificados en el APK de release: solo RECORD_AUDIO y ACCESS_NETWORK_STATE (lo agrega el reproductor de audio; solo consulta el estado de red). No declara INTERNET, así que la app no puede enviar ni recibir datos.
+- Dependencias nuevas: `archive` (zip) y `file_picker` (guardar/abrir archivos).

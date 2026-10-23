@@ -18,6 +18,11 @@ class RoutineScreen extends ConsumerWidget {
 
   Future<void> _setDone(WidgetRef ref, RoutineStepEntry e, bool done) async {
     await ref.read(databaseProvider).setStepDone(e.step.id, done);
+    if (done) {
+      ref
+          .read(usageLoggerProvider)
+          .log(routine.profileId, e.pictogram.id, 'routine');
+    }
     ref.invalidate(routineStepsProvider(routine.id));
   }
 
