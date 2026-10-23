@@ -24,9 +24,13 @@ class AppColors {
 class _NoTransitions extends PageTransitionsBuilder {
   const _NoTransitions();
   @override
-  Widget buildTransitions<T>(PageRoute<T> route, BuildContext context,
-          Animation<double> animation, Animation<double> secondary, Widget child) =>
-      child;
+  Widget buildTransitions<T>(
+    PageRoute<T> route,
+    BuildContext context,
+    Animation<double> animation,
+    Animation<double> secondary,
+    Widget child,
+  ) => child;
 }
 
 ThemeData buildAppTheme() {
@@ -40,9 +44,9 @@ ThemeData buildAppTheme() {
     colorScheme: scheme,
     scaffoldBackgroundColor: AppColors.background,
     splashFactory: NoSplash.splashFactory,
-    pageTransitionsTheme: const PageTransitionsTheme(builders: {
-      TargetPlatform.android: _NoTransitions(),
-    }),
+    pageTransitionsTheme: const PageTransitionsTheme(
+      builders: {TargetPlatform.android: _NoTransitions()},
+    ),
     textTheme: Typography.blackMountainView.apply(
       bodyColor: AppColors.ink,
       displayColor: AppColors.ink,

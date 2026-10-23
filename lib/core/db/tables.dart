@@ -4,8 +4,10 @@ class Profiles extends Table {
   IntColumn get id => integer().autoIncrement()();
   TextColumn get name => text()();
   IntColumn get gridSize => integer().withDefault(const Constant(2))();
-  BoolColumn get phraseBarEnabled => boolean().withDefault(const Constant(false))();
-  BoolColumn get nestedCategories => boolean().withDefault(const Constant(false))();
+  BoolColumn get phraseBarEnabled =>
+      boolean().withDefault(const Constant(false))();
+  BoolColumn get nestedCategories =>
+      boolean().withDefault(const Constant(false))();
   DateTimeColumn get createdAt => dateTime().withDefault(currentDateAndTime)();
 }
 
@@ -33,13 +35,14 @@ class Pictograms extends Table {
 class BoardItems extends Table {
   IntColumn get id => integer().autoIncrement()();
   IntColumn get profileId => integer().references(Profiles, #id)();
-  IntColumn get categoryId => integer().nullable().references(Categories, #id)();
+  IntColumn get categoryId =>
+      integer().nullable().references(Categories, #id)();
   IntColumn get pictogramId => integer().references(Pictograms, #id)();
   IntColumn get position => integer()();
   BoolColumn get hidden => boolean().withDefault(const Constant(false))();
 
   @override
   List<Set<Column>> get uniqueKeys => [
-        {profileId, categoryId, position},
-      ];
+    {profileId, categoryId, position},
+  ];
 }
