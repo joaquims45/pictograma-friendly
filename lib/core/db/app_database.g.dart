@@ -2812,6 +2812,570 @@ class RoutineStepsCompanion extends UpdateCompanion<RoutineStep> {
   }
 }
 
+class $AppSettingsTable extends AppSettings
+    with TableInfo<$AppSettingsTable, AppSetting> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $AppSettingsTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _keyMeta = const VerificationMeta('key');
+  @override
+  late final GeneratedColumn<String> key = GeneratedColumn<String>(
+    'key',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _valueMeta = const VerificationMeta('value');
+  @override
+  late final GeneratedColumn<String> value = GeneratedColumn<String>(
+    'value',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  @override
+  List<GeneratedColumn> get $columns => [key, value];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'app_settings';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<AppSetting> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('key')) {
+      context.handle(
+        _keyMeta,
+        key.isAcceptableOrUnknown(data['key']!, _keyMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_keyMeta);
+    }
+    if (data.containsKey('value')) {
+      context.handle(
+        _valueMeta,
+        value.isAcceptableOrUnknown(data['value']!, _valueMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_valueMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {key};
+  @override
+  AppSetting map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return AppSetting(
+      key: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}key'],
+      )!,
+      value: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}value'],
+      )!,
+    );
+  }
+
+  @override
+  $AppSettingsTable createAlias(String alias) {
+    return $AppSettingsTable(attachedDatabase, alias);
+  }
+}
+
+class AppSetting extends DataClass implements Insertable<AppSetting> {
+  final String key;
+  final String value;
+  const AppSetting({required this.key, required this.value});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['key'] = Variable<String>(key);
+    map['value'] = Variable<String>(value);
+    return map;
+  }
+
+  AppSettingsCompanion toCompanion(bool nullToAbsent) {
+    return AppSettingsCompanion(key: Value(key), value: Value(value));
+  }
+
+  factory AppSetting.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return AppSetting(
+      key: serializer.fromJson<String>(json['key']),
+      value: serializer.fromJson<String>(json['value']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'key': serializer.toJson<String>(key),
+      'value': serializer.toJson<String>(value),
+    };
+  }
+
+  AppSetting copyWith({String? key, String? value}) =>
+      AppSetting(key: key ?? this.key, value: value ?? this.value);
+  AppSetting copyWithCompanion(AppSettingsCompanion data) {
+    return AppSetting(
+      key: data.key.present ? data.key.value : this.key,
+      value: data.value.present ? data.value.value : this.value,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('AppSetting(')
+          ..write('key: $key, ')
+          ..write('value: $value')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(key, value);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is AppSetting &&
+          other.key == this.key &&
+          other.value == this.value);
+}
+
+class AppSettingsCompanion extends UpdateCompanion<AppSetting> {
+  final Value<String> key;
+  final Value<String> value;
+  final Value<int> rowid;
+  const AppSettingsCompanion({
+    this.key = const Value.absent(),
+    this.value = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  AppSettingsCompanion.insert({
+    required String key,
+    required String value,
+    this.rowid = const Value.absent(),
+  }) : key = Value(key),
+       value = Value(value);
+  static Insertable<AppSetting> custom({
+    Expression<String>? key,
+    Expression<String>? value,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (key != null) 'key': key,
+      if (value != null) 'value': value,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  AppSettingsCompanion copyWith({
+    Value<String>? key,
+    Value<String>? value,
+    Value<int>? rowid,
+  }) {
+    return AppSettingsCompanion(
+      key: key ?? this.key,
+      value: value ?? this.value,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (key.present) {
+      map['key'] = Variable<String>(key.value);
+    }
+    if (value.present) {
+      map['value'] = Variable<String>(value.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('AppSettingsCompanion(')
+          ..write('key: $key, ')
+          ..write('value: $value, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $UsageLogTable extends UsageLog
+    with TableInfo<$UsageLogTable, UsageEvent> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $UsageLogTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
+    'id',
+    aliasedName,
+    false,
+    hasAutoIncrement: true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'PRIMARY KEY AUTOINCREMENT',
+    ),
+  );
+  static const VerificationMeta _profileIdMeta = const VerificationMeta(
+    'profileId',
+  );
+  @override
+  late final GeneratedColumn<int> profileId = GeneratedColumn<int>(
+    'profile_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'REFERENCES profiles (id)',
+    ),
+  );
+  static const VerificationMeta _pictogramIdMeta = const VerificationMeta(
+    'pictogramId',
+  );
+  @override
+  late final GeneratedColumn<int> pictogramId = GeneratedColumn<int>(
+    'pictogram_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'REFERENCES pictograms (id)',
+    ),
+  );
+  static const VerificationMeta _sourceMeta = const VerificationMeta('source');
+  @override
+  late final GeneratedColumn<String> source = GeneratedColumn<String>(
+    'source',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _atMeta = const VerificationMeta('at');
+  @override
+  late final GeneratedColumn<DateTime> at = GeneratedColumn<DateTime>(
+    'at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: true,
+  );
+  @override
+  List<GeneratedColumn> get $columns => [
+    id,
+    profileId,
+    pictogramId,
+    source,
+    at,
+  ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'usage_log';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<UsageEvent> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('profile_id')) {
+      context.handle(
+        _profileIdMeta,
+        profileId.isAcceptableOrUnknown(data['profile_id']!, _profileIdMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_profileIdMeta);
+    }
+    if (data.containsKey('pictogram_id')) {
+      context.handle(
+        _pictogramIdMeta,
+        pictogramId.isAcceptableOrUnknown(
+          data['pictogram_id']!,
+          _pictogramIdMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_pictogramIdMeta);
+    }
+    if (data.containsKey('source')) {
+      context.handle(
+        _sourceMeta,
+        source.isAcceptableOrUnknown(data['source']!, _sourceMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_sourceMeta);
+    }
+    if (data.containsKey('at')) {
+      context.handle(_atMeta, at.isAcceptableOrUnknown(data['at']!, _atMeta));
+    } else if (isInserting) {
+      context.missing(_atMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  UsageEvent map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return UsageEvent(
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}id'],
+      )!,
+      profileId: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}profile_id'],
+      )!,
+      pictogramId: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}pictogram_id'],
+      )!,
+      source: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}source'],
+      )!,
+      at: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}at'],
+      )!,
+    );
+  }
+
+  @override
+  $UsageLogTable createAlias(String alias) {
+    return $UsageLogTable(attachedDatabase, alias);
+  }
+}
+
+class UsageEvent extends DataClass implements Insertable<UsageEvent> {
+  final int id;
+  final int profileId;
+  final int pictogramId;
+  final String source;
+  final DateTime at;
+  const UsageEvent({
+    required this.id,
+    required this.profileId,
+    required this.pictogramId,
+    required this.source,
+    required this.at,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<int>(id);
+    map['profile_id'] = Variable<int>(profileId);
+    map['pictogram_id'] = Variable<int>(pictogramId);
+    map['source'] = Variable<String>(source);
+    map['at'] = Variable<DateTime>(at);
+    return map;
+  }
+
+  UsageLogCompanion toCompanion(bool nullToAbsent) {
+    return UsageLogCompanion(
+      id: Value(id),
+      profileId: Value(profileId),
+      pictogramId: Value(pictogramId),
+      source: Value(source),
+      at: Value(at),
+    );
+  }
+
+  factory UsageEvent.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return UsageEvent(
+      id: serializer.fromJson<int>(json['id']),
+      profileId: serializer.fromJson<int>(json['profileId']),
+      pictogramId: serializer.fromJson<int>(json['pictogramId']),
+      source: serializer.fromJson<String>(json['source']),
+      at: serializer.fromJson<DateTime>(json['at']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'profileId': serializer.toJson<int>(profileId),
+      'pictogramId': serializer.toJson<int>(pictogramId),
+      'source': serializer.toJson<String>(source),
+      'at': serializer.toJson<DateTime>(at),
+    };
+  }
+
+  UsageEvent copyWith({
+    int? id,
+    int? profileId,
+    int? pictogramId,
+    String? source,
+    DateTime? at,
+  }) => UsageEvent(
+    id: id ?? this.id,
+    profileId: profileId ?? this.profileId,
+    pictogramId: pictogramId ?? this.pictogramId,
+    source: source ?? this.source,
+    at: at ?? this.at,
+  );
+  UsageEvent copyWithCompanion(UsageLogCompanion data) {
+    return UsageEvent(
+      id: data.id.present ? data.id.value : this.id,
+      profileId: data.profileId.present ? data.profileId.value : this.profileId,
+      pictogramId: data.pictogramId.present
+          ? data.pictogramId.value
+          : this.pictogramId,
+      source: data.source.present ? data.source.value : this.source,
+      at: data.at.present ? data.at.value : this.at,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('UsageEvent(')
+          ..write('id: $id, ')
+          ..write('profileId: $profileId, ')
+          ..write('pictogramId: $pictogramId, ')
+          ..write('source: $source, ')
+          ..write('at: $at')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(id, profileId, pictogramId, source, at);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is UsageEvent &&
+          other.id == this.id &&
+          other.profileId == this.profileId &&
+          other.pictogramId == this.pictogramId &&
+          other.source == this.source &&
+          other.at == this.at);
+}
+
+class UsageLogCompanion extends UpdateCompanion<UsageEvent> {
+  final Value<int> id;
+  final Value<int> profileId;
+  final Value<int> pictogramId;
+  final Value<String> source;
+  final Value<DateTime> at;
+  const UsageLogCompanion({
+    this.id = const Value.absent(),
+    this.profileId = const Value.absent(),
+    this.pictogramId = const Value.absent(),
+    this.source = const Value.absent(),
+    this.at = const Value.absent(),
+  });
+  UsageLogCompanion.insert({
+    this.id = const Value.absent(),
+    required int profileId,
+    required int pictogramId,
+    required String source,
+    required DateTime at,
+  }) : profileId = Value(profileId),
+       pictogramId = Value(pictogramId),
+       source = Value(source),
+       at = Value(at);
+  static Insertable<UsageEvent> custom({
+    Expression<int>? id,
+    Expression<int>? profileId,
+    Expression<int>? pictogramId,
+    Expression<String>? source,
+    Expression<DateTime>? at,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (profileId != null) 'profile_id': profileId,
+      if (pictogramId != null) 'pictogram_id': pictogramId,
+      if (source != null) 'source': source,
+      if (at != null) 'at': at,
+    });
+  }
+
+  UsageLogCompanion copyWith({
+    Value<int>? id,
+    Value<int>? profileId,
+    Value<int>? pictogramId,
+    Value<String>? source,
+    Value<DateTime>? at,
+  }) {
+    return UsageLogCompanion(
+      id: id ?? this.id,
+      profileId: profileId ?? this.profileId,
+      pictogramId: pictogramId ?? this.pictogramId,
+      source: source ?? this.source,
+      at: at ?? this.at,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (profileId.present) {
+      map['profile_id'] = Variable<int>(profileId.value);
+    }
+    if (pictogramId.present) {
+      map['pictogram_id'] = Variable<int>(pictogramId.value);
+    }
+    if (source.present) {
+      map['source'] = Variable<String>(source.value);
+    }
+    if (at.present) {
+      map['at'] = Variable<DateTime>(at.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('UsageLogCompanion(')
+          ..write('id: $id, ')
+          ..write('profileId: $profileId, ')
+          ..write('pictogramId: $pictogramId, ')
+          ..write('source: $source, ')
+          ..write('at: $at')
+          ..write(')'))
+        .toString();
+  }
+}
+
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   $AppDatabaseManager get managers => $AppDatabaseManager(this);
@@ -2823,6 +3387,8 @@ abstract class _$AppDatabase extends GeneratedDatabase {
       $ProfileCategoriesTable(this);
   late final $RoutinesTable routines = $RoutinesTable(this);
   late final $RoutineStepsTable routineSteps = $RoutineStepsTable(this);
+  late final $AppSettingsTable appSettings = $AppSettingsTable(this);
+  late final $UsageLogTable usageLog = $UsageLogTable(this);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
@@ -2835,6 +3401,8 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     profileCategories,
     routines,
     routineSteps,
+    appSettings,
+    usageLog,
   ];
 }
 
@@ -2912,6 +3480,24 @@ final class $$ProfilesTableReferences
     ).filter((f) => f.profileId.id.sqlEquals($_itemColumn<int>('id')!));
 
     final cache = $_typedResult.readTableOrNull(_routinesRefsTable($_db));
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: cache),
+    );
+  }
+
+  static MultiTypedResultKey<$UsageLogTable, List<UsageEvent>>
+  _usageLogRefsTable(_$AppDatabase db) => MultiTypedResultKey.fromTable(
+    db.usageLog,
+    aliasName: 'profiles__id__usage_log__profile_id',
+  );
+
+  $$UsageLogTableProcessedTableManager get usageLogRefs {
+    final manager = $$UsageLogTableTableManager(
+      $_db,
+      $_db.usageLog,
+    ).filter((f) => f.profileId.id.sqlEquals($_itemColumn<int>('id')!));
+
+    final cache = $_typedResult.readTableOrNull(_usageLogRefsTable($_db));
     return ProcessedTableManager(
       manager.$state.copyWith(prefetchedData: cache),
     );
@@ -3023,6 +3609,31 @@ class $$ProfilesTableFilterComposer
           }) => $$RoutinesTableFilterComposer(
             $db: $db,
             $table: $db.routines,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return f(composer);
+  }
+
+  Expression<bool> usageLogRefs(
+    Expression<bool> Function($$UsageLogTableFilterComposer f) f,
+  ) {
+    final $$UsageLogTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.usageLog,
+      getReferencedColumn: (t) => t.profileId,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$UsageLogTableFilterComposer(
+            $db: $db,
+            $table: $db.usageLog,
             $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
             joinBuilder: joinBuilder,
             $removeJoinBuilderFromRootComposer:
@@ -3179,6 +3790,31 @@ class $$ProfilesTableAnnotationComposer
     );
     return f(composer);
   }
+
+  Expression<T> usageLogRefs<T extends Object>(
+    Expression<T> Function($$UsageLogTableAnnotationComposer a) f,
+  ) {
+    final $$UsageLogTableAnnotationComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.usageLog,
+      getReferencedColumn: (t) => t.profileId,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$UsageLogTableAnnotationComposer(
+            $db: $db,
+            $table: $db.usageLog,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return f(composer);
+  }
 }
 
 class $$ProfilesTableTableManager
@@ -3198,6 +3834,7 @@ class $$ProfilesTableTableManager
             bool boardItemsRefs,
             bool profileCategoriesRefs,
             bool routinesRefs,
+            bool usageLogRefs,
           })
         > {
   $$ProfilesTableTableManager(_$AppDatabase db, $ProfilesTable table)
@@ -3256,6 +3893,7 @@ class $$ProfilesTableTableManager
                 boardItemsRefs = false,
                 profileCategoriesRefs = false,
                 routinesRefs = false,
+                usageLogRefs = false,
               }) {
                 return PrefetchHooks(
                   db: db,
@@ -3263,6 +3901,7 @@ class $$ProfilesTableTableManager
                     if (boardItemsRefs) db.boardItems,
                     if (profileCategoriesRefs) db.profileCategories,
                     if (routinesRefs) db.routines,
+                    if (usageLogRefs) db.usageLog,
                   ],
                   addJoins: null,
                   getPrefetchedDataCallback: (items) async {
@@ -3327,6 +3966,26 @@ class $$ProfilesTableTableManager
                           referencedColumn: 'profile_id',
                           typedResults: items,
                         ),
+                      if (usageLogRefs)
+                        await $_getPrefetchedDataByColumns<
+                          Profile,
+                          $ProfilesTable,
+                          UsageEvent,
+                          $UsageLogTable
+                        >(
+                          currentTable: table,
+                          referencedTable: $$ProfilesTableReferences
+                              ._usageLogRefsTable(db),
+                          managerFromTypedResult: (p0) =>
+                              $$ProfilesTableReferences(
+                                db,
+                                table,
+                                p0,
+                              ).usageLogRefs,
+                          currentColumn: 'id',
+                          referencedColumn: 'profile_id',
+                          typedResults: items,
+                        ),
                     ];
                   },
                 );
@@ -3351,6 +4010,7 @@ typedef $$ProfilesTableProcessedTableManager =
         bool boardItemsRefs,
         bool profileCategoriesRefs,
         bool routinesRefs,
+        bool usageLogRefs,
       })
     >;
 typedef $$CategoriesTableCreateCompanionBuilder = CategoriesCompanion Function({
@@ -3923,6 +4583,24 @@ final class $$PictogramsTableReferences
       manager.$state.copyWith(prefetchedData: cache),
     );
   }
+
+  static MultiTypedResultKey<$UsageLogTable, List<UsageEvent>>
+  _usageLogRefsTable(_$AppDatabase db) => MultiTypedResultKey.fromTable(
+    db.usageLog,
+    aliasName: 'pictograms__id__usage_log__pictogram_id',
+  );
+
+  $$UsageLogTableProcessedTableManager get usageLogRefs {
+    final manager = $$UsageLogTableTableManager(
+      $_db,
+      $_db.usageLog,
+    ).filter((f) => f.pictogramId.id.sqlEquals($_itemColumn<int>('id')!));
+
+    final cache = $_typedResult.readTableOrNull(_usageLogRefsTable($_db));
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: cache),
+    );
+  }
 }
 
 class $$PictogramsTableFilterComposer
@@ -4038,6 +4716,31 @@ class $$PictogramsTableFilterComposer
           }) => $$RoutineStepsTableFilterComposer(
             $db: $db,
             $table: $db.routineSteps,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return f(composer);
+  }
+
+  Expression<bool> usageLogRefs(
+    Expression<bool> Function($$UsageLogTableFilterComposer f) f,
+  ) {
+    final $$UsageLogTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.usageLog,
+      getReferencedColumn: (t) => t.pictogramId,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$UsageLogTableFilterComposer(
+            $db: $db,
+            $table: $db.usageLog,
             $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
             joinBuilder: joinBuilder,
             $removeJoinBuilderFromRootComposer:
@@ -4226,6 +4929,31 @@ class $$PictogramsTableAnnotationComposer
     );
     return f(composer);
   }
+
+  Expression<T> usageLogRefs<T extends Object>(
+    Expression<T> Function($$UsageLogTableAnnotationComposer a) f,
+  ) {
+    final $$UsageLogTableAnnotationComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.usageLog,
+      getReferencedColumn: (t) => t.pictogramId,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$UsageLogTableAnnotationComposer(
+            $db: $db,
+            $table: $db.usageLog,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return f(composer);
+  }
 }
 
 class $$PictogramsTableTableManager
@@ -4245,6 +4973,7 @@ class $$PictogramsTableTableManager
             bool categoryId,
             bool boardItemsRefs,
             bool routineStepsRefs,
+            bool usageLogRefs,
           })
         > {
   $$PictogramsTableTableManager(_$AppDatabase db, $PictogramsTable table)
@@ -4315,12 +5044,14 @@ class $$PictogramsTableTableManager
                 categoryId = false,
                 boardItemsRefs = false,
                 routineStepsRefs = false,
+                usageLogRefs = false,
               }) {
                 return PrefetchHooks(
                   db: db,
                   explicitlyWatchedTables: [
                     if (boardItemsRefs) db.boardItems,
                     if (routineStepsRefs) db.routineSteps,
+                    if (usageLogRefs) db.usageLog,
                   ],
                   addJoins:
                       <
@@ -4394,6 +5125,26 @@ class $$PictogramsTableTableManager
                           referencedColumn: 'pictogram_id',
                           typedResults: items,
                         ),
+                      if (usageLogRefs)
+                        await $_getPrefetchedDataByColumns<
+                          Pictogram,
+                          $PictogramsTable,
+                          UsageEvent,
+                          $UsageLogTable
+                        >(
+                          currentTable: table,
+                          referencedTable: $$PictogramsTableReferences
+                              ._usageLogRefsTable(db),
+                          managerFromTypedResult: (p0) =>
+                              $$PictogramsTableReferences(
+                                db,
+                                table,
+                                p0,
+                              ).usageLogRefs,
+                          currentColumn: 'id',
+                          referencedColumn: 'pictogram_id',
+                          typedResults: items,
+                        ),
                     ];
                   },
                 );
@@ -4418,6 +5169,7 @@ typedef $$PictogramsTableProcessedTableManager =
         bool categoryId,
         bool boardItemsRefs,
         bool routineStepsRefs,
+        bool usageLogRefs,
       })
     >;
 typedef $$BoardItemsTableCreateCompanionBuilder = BoardItemsCompanion Function({
@@ -6122,6 +6874,544 @@ typedef $$RoutineStepsTableProcessedTableManager =
       RoutineStep,
       PrefetchHooks Function({bool routineId, bool pictogramId})
     >;
+typedef $$AppSettingsTableCreateCompanionBuilder =
+    AppSettingsCompanion Function({
+      required String key,
+      required String value,
+      Value<int> rowid,
+    });
+typedef $$AppSettingsTableUpdateCompanionBuilder =
+    AppSettingsCompanion Function({
+      Value<String> key,
+      Value<String> value,
+      Value<int> rowid,
+    });
+
+class $$AppSettingsTableFilterComposer
+    extends Composer<_$AppDatabase, $AppSettingsTable> {
+  $$AppSettingsTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get key => $composableBuilder(
+    column: $table.key,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get value => $composableBuilder(
+    column: $table.value,
+    builder: (column) => ColumnFilters(column),
+  );
+}
+
+class $$AppSettingsTableOrderingComposer
+    extends Composer<_$AppDatabase, $AppSettingsTable> {
+  $$AppSettingsTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get key => $composableBuilder(
+    column: $table.key,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get value => $composableBuilder(
+    column: $table.value,
+    builder: (column) => ColumnOrderings(column),
+  );
+}
+
+class $$AppSettingsTableAnnotationComposer
+    extends Composer<_$AppDatabase, $AppSettingsTable> {
+  $$AppSettingsTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get key =>
+      $composableBuilder(column: $table.key, builder: (column) => column);
+
+  GeneratedColumn<String> get value =>
+      $composableBuilder(column: $table.value, builder: (column) => column);
+}
+
+class $$AppSettingsTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $AppSettingsTable,
+          AppSetting,
+          $$AppSettingsTableFilterComposer,
+          $$AppSettingsTableOrderingComposer,
+          $$AppSettingsTableAnnotationComposer,
+          $$AppSettingsTableCreateCompanionBuilder,
+          $$AppSettingsTableUpdateCompanionBuilder,
+          (
+            AppSetting,
+            BaseReferences<_$AppDatabase, $AppSettingsTable, AppSetting>,
+          ),
+          AppSetting,
+          PrefetchHooks Function()
+        > {
+  $$AppSettingsTableTableManager(_$AppDatabase db, $AppSettingsTable table)
+    : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$AppSettingsTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$AppSettingsTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$AppSettingsTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback: ({
+            Value<String> key = const Value.absent(),
+            Value<String> value = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) => AppSettingsCompanion(key: key, value: value, rowid: rowid),
+          createCompanionCallback:
+              ({
+                required String key,
+                required String value,
+                Value<int> rowid = const Value.absent(),
+              }) => AppSettingsCompanion.insert(
+                key: key,
+                value: value,
+                rowid: rowid,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map(
+                (e) => (
+                  e.readTable<$AppSettingsTable, AppSetting>(table),
+                  BaseReferences<_$AppDatabase, $AppSettingsTable, AppSetting>(
+                    db,
+                    table,
+                    e,
+                  ),
+                ),
+              )
+              .toList(),
+          prefetchHooksCallback: null,
+        ),
+      );
+}
+
+typedef $$AppSettingsTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $AppSettingsTable,
+      AppSetting,
+      $$AppSettingsTableFilterComposer,
+      $$AppSettingsTableOrderingComposer,
+      $$AppSettingsTableAnnotationComposer,
+      $$AppSettingsTableCreateCompanionBuilder,
+      $$AppSettingsTableUpdateCompanionBuilder,
+      (
+        AppSetting,
+        BaseReferences<_$AppDatabase, $AppSettingsTable, AppSetting>,
+      ),
+      AppSetting,
+      PrefetchHooks Function()
+    >;
+typedef $$UsageLogTableCreateCompanionBuilder = UsageLogCompanion Function({
+  Value<int> id,
+  required int profileId,
+  required int pictogramId,
+  required String source,
+  required DateTime at,
+});
+typedef $$UsageLogTableUpdateCompanionBuilder = UsageLogCompanion Function({
+  Value<int> id,
+  Value<int> profileId,
+  Value<int> pictogramId,
+  Value<String> source,
+  Value<DateTime> at,
+});
+
+final class $$UsageLogTableReferences
+    extends BaseReferences<_$AppDatabase, $UsageLogTable, UsageEvent> {
+  $$UsageLogTableReferences(super.$_db, super.$_table, super.$_typedResult);
+
+  static $ProfilesTable _profileIdTable(_$AppDatabase db) =>
+      db.profiles.createAlias('usage_log__profile_id__profiles__id');
+
+  $$ProfilesTableProcessedTableManager get profileId {
+    final $_column = $_itemColumn<int>('profile_id')!;
+
+    final manager = $$ProfilesTableTableManager(
+      $_db,
+      $_db.profiles,
+    ).filter((f) => f.id.sqlEquals($_column));
+    final item = $_typedResult.readTableOrNull(_profileIdTable($_db));
+    if (item == null) return manager;
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: [item]),
+    );
+  }
+
+  static $PictogramsTable _pictogramIdTable(_$AppDatabase db) =>
+      db.pictograms.createAlias('usage_log__pictogram_id__pictograms__id');
+
+  $$PictogramsTableProcessedTableManager get pictogramId {
+    final $_column = $_itemColumn<int>('pictogram_id')!;
+
+    final manager = $$PictogramsTableTableManager(
+      $_db,
+      $_db.pictograms,
+    ).filter((f) => f.id.sqlEquals($_column));
+    final item = $_typedResult.readTableOrNull(_pictogramIdTable($_db));
+    if (item == null) return manager;
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: [item]),
+    );
+  }
+}
+
+class $$UsageLogTableFilterComposer
+    extends Composer<_$AppDatabase, $UsageLogTable> {
+  $$UsageLogTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<int> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get source => $composableBuilder(
+    column: $table.source,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<DateTime> get at => $composableBuilder(
+    column: $table.at,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  $$ProfilesTableFilterComposer get profileId {
+    final $$ProfilesTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.profileId,
+      referencedTable: $db.profiles,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$ProfilesTableFilterComposer(
+            $db: $db,
+            $table: $db.profiles,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+
+  $$PictogramsTableFilterComposer get pictogramId {
+    final $$PictogramsTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.pictogramId,
+      referencedTable: $db.pictograms,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$PictogramsTableFilterComposer(
+            $db: $db,
+            $table: $db.pictograms,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+}
+
+class $$UsageLogTableOrderingComposer
+    extends Composer<_$AppDatabase, $UsageLogTable> {
+  $$UsageLogTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<int> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get source => $composableBuilder(
+    column: $table.source,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<DateTime> get at => $composableBuilder(
+    column: $table.at,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  $$ProfilesTableOrderingComposer get profileId {
+    final $$ProfilesTableOrderingComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.profileId,
+      referencedTable: $db.profiles,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$ProfilesTableOrderingComposer(
+            $db: $db,
+            $table: $db.profiles,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+
+  $$PictogramsTableOrderingComposer get pictogramId {
+    final $$PictogramsTableOrderingComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.pictogramId,
+      referencedTable: $db.pictograms,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$PictogramsTableOrderingComposer(
+            $db: $db,
+            $table: $db.pictograms,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+}
+
+class $$UsageLogTableAnnotationComposer
+    extends Composer<_$AppDatabase, $UsageLogTable> {
+  $$UsageLogTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<int> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get source =>
+      $composableBuilder(column: $table.source, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get at =>
+      $composableBuilder(column: $table.at, builder: (column) => column);
+
+  $$ProfilesTableAnnotationComposer get profileId {
+    final $$ProfilesTableAnnotationComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.profileId,
+      referencedTable: $db.profiles,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$ProfilesTableAnnotationComposer(
+            $db: $db,
+            $table: $db.profiles,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+
+  $$PictogramsTableAnnotationComposer get pictogramId {
+    final $$PictogramsTableAnnotationComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.pictogramId,
+      referencedTable: $db.pictograms,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$PictogramsTableAnnotationComposer(
+            $db: $db,
+            $table: $db.pictograms,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+}
+
+class $$UsageLogTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $UsageLogTable,
+          UsageEvent,
+          $$UsageLogTableFilterComposer,
+          $$UsageLogTableOrderingComposer,
+          $$UsageLogTableAnnotationComposer,
+          $$UsageLogTableCreateCompanionBuilder,
+          $$UsageLogTableUpdateCompanionBuilder,
+          (UsageEvent, $$UsageLogTableReferences),
+          UsageEvent,
+          PrefetchHooks Function({bool profileId, bool pictogramId})
+        > {
+  $$UsageLogTableTableManager(_$AppDatabase db, $UsageLogTable table)
+    : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$UsageLogTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$UsageLogTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$UsageLogTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                Value<int> profileId = const Value.absent(),
+                Value<int> pictogramId = const Value.absent(),
+                Value<String> source = const Value.absent(),
+                Value<DateTime> at = const Value.absent(),
+              }) => UsageLogCompanion(
+                id: id,
+                profileId: profileId,
+                pictogramId: pictogramId,
+                source: source,
+                at: at,
+              ),
+          createCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                required int profileId,
+                required int pictogramId,
+                required String source,
+                required DateTime at,
+              }) => UsageLogCompanion.insert(
+                id: id,
+                profileId: profileId,
+                pictogramId: pictogramId,
+                source: source,
+                at: at,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map(
+                (e) => (
+                  e.readTable<$UsageLogTable, UsageEvent>(table),
+                  $$UsageLogTableReferences(db, table, e),
+                ),
+              )
+              .toList(),
+          prefetchHooksCallback: ({profileId = false, pictogramId = false}) {
+            return PrefetchHooks(
+              db: db,
+              explicitlyWatchedTables: [],
+              addJoins:
+                  <
+                    T extends TableManagerState<
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic
+                    >
+                  >(state) {
+                    if (profileId) {
+                      state = state.withJoin(
+                        currentTable: table,
+                        currentColumn: table.profileId,
+                        referencedTable: $$UsageLogTableReferences
+                            ._profileIdTable(db),
+                        referencedColumn: $$UsageLogTableReferences
+                            ._profileIdTable(db)
+                            .id,
+                      ) as T;
+                    }
+                    if (pictogramId) {
+                      state = state.withJoin(
+                        currentTable: table,
+                        currentColumn: table.pictogramId,
+                        referencedTable: $$UsageLogTableReferences
+                            ._pictogramIdTable(db),
+                        referencedColumn: $$UsageLogTableReferences
+                            ._pictogramIdTable(db)
+                            .id,
+                      ) as T;
+                    }
+
+                    return state;
+                  },
+              getPrefetchedDataCallback: (items) async {
+                return [];
+              },
+            );
+          },
+        ),
+      );
+}
+
+typedef $$UsageLogTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $UsageLogTable,
+      UsageEvent,
+      $$UsageLogTableFilterComposer,
+      $$UsageLogTableOrderingComposer,
+      $$UsageLogTableAnnotationComposer,
+      $$UsageLogTableCreateCompanionBuilder,
+      $$UsageLogTableUpdateCompanionBuilder,
+      (UsageEvent, $$UsageLogTableReferences),
+      UsageEvent,
+      PrefetchHooks Function({bool profileId, bool pictogramId})
+    >;
 
 class $AppDatabaseManager {
   final _$AppDatabase _db;
@@ -6140,4 +7430,8 @@ class $AppDatabaseManager {
       $$RoutinesTableTableManager(_db, _db.routines);
   $$RoutineStepsTableTableManager get routineSteps =>
       $$RoutineStepsTableTableManager(_db, _db.routineSteps);
+  $$AppSettingsTableTableManager get appSettings =>
+      $$AppSettingsTableTableManager(_db, _db.appSettings);
+  $$UsageLogTableTableManager get usageLog =>
+      $$UsageLogTableTableManager(_db, _db.usageLog);
 }

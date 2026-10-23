@@ -14,6 +14,8 @@ part 'app_database.g.dart';
     ProfileCategories,
     Routines,
     RoutineSteps,
+    AppSettings,
+    UsageLog,
   ],
 )
 class AppDatabase extends _$AppDatabase {
@@ -21,12 +23,16 @@ class AppDatabase extends _$AppDatabase {
     : super(executor ?? driftDatabase(name: 'pictogramas'));
 
   @override
-  int get schemaVersion => 3;
+  int get schemaVersion => 4;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
     onCreate: (m) => m.createAll(),
     onUpgrade: (m, from, to) async {
+      if (from < 4) {
+        await m.createTable(appSettings);
+        await m.createTable(usageLog);
+      }
       if (from < 3) {
         await m.createTable(routines);
         await m.createTable(routineSteps);

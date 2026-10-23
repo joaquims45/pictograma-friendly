@@ -78,3 +78,23 @@ class RoutineSteps extends Table {
   IntColumn get position => integer()();
   BoolColumn get done => boolean().withDefault(const Constant(false))();
 }
+
+/// Ajustes simples clave/valor (ej. si el registro de uso está activado).
+@DataClassName('AppSetting')
+class AppSettings extends Table {
+  TextColumn get key => text()();
+  TextColumn get value => text()();
+
+  @override
+  Set<Column> get primaryKey => {key};
+}
+
+/// Registro de uso opcional (apagado por defecto). Solo vive en el teléfono.
+@DataClassName('UsageEvent')
+class UsageLog extends Table {
+  IntColumn get id => integer().autoIncrement()();
+  IntColumn get profileId => integer().references(Profiles, #id)();
+  IntColumn get pictogramId => integer().references(Pictograms, #id)();
+  TextColumn get source => text()(); // 'board' | 'routine'
+  DateTimeColumn get at => dateTime()();
+}
