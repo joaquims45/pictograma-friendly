@@ -27,3 +27,17 @@ Fuente: ARASAAC (CC BY-NC-SA). Ver pantalla "Acerca de" para la atribución.
 1. Ajustes de Android → Seguridad → "Fijar pantalla" (o "Fijación de app") → activar.
 2. Al abrir un tablero la app pide fijarse; confirmar.
 3. Para salir: mantener presionado 3 segundos el candado gris de la esquina superior derecha.
+
+## Firmar el APK (release)
+1. Crear la clave (una sola vez, guardarla y respaldarla; sin ella no se puede actualizar la app):
+   ```
+   keytool -genkey -v -keystore D:\dev\pictogramas-release.jks -keyalg RSA -keysize 2048 -validity 10000 -alias pictogramas
+   ```
+2. Crear `android/key.properties` (no se versiona):
+   ```
+   storePassword=TU_CLAVE
+   keyPassword=TU_CLAVE
+   keyAlias=pictogramas
+   storeFile=D:/dev/pictogramas-release.jks
+   ```
+3. `flutter build apk --release`. Sin `key.properties` firma con la clave de debug (sirve para instalar en tu celular).
