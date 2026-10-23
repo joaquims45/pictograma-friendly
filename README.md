@@ -22,3 +22,8 @@ Salida: `build/app/outputs/flutter-apk/app-release.apk`. Instalar por USB: `adb 
 
 ## Pictogramas
 Fuente: ARASAAC (CC BY-NC-SA). Ver pantalla "Acerca de" para la atribución.
+
+## Fijado de pantalla (para que los chicos no salgan de la app)
+1. Ajustes de Android → Seguridad → "Fijar pantalla" (o "Fijación de app") → activar.
+2. Al abrir un tablero la app pide fijarse; confirmar.
+3. Para salir: mantener presionado 3 segundos el candado gris de la esquina superior derecha.

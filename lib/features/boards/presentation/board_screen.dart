@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/db/app_database.dart';
+import '../../../core/kiosk/kiosk.dart';
 import '../../../core/providers.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../phrase_bar/presentation/phrase_bar.dart';
@@ -18,6 +19,17 @@ class BoardScreen extends ConsumerStatefulWidget {
 
 class _BoardScreenState extends ConsumerState<BoardScreen> {
   int? _categoryId;
+
+  @override
+  void initState() {
+    super.initState();
+    Kiosk.start();
+  }
+
+  Future<void> _exit() async {
+    await Kiosk.stop();
+    if (mounted) Navigator.of(context).pop();
+  }
 
   Profile get profile => widget.profile;
 
@@ -77,9 +89,7 @@ class _BoardScreenState extends ConsumerState<BoardScreen> {
           ],
         ),
       ),
-      floatingActionButton: _ExitLock(
-        onExit: () => Navigator.of(context).pop(),
-      ),
+      floatingActionButton: _ExitLock(onExit: _exit),
       floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
     );
   }
