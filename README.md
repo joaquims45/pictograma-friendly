@@ -41,3 +41,11 @@ Fuente: ARASAAC (CC BY-NC-SA). Ver pantalla "Acerca de" para la atribución.
    storeFile=D:/dev/pictogramas-release.jks
    ```
 3. `flutter build apk --release`. Sin `key.properties` firma con la clave de debug (sirve para instalar en tu celular).
+
+## Emulador (sin celular)
+Todo vive en D:. Crear/usar el AVD:
+```
+set ANDROID_AVD_HOME=D:\devvd
+D:\devndroid-sdkmulatormulator.exe -avd medium_phone
+flutter run -d emulator-5554
+```

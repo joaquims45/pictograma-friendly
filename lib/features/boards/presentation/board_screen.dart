@@ -72,6 +72,10 @@ class _BoardScreenState extends ConsumerState<BoardScreen> {
       body: SafeArea(
         child: Column(
           children: [
+            Align(
+              alignment: Alignment.centerRight,
+              child: _ExitLock(onExit: _exit),
+            ),
             if (profile.phraseBarEnabled) const PhraseBar(),
             Expanded(
               child: Row(
@@ -89,8 +93,6 @@ class _BoardScreenState extends ConsumerState<BoardScreen> {
           ],
         ),
       ),
-      floatingActionButton: _ExitLock(onExit: _exit),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
     );
   }
 }
@@ -164,7 +166,7 @@ class _ExitLock extends StatelessWidget {
             ),
       },
       child: const Padding(
-        padding: EdgeInsets.all(16),
+        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 6),
         child: Icon(Icons.lock_outline, size: 28, color: Color(0x668A93A0)),
       ),
     );

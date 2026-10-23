@@ -13,18 +13,19 @@ class Speaker {
 
   Future<void> init() async {
     if (_ready) return;
-    for (final lang in const ['es-AR', 'es-US', 'es-ES']) {
-      try {
-        if (await _tts.isLanguageAvailable(lang) == true) {
-          await _tts.setLanguage(lang);
+    _ready = true;
+    // Sin motor de voz instalado estas llamadas pueden no responder nunca.
+    const limit = Duration(seconds: 3);
+    try {
+      for (final lang in const ['es-AR', 'es-US', 'es-ES']) {
+        if (await _tts.isLanguageAvailable(lang).timeout(limit) == true) {
+          await _tts.setLanguage(lang).timeout(limit);
           break;
         }
-      } catch (_) {}
-    }
-    await _tts.setSpeechRate(0.42); // calmo
-    await _tts.setVolume(1.0);
-    await _tts.awaitSpeakCompletion(false);
-    _ready = true;
+      }
+      await _tts.setSpeechRate(0.42).timeout(limit); // calmo
+      await _tts.setVolume(1.0).timeout(limit);
+    } catch (_) {}
   }
 
   Future<void> speakPictogram(Pictogram p) async {

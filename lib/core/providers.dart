@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'db/app_database.dart';
@@ -20,7 +22,8 @@ final speakerProvider = Provider<Speaker>((ref) {
 /// Siembra datos y prepara la voz antes de mostrar la app.
 final bootstrapProvider = FutureProvider<void>((ref) async {
   await seedIfEmpty(ref.read(databaseProvider));
-  await ref.read(speakerProvider).init();
+  // La voz se prepara en segundo plano: nunca debe bloquear el arranque.
+  unawaited(ref.read(speakerProvider).init());
 });
 
 final profilesProvider = FutureProvider<List<Profile>>(

@@ -66,15 +66,20 @@ class _PictogramTileState extends State<PictogramTile> {
                 ),
               ),
               const SizedBox(height: 8),
-              FittedBox(
-                fit: BoxFit.scaleDown,
-                child: Text(
-                  p.labelEs,
-                  style: const TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w600,
+              SizedBox(
+                height: 48,
+                child: Center(
+                  child: Text(
+                    p.labelEs,
+                    textAlign: TextAlign.center,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                      fontSize: 18,
+                      height: 1.15,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
-                  maxLines: 1,
                 ),
               ),
             ],
