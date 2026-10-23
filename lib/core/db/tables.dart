@@ -60,3 +60,21 @@ class ProfileCategories extends Table {
     {profileId, categoryId},
   ];
 }
+
+/// Rutina o agenda visual de un perfil (ej. "Mañana", "Ir a dormir").
+class Routines extends Table {
+  IntColumn get id => integer().autoIncrement()();
+  IntColumn get profileId => integer().references(Profiles, #id)();
+  TextColumn get name => text()();
+  IntColumn get position => integer().withDefault(const Constant(0))();
+  DateTimeColumn get createdAt => dateTime().withDefault(currentDateAndTime)();
+}
+
+/// Pasos en orden fijo. `done` lo marca el adulto o el chico con el tilde.
+class RoutineSteps extends Table {
+  IntColumn get id => integer().autoIncrement()();
+  IntColumn get routineId => integer().references(Routines, #id)();
+  IntColumn get pictogramId => integer().references(Pictograms, #id)();
+  IntColumn get position => integer()();
+  BoolColumn get done => boolean().withDefault(const Constant(false))();
+}

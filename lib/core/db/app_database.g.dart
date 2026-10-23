@@ -2102,6 +2102,716 @@ class ProfileCategoriesCompanion extends UpdateCompanion<ProfileCategory> {
   }
 }
 
+class $RoutinesTable extends Routines with TableInfo<$RoutinesTable, Routine> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $RoutinesTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
+    'id',
+    aliasedName,
+    false,
+    hasAutoIncrement: true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'PRIMARY KEY AUTOINCREMENT',
+    ),
+  );
+  static const VerificationMeta _profileIdMeta = const VerificationMeta(
+    'profileId',
+  );
+  @override
+  late final GeneratedColumn<int> profileId = GeneratedColumn<int>(
+    'profile_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'REFERENCES profiles (id)',
+    ),
+  );
+  static const VerificationMeta _nameMeta = const VerificationMeta('name');
+  @override
+  late final GeneratedColumn<String> name = GeneratedColumn<String>(
+    'name',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _positionMeta = const VerificationMeta(
+    'position',
+  );
+  @override
+  late final GeneratedColumn<int> position = GeneratedColumn<int>(
+    'position',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(0),
+  );
+  static const VerificationMeta _createdAtMeta = const VerificationMeta(
+    'createdAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> createdAt = GeneratedColumn<DateTime>(
+    'created_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: false,
+    defaultValue: currentDateAndTime,
+  );
+  @override
+  List<GeneratedColumn> get $columns => [
+    id,
+    profileId,
+    name,
+    position,
+    createdAt,
+  ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'routines';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<Routine> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('profile_id')) {
+      context.handle(
+        _profileIdMeta,
+        profileId.isAcceptableOrUnknown(data['profile_id']!, _profileIdMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_profileIdMeta);
+    }
+    if (data.containsKey('name')) {
+      context.handle(
+        _nameMeta,
+        name.isAcceptableOrUnknown(data['name']!, _nameMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_nameMeta);
+    }
+    if (data.containsKey('position')) {
+      context.handle(
+        _positionMeta,
+        position.isAcceptableOrUnknown(data['position']!, _positionMeta),
+      );
+    }
+    if (data.containsKey('created_at')) {
+      context.handle(
+        _createdAtMeta,
+        createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta),
+      );
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  Routine map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return Routine(
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}id'],
+      )!,
+      profileId: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}profile_id'],
+      )!,
+      name: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}name'],
+      )!,
+      position: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}position'],
+      )!,
+      createdAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}created_at'],
+      )!,
+    );
+  }
+
+  @override
+  $RoutinesTable createAlias(String alias) {
+    return $RoutinesTable(attachedDatabase, alias);
+  }
+}
+
+class Routine extends DataClass implements Insertable<Routine> {
+  final int id;
+  final int profileId;
+  final String name;
+  final int position;
+  final DateTime createdAt;
+  const Routine({
+    required this.id,
+    required this.profileId,
+    required this.name,
+    required this.position,
+    required this.createdAt,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<int>(id);
+    map['profile_id'] = Variable<int>(profileId);
+    map['name'] = Variable<String>(name);
+    map['position'] = Variable<int>(position);
+    map['created_at'] = Variable<DateTime>(createdAt);
+    return map;
+  }
+
+  RoutinesCompanion toCompanion(bool nullToAbsent) {
+    return RoutinesCompanion(
+      id: Value(id),
+      profileId: Value(profileId),
+      name: Value(name),
+      position: Value(position),
+      createdAt: Value(createdAt),
+    );
+  }
+
+  factory Routine.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return Routine(
+      id: serializer.fromJson<int>(json['id']),
+      profileId: serializer.fromJson<int>(json['profileId']),
+      name: serializer.fromJson<String>(json['name']),
+      position: serializer.fromJson<int>(json['position']),
+      createdAt: serializer.fromJson<DateTime>(json['createdAt']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'profileId': serializer.toJson<int>(profileId),
+      'name': serializer.toJson<String>(name),
+      'position': serializer.toJson<int>(position),
+      'createdAt': serializer.toJson<DateTime>(createdAt),
+    };
+  }
+
+  Routine copyWith({
+    int? id,
+    int? profileId,
+    String? name,
+    int? position,
+    DateTime? createdAt,
+  }) => Routine(
+    id: id ?? this.id,
+    profileId: profileId ?? this.profileId,
+    name: name ?? this.name,
+    position: position ?? this.position,
+    createdAt: createdAt ?? this.createdAt,
+  );
+  Routine copyWithCompanion(RoutinesCompanion data) {
+    return Routine(
+      id: data.id.present ? data.id.value : this.id,
+      profileId: data.profileId.present ? data.profileId.value : this.profileId,
+      name: data.name.present ? data.name.value : this.name,
+      position: data.position.present ? data.position.value : this.position,
+      createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('Routine(')
+          ..write('id: $id, ')
+          ..write('profileId: $profileId, ')
+          ..write('name: $name, ')
+          ..write('position: $position, ')
+          ..write('createdAt: $createdAt')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(id, profileId, name, position, createdAt);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is Routine &&
+          other.id == this.id &&
+          other.profileId == this.profileId &&
+          other.name == this.name &&
+          other.position == this.position &&
+          other.createdAt == this.createdAt);
+}
+
+class RoutinesCompanion extends UpdateCompanion<Routine> {
+  final Value<int> id;
+  final Value<int> profileId;
+  final Value<String> name;
+  final Value<int> position;
+  final Value<DateTime> createdAt;
+  const RoutinesCompanion({
+    this.id = const Value.absent(),
+    this.profileId = const Value.absent(),
+    this.name = const Value.absent(),
+    this.position = const Value.absent(),
+    this.createdAt = const Value.absent(),
+  });
+  RoutinesCompanion.insert({
+    this.id = const Value.absent(),
+    required int profileId,
+    required String name,
+    this.position = const Value.absent(),
+    this.createdAt = const Value.absent(),
+  }) : profileId = Value(profileId),
+       name = Value(name);
+  static Insertable<Routine> custom({
+    Expression<int>? id,
+    Expression<int>? profileId,
+    Expression<String>? name,
+    Expression<int>? position,
+    Expression<DateTime>? createdAt,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (profileId != null) 'profile_id': profileId,
+      if (name != null) 'name': name,
+      if (position != null) 'position': position,
+      if (createdAt != null) 'created_at': createdAt,
+    });
+  }
+
+  RoutinesCompanion copyWith({
+    Value<int>? id,
+    Value<int>? profileId,
+    Value<String>? name,
+    Value<int>? position,
+    Value<DateTime>? createdAt,
+  }) {
+    return RoutinesCompanion(
+      id: id ?? this.id,
+      profileId: profileId ?? this.profileId,
+      name: name ?? this.name,
+      position: position ?? this.position,
+      createdAt: createdAt ?? this.createdAt,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (profileId.present) {
+      map['profile_id'] = Variable<int>(profileId.value);
+    }
+    if (name.present) {
+      map['name'] = Variable<String>(name.value);
+    }
+    if (position.present) {
+      map['position'] = Variable<int>(position.value);
+    }
+    if (createdAt.present) {
+      map['created_at'] = Variable<DateTime>(createdAt.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('RoutinesCompanion(')
+          ..write('id: $id, ')
+          ..write('profileId: $profileId, ')
+          ..write('name: $name, ')
+          ..write('position: $position, ')
+          ..write('createdAt: $createdAt')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $RoutineStepsTable extends RoutineSteps
+    with TableInfo<$RoutineStepsTable, RoutineStep> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $RoutineStepsTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
+    'id',
+    aliasedName,
+    false,
+    hasAutoIncrement: true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'PRIMARY KEY AUTOINCREMENT',
+    ),
+  );
+  static const VerificationMeta _routineIdMeta = const VerificationMeta(
+    'routineId',
+  );
+  @override
+  late final GeneratedColumn<int> routineId = GeneratedColumn<int>(
+    'routine_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'REFERENCES routines (id)',
+    ),
+  );
+  static const VerificationMeta _pictogramIdMeta = const VerificationMeta(
+    'pictogramId',
+  );
+  @override
+  late final GeneratedColumn<int> pictogramId = GeneratedColumn<int>(
+    'pictogram_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'REFERENCES pictograms (id)',
+    ),
+  );
+  static const VerificationMeta _positionMeta = const VerificationMeta(
+    'position',
+  );
+  @override
+  late final GeneratedColumn<int> position = GeneratedColumn<int>(
+    'position',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _doneMeta = const VerificationMeta('done');
+  @override
+  late final GeneratedColumn<bool> done = GeneratedColumn<bool>(
+    'done',
+    aliasedName,
+    false,
+    type: DriftSqlType.bool,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'CHECK ("done" IN (0, 1))',
+    ),
+    defaultValue: const Constant(false),
+  );
+  @override
+  List<GeneratedColumn> get $columns => [
+    id,
+    routineId,
+    pictogramId,
+    position,
+    done,
+  ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'routine_steps';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<RoutineStep> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('routine_id')) {
+      context.handle(
+        _routineIdMeta,
+        routineId.isAcceptableOrUnknown(data['routine_id']!, _routineIdMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_routineIdMeta);
+    }
+    if (data.containsKey('pictogram_id')) {
+      context.handle(
+        _pictogramIdMeta,
+        pictogramId.isAcceptableOrUnknown(
+          data['pictogram_id']!,
+          _pictogramIdMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_pictogramIdMeta);
+    }
+    if (data.containsKey('position')) {
+      context.handle(
+        _positionMeta,
+        position.isAcceptableOrUnknown(data['position']!, _positionMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_positionMeta);
+    }
+    if (data.containsKey('done')) {
+      context.handle(
+        _doneMeta,
+        done.isAcceptableOrUnknown(data['done']!, _doneMeta),
+      );
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  RoutineStep map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return RoutineStep(
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}id'],
+      )!,
+      routineId: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}routine_id'],
+      )!,
+      pictogramId: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}pictogram_id'],
+      )!,
+      position: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}position'],
+      )!,
+      done: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}done'],
+      )!,
+    );
+  }
+
+  @override
+  $RoutineStepsTable createAlias(String alias) {
+    return $RoutineStepsTable(attachedDatabase, alias);
+  }
+}
+
+class RoutineStep extends DataClass implements Insertable<RoutineStep> {
+  final int id;
+  final int routineId;
+  final int pictogramId;
+  final int position;
+  final bool done;
+  const RoutineStep({
+    required this.id,
+    required this.routineId,
+    required this.pictogramId,
+    required this.position,
+    required this.done,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<int>(id);
+    map['routine_id'] = Variable<int>(routineId);
+    map['pictogram_id'] = Variable<int>(pictogramId);
+    map['position'] = Variable<int>(position);
+    map['done'] = Variable<bool>(done);
+    return map;
+  }
+
+  RoutineStepsCompanion toCompanion(bool nullToAbsent) {
+    return RoutineStepsCompanion(
+      id: Value(id),
+      routineId: Value(routineId),
+      pictogramId: Value(pictogramId),
+      position: Value(position),
+      done: Value(done),
+    );
+  }
+
+  factory RoutineStep.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return RoutineStep(
+      id: serializer.fromJson<int>(json['id']),
+      routineId: serializer.fromJson<int>(json['routineId']),
+      pictogramId: serializer.fromJson<int>(json['pictogramId']),
+      position: serializer.fromJson<int>(json['position']),
+      done: serializer.fromJson<bool>(json['done']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'routineId': serializer.toJson<int>(routineId),
+      'pictogramId': serializer.toJson<int>(pictogramId),
+      'position': serializer.toJson<int>(position),
+      'done': serializer.toJson<bool>(done),
+    };
+  }
+
+  RoutineStep copyWith({
+    int? id,
+    int? routineId,
+    int? pictogramId,
+    int? position,
+    bool? done,
+  }) => RoutineStep(
+    id: id ?? this.id,
+    routineId: routineId ?? this.routineId,
+    pictogramId: pictogramId ?? this.pictogramId,
+    position: position ?? this.position,
+    done: done ?? this.done,
+  );
+  RoutineStep copyWithCompanion(RoutineStepsCompanion data) {
+    return RoutineStep(
+      id: data.id.present ? data.id.value : this.id,
+      routineId: data.routineId.present ? data.routineId.value : this.routineId,
+      pictogramId: data.pictogramId.present
+          ? data.pictogramId.value
+          : this.pictogramId,
+      position: data.position.present ? data.position.value : this.position,
+      done: data.done.present ? data.done.value : this.done,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('RoutineStep(')
+          ..write('id: $id, ')
+          ..write('routineId: $routineId, ')
+          ..write('pictogramId: $pictogramId, ')
+          ..write('position: $position, ')
+          ..write('done: $done')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(id, routineId, pictogramId, position, done);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is RoutineStep &&
+          other.id == this.id &&
+          other.routineId == this.routineId &&
+          other.pictogramId == this.pictogramId &&
+          other.position == this.position &&
+          other.done == this.done);
+}
+
+class RoutineStepsCompanion extends UpdateCompanion<RoutineStep> {
+  final Value<int> id;
+  final Value<int> routineId;
+  final Value<int> pictogramId;
+  final Value<int> position;
+  final Value<bool> done;
+  const RoutineStepsCompanion({
+    this.id = const Value.absent(),
+    this.routineId = const Value.absent(),
+    this.pictogramId = const Value.absent(),
+    this.position = const Value.absent(),
+    this.done = const Value.absent(),
+  });
+  RoutineStepsCompanion.insert({
+    this.id = const Value.absent(),
+    required int routineId,
+    required int pictogramId,
+    required int position,
+    this.done = const Value.absent(),
+  }) : routineId = Value(routineId),
+       pictogramId = Value(pictogramId),
+       position = Value(position);
+  static Insertable<RoutineStep> custom({
+    Expression<int>? id,
+    Expression<int>? routineId,
+    Expression<int>? pictogramId,
+    Expression<int>? position,
+    Expression<bool>? done,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (routineId != null) 'routine_id': routineId,
+      if (pictogramId != null) 'pictogram_id': pictogramId,
+      if (position != null) 'position': position,
+      if (done != null) 'done': done,
+    });
+  }
+
+  RoutineStepsCompanion copyWith({
+    Value<int>? id,
+    Value<int>? routineId,
+    Value<int>? pictogramId,
+    Value<int>? position,
+    Value<bool>? done,
+  }) {
+    return RoutineStepsCompanion(
+      id: id ?? this.id,
+      routineId: routineId ?? this.routineId,
+      pictogramId: pictogramId ?? this.pictogramId,
+      position: position ?? this.position,
+      done: done ?? this.done,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (routineId.present) {
+      map['routine_id'] = Variable<int>(routineId.value);
+    }
+    if (pictogramId.present) {
+      map['pictogram_id'] = Variable<int>(pictogramId.value);
+    }
+    if (position.present) {
+      map['position'] = Variable<int>(position.value);
+    }
+    if (done.present) {
+      map['done'] = Variable<bool>(done.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('RoutineStepsCompanion(')
+          ..write('id: $id, ')
+          ..write('routineId: $routineId, ')
+          ..write('pictogramId: $pictogramId, ')
+          ..write('position: $position, ')
+          ..write('done: $done')
+          ..write(')'))
+        .toString();
+  }
+}
+
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   $AppDatabaseManager get managers => $AppDatabaseManager(this);
@@ -2111,6 +2821,8 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   late final $BoardItemsTable boardItems = $BoardItemsTable(this);
   late final $ProfileCategoriesTable profileCategories =
       $ProfileCategoriesTable(this);
+  late final $RoutinesTable routines = $RoutinesTable(this);
+  late final $RoutineStepsTable routineSteps = $RoutineStepsTable(this);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
@@ -2121,6 +2833,8 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     pictograms,
     boardItems,
     profileCategories,
+    routines,
+    routineSteps,
   ];
 }
 
@@ -2179,6 +2893,25 @@ final class $$ProfilesTableReferences
     final cache = $_typedResult.readTableOrNull(
       _profileCategoriesRefsTable($_db),
     );
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: cache),
+    );
+  }
+
+  static MultiTypedResultKey<$RoutinesTable, List<Routine>> _routinesRefsTable(
+    _$AppDatabase db,
+  ) => MultiTypedResultKey.fromTable(
+    db.routines,
+    aliasName: 'profiles__id__routines__profile_id',
+  );
+
+  $$RoutinesTableProcessedTableManager get routinesRefs {
+    final manager = $$RoutinesTableTableManager(
+      $_db,
+      $_db.routines,
+    ).filter((f) => f.profileId.id.sqlEquals($_itemColumn<int>('id')!));
+
+    final cache = $_typedResult.readTableOrNull(_routinesRefsTable($_db));
     return ProcessedTableManager(
       manager.$state.copyWith(prefetchedData: cache),
     );
@@ -2265,6 +2998,31 @@ class $$ProfilesTableFilterComposer
           }) => $$ProfileCategoriesTableFilterComposer(
             $db: $db,
             $table: $db.profileCategories,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return f(composer);
+  }
+
+  Expression<bool> routinesRefs(
+    Expression<bool> Function($$RoutinesTableFilterComposer f) f,
+  ) {
+    final $$RoutinesTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.routines,
+      getReferencedColumn: (t) => t.profileId,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$RoutinesTableFilterComposer(
+            $db: $db,
+            $table: $db.routines,
             $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
             joinBuilder: joinBuilder,
             $removeJoinBuilderFromRootComposer:
@@ -2396,6 +3154,31 @@ class $$ProfilesTableAnnotationComposer
         );
     return f(composer);
   }
+
+  Expression<T> routinesRefs<T extends Object>(
+    Expression<T> Function($$RoutinesTableAnnotationComposer a) f,
+  ) {
+    final $$RoutinesTableAnnotationComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.routines,
+      getReferencedColumn: (t) => t.profileId,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$RoutinesTableAnnotationComposer(
+            $db: $db,
+            $table: $db.routines,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return f(composer);
+  }
 }
 
 class $$ProfilesTableTableManager
@@ -2414,6 +3197,7 @@ class $$ProfilesTableTableManager
           PrefetchHooks Function({
             bool boardItemsRefs,
             bool profileCategoriesRefs,
+            bool routinesRefs,
           })
         > {
   $$ProfilesTableTableManager(_$AppDatabase db, $ProfilesTable table)
@@ -2468,12 +3252,17 @@ class $$ProfilesTableTableManager
               )
               .toList(),
           prefetchHooksCallback:
-              ({boardItemsRefs = false, profileCategoriesRefs = false}) {
+              ({
+                boardItemsRefs = false,
+                profileCategoriesRefs = false,
+                routinesRefs = false,
+              }) {
                 return PrefetchHooks(
                   db: db,
                   explicitlyWatchedTables: [
                     if (boardItemsRefs) db.boardItems,
                     if (profileCategoriesRefs) db.profileCategories,
+                    if (routinesRefs) db.routines,
                   ],
                   addJoins: null,
                   getPrefetchedDataCallback: (items) async {
@@ -2518,6 +3307,26 @@ class $$ProfilesTableTableManager
                           referencedColumn: 'profile_id',
                           typedResults: items,
                         ),
+                      if (routinesRefs)
+                        await $_getPrefetchedDataByColumns<
+                          Profile,
+                          $ProfilesTable,
+                          Routine,
+                          $RoutinesTable
+                        >(
+                          currentTable: table,
+                          referencedTable: $$ProfilesTableReferences
+                              ._routinesRefsTable(db),
+                          managerFromTypedResult: (p0) =>
+                              $$ProfilesTableReferences(
+                                db,
+                                table,
+                                p0,
+                              ).routinesRefs,
+                          currentColumn: 'id',
+                          referencedColumn: 'profile_id',
+                          typedResults: items,
+                        ),
                     ];
                   },
                 );
@@ -2538,7 +3347,11 @@ typedef $$ProfilesTableProcessedTableManager =
       $$ProfilesTableUpdateCompanionBuilder,
       (Profile, $$ProfilesTableReferences),
       Profile,
-      PrefetchHooks Function({bool boardItemsRefs, bool profileCategoriesRefs})
+      PrefetchHooks Function({
+        bool boardItemsRefs,
+        bool profileCategoriesRefs,
+        bool routinesRefs,
+      })
     >;
 typedef $$CategoriesTableCreateCompanionBuilder = CategoriesCompanion Function({
   Value<int> id,
@@ -3092,6 +3905,24 @@ final class $$PictogramsTableReferences
       manager.$state.copyWith(prefetchedData: cache),
     );
   }
+
+  static MultiTypedResultKey<$RoutineStepsTable, List<RoutineStep>>
+  _routineStepsRefsTable(_$AppDatabase db) => MultiTypedResultKey.fromTable(
+    db.routineSteps,
+    aliasName: 'pictograms__id__routine_steps__pictogram_id',
+  );
+
+  $$RoutineStepsTableProcessedTableManager get routineStepsRefs {
+    final manager = $$RoutineStepsTableTableManager(
+      $_db,
+      $_db.routineSteps,
+    ).filter((f) => f.pictogramId.id.sqlEquals($_itemColumn<int>('id')!));
+
+    final cache = $_typedResult.readTableOrNull(_routineStepsRefsTable($_db));
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: cache),
+    );
+  }
 }
 
 class $$PictogramsTableFilterComposer
@@ -3182,6 +4013,31 @@ class $$PictogramsTableFilterComposer
           }) => $$BoardItemsTableFilterComposer(
             $db: $db,
             $table: $db.boardItems,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return f(composer);
+  }
+
+  Expression<bool> routineStepsRefs(
+    Expression<bool> Function($$RoutineStepsTableFilterComposer f) f,
+  ) {
+    final $$RoutineStepsTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.routineSteps,
+      getReferencedColumn: (t) => t.pictogramId,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$RoutineStepsTableFilterComposer(
+            $db: $db,
+            $table: $db.routineSteps,
             $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
             joinBuilder: joinBuilder,
             $removeJoinBuilderFromRootComposer:
@@ -3345,6 +4201,31 @@ class $$PictogramsTableAnnotationComposer
     );
     return f(composer);
   }
+
+  Expression<T> routineStepsRefs<T extends Object>(
+    Expression<T> Function($$RoutineStepsTableAnnotationComposer a) f,
+  ) {
+    final $$RoutineStepsTableAnnotationComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.routineSteps,
+      getReferencedColumn: (t) => t.pictogramId,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$RoutineStepsTableAnnotationComposer(
+            $db: $db,
+            $table: $db.routineSteps,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return f(composer);
+  }
 }
 
 class $$PictogramsTableTableManager
@@ -3360,7 +4241,11 @@ class $$PictogramsTableTableManager
           $$PictogramsTableUpdateCompanionBuilder,
           (Pictogram, $$PictogramsTableReferences),
           Pictogram,
-          PrefetchHooks Function({bool categoryId, bool boardItemsRefs})
+          PrefetchHooks Function({
+            bool categoryId,
+            bool boardItemsRefs,
+            bool routineStepsRefs,
+          })
         > {
   $$PictogramsTableTableManager(_$AppDatabase db, $PictogramsTable table)
     : super(
@@ -3426,10 +4311,17 @@ class $$PictogramsTableTableManager
               )
               .toList(),
           prefetchHooksCallback:
-              ({categoryId = false, boardItemsRefs = false}) {
+              ({
+                categoryId = false,
+                boardItemsRefs = false,
+                routineStepsRefs = false,
+              }) {
                 return PrefetchHooks(
                   db: db,
-                  explicitlyWatchedTables: [if (boardItemsRefs) db.boardItems],
+                  explicitlyWatchedTables: [
+                    if (boardItemsRefs) db.boardItems,
+                    if (routineStepsRefs) db.routineSteps,
+                  ],
                   addJoins:
                       <
                         T extends TableManagerState<
@@ -3482,6 +4374,26 @@ class $$PictogramsTableTableManager
                           referencedColumn: 'pictogram_id',
                           typedResults: items,
                         ),
+                      if (routineStepsRefs)
+                        await $_getPrefetchedDataByColumns<
+                          Pictogram,
+                          $PictogramsTable,
+                          RoutineStep,
+                          $RoutineStepsTable
+                        >(
+                          currentTable: table,
+                          referencedTable: $$PictogramsTableReferences
+                              ._routineStepsRefsTable(db),
+                          managerFromTypedResult: (p0) =>
+                              $$PictogramsTableReferences(
+                                db,
+                                table,
+                                p0,
+                              ).routineStepsRefs,
+                          currentColumn: 'id',
+                          referencedColumn: 'pictogram_id',
+                          typedResults: items,
+                        ),
                     ];
                   },
                 );
@@ -3502,7 +4414,11 @@ typedef $$PictogramsTableProcessedTableManager =
       $$PictogramsTableUpdateCompanionBuilder,
       (Pictogram, $$PictogramsTableReferences),
       Pictogram,
-      PrefetchHooks Function({bool categoryId, bool boardItemsRefs})
+      PrefetchHooks Function({
+        bool categoryId,
+        bool boardItemsRefs,
+        bool routineStepsRefs,
+      })
     >;
 typedef $$BoardItemsTableCreateCompanionBuilder = BoardItemsCompanion Function({
   Value<int> id,
@@ -4414,6 +5330,798 @@ typedef $$ProfileCategoriesTableProcessedTableManager =
       ProfileCategory,
       PrefetchHooks Function({bool profileId, bool categoryId})
     >;
+typedef $$RoutinesTableCreateCompanionBuilder = RoutinesCompanion Function({
+  Value<int> id,
+  required int profileId,
+  required String name,
+  Value<int> position,
+  Value<DateTime> createdAt,
+});
+typedef $$RoutinesTableUpdateCompanionBuilder = RoutinesCompanion Function({
+  Value<int> id,
+  Value<int> profileId,
+  Value<String> name,
+  Value<int> position,
+  Value<DateTime> createdAt,
+});
+
+final class $$RoutinesTableReferences
+    extends BaseReferences<_$AppDatabase, $RoutinesTable, Routine> {
+  $$RoutinesTableReferences(super.$_db, super.$_table, super.$_typedResult);
+
+  static $ProfilesTable _profileIdTable(_$AppDatabase db) =>
+      db.profiles.createAlias('routines__profile_id__profiles__id');
+
+  $$ProfilesTableProcessedTableManager get profileId {
+    final $_column = $_itemColumn<int>('profile_id')!;
+
+    final manager = $$ProfilesTableTableManager(
+      $_db,
+      $_db.profiles,
+    ).filter((f) => f.id.sqlEquals($_column));
+    final item = $_typedResult.readTableOrNull(_profileIdTable($_db));
+    if (item == null) return manager;
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: [item]),
+    );
+  }
+
+  static MultiTypedResultKey<$RoutineStepsTable, List<RoutineStep>>
+  _routineStepsRefsTable(_$AppDatabase db) => MultiTypedResultKey.fromTable(
+    db.routineSteps,
+    aliasName: 'routines__id__routine_steps__routine_id',
+  );
+
+  $$RoutineStepsTableProcessedTableManager get routineStepsRefs {
+    final manager = $$RoutineStepsTableTableManager(
+      $_db,
+      $_db.routineSteps,
+    ).filter((f) => f.routineId.id.sqlEquals($_itemColumn<int>('id')!));
+
+    final cache = $_typedResult.readTableOrNull(_routineStepsRefsTable($_db));
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: cache),
+    );
+  }
+}
+
+class $$RoutinesTableFilterComposer
+    extends Composer<_$AppDatabase, $RoutinesTable> {
+  $$RoutinesTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<int> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get name => $composableBuilder(
+    column: $table.name,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get position => $composableBuilder(
+    column: $table.position,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<DateTime> get createdAt => $composableBuilder(
+    column: $table.createdAt,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  $$ProfilesTableFilterComposer get profileId {
+    final $$ProfilesTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.profileId,
+      referencedTable: $db.profiles,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$ProfilesTableFilterComposer(
+            $db: $db,
+            $table: $db.profiles,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+
+  Expression<bool> routineStepsRefs(
+    Expression<bool> Function($$RoutineStepsTableFilterComposer f) f,
+  ) {
+    final $$RoutineStepsTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.routineSteps,
+      getReferencedColumn: (t) => t.routineId,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$RoutineStepsTableFilterComposer(
+            $db: $db,
+            $table: $db.routineSteps,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return f(composer);
+  }
+}
+
+class $$RoutinesTableOrderingComposer
+    extends Composer<_$AppDatabase, $RoutinesTable> {
+  $$RoutinesTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<int> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get name => $composableBuilder(
+    column: $table.name,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get position => $composableBuilder(
+    column: $table.position,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<DateTime> get createdAt => $composableBuilder(
+    column: $table.createdAt,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  $$ProfilesTableOrderingComposer get profileId {
+    final $$ProfilesTableOrderingComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.profileId,
+      referencedTable: $db.profiles,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$ProfilesTableOrderingComposer(
+            $db: $db,
+            $table: $db.profiles,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+}
+
+class $$RoutinesTableAnnotationComposer
+    extends Composer<_$AppDatabase, $RoutinesTable> {
+  $$RoutinesTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<int> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get name =>
+      $composableBuilder(column: $table.name, builder: (column) => column);
+
+  GeneratedColumn<int> get position =>
+      $composableBuilder(column: $table.position, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get createdAt =>
+      $composableBuilder(column: $table.createdAt, builder: (column) => column);
+
+  $$ProfilesTableAnnotationComposer get profileId {
+    final $$ProfilesTableAnnotationComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.profileId,
+      referencedTable: $db.profiles,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$ProfilesTableAnnotationComposer(
+            $db: $db,
+            $table: $db.profiles,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+
+  Expression<T> routineStepsRefs<T extends Object>(
+    Expression<T> Function($$RoutineStepsTableAnnotationComposer a) f,
+  ) {
+    final $$RoutineStepsTableAnnotationComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.routineSteps,
+      getReferencedColumn: (t) => t.routineId,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$RoutineStepsTableAnnotationComposer(
+            $db: $db,
+            $table: $db.routineSteps,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return f(composer);
+  }
+}
+
+class $$RoutinesTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $RoutinesTable,
+          Routine,
+          $$RoutinesTableFilterComposer,
+          $$RoutinesTableOrderingComposer,
+          $$RoutinesTableAnnotationComposer,
+          $$RoutinesTableCreateCompanionBuilder,
+          $$RoutinesTableUpdateCompanionBuilder,
+          (Routine, $$RoutinesTableReferences),
+          Routine,
+          PrefetchHooks Function({bool profileId, bool routineStepsRefs})
+        > {
+  $$RoutinesTableTableManager(_$AppDatabase db, $RoutinesTable table)
+    : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$RoutinesTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$RoutinesTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$RoutinesTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                Value<int> profileId = const Value.absent(),
+                Value<String> name = const Value.absent(),
+                Value<int> position = const Value.absent(),
+                Value<DateTime> createdAt = const Value.absent(),
+              }) => RoutinesCompanion(
+                id: id,
+                profileId: profileId,
+                name: name,
+                position: position,
+                createdAt: createdAt,
+              ),
+          createCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                required int profileId,
+                required String name,
+                Value<int> position = const Value.absent(),
+                Value<DateTime> createdAt = const Value.absent(),
+              }) => RoutinesCompanion.insert(
+                id: id,
+                profileId: profileId,
+                name: name,
+                position: position,
+                createdAt: createdAt,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map(
+                (e) => (
+                  e.readTable<$RoutinesTable, Routine>(table),
+                  $$RoutinesTableReferences(db, table, e),
+                ),
+              )
+              .toList(),
+          prefetchHooksCallback:
+              ({profileId = false, routineStepsRefs = false}) {
+                return PrefetchHooks(
+                  db: db,
+                  explicitlyWatchedTables: [
+                    if (routineStepsRefs) db.routineSteps,
+                  ],
+                  addJoins:
+                      <
+                        T extends TableManagerState<
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic
+                        >
+                      >(state) {
+                        if (profileId) {
+                          state = state.withJoin(
+                            currentTable: table,
+                            currentColumn: table.profileId,
+                            referencedTable: $$RoutinesTableReferences
+                                ._profileIdTable(db),
+                            referencedColumn: $$RoutinesTableReferences
+                                ._profileIdTable(db)
+                                .id,
+                          ) as T;
+                        }
+
+                        return state;
+                      },
+                  getPrefetchedDataCallback: (items) async {
+                    return [
+                      if (routineStepsRefs)
+                        await $_getPrefetchedDataByColumns<
+                          Routine,
+                          $RoutinesTable,
+                          RoutineStep,
+                          $RoutineStepsTable
+                        >(
+                          currentTable: table,
+                          referencedTable: $$RoutinesTableReferences
+                              ._routineStepsRefsTable(db),
+                          managerFromTypedResult: (p0) =>
+                              $$RoutinesTableReferences(
+                                db,
+                                table,
+                                p0,
+                              ).routineStepsRefs,
+                          currentColumn: 'id',
+                          referencedColumn: 'routine_id',
+                          typedResults: items,
+                        ),
+                    ];
+                  },
+                );
+              },
+        ),
+      );
+}
+
+typedef $$RoutinesTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $RoutinesTable,
+      Routine,
+      $$RoutinesTableFilterComposer,
+      $$RoutinesTableOrderingComposer,
+      $$RoutinesTableAnnotationComposer,
+      $$RoutinesTableCreateCompanionBuilder,
+      $$RoutinesTableUpdateCompanionBuilder,
+      (Routine, $$RoutinesTableReferences),
+      Routine,
+      PrefetchHooks Function({bool profileId, bool routineStepsRefs})
+    >;
+typedef $$RoutineStepsTableCreateCompanionBuilder =
+    RoutineStepsCompanion Function({
+      Value<int> id,
+      required int routineId,
+      required int pictogramId,
+      required int position,
+      Value<bool> done,
+    });
+typedef $$RoutineStepsTableUpdateCompanionBuilder =
+    RoutineStepsCompanion Function({
+      Value<int> id,
+      Value<int> routineId,
+      Value<int> pictogramId,
+      Value<int> position,
+      Value<bool> done,
+    });
+
+final class $$RoutineStepsTableReferences
+    extends BaseReferences<_$AppDatabase, $RoutineStepsTable, RoutineStep> {
+  $$RoutineStepsTableReferences(super.$_db, super.$_table, super.$_typedResult);
+
+  static $RoutinesTable _routineIdTable(_$AppDatabase db) =>
+      db.routines.createAlias('routine_steps__routine_id__routines__id');
+
+  $$RoutinesTableProcessedTableManager get routineId {
+    final $_column = $_itemColumn<int>('routine_id')!;
+
+    final manager = $$RoutinesTableTableManager(
+      $_db,
+      $_db.routines,
+    ).filter((f) => f.id.sqlEquals($_column));
+    final item = $_typedResult.readTableOrNull(_routineIdTable($_db));
+    if (item == null) return manager;
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: [item]),
+    );
+  }
+
+  static $PictogramsTable _pictogramIdTable(_$AppDatabase db) =>
+      db.pictograms.createAlias('routine_steps__pictogram_id__pictograms__id');
+
+  $$PictogramsTableProcessedTableManager get pictogramId {
+    final $_column = $_itemColumn<int>('pictogram_id')!;
+
+    final manager = $$PictogramsTableTableManager(
+      $_db,
+      $_db.pictograms,
+    ).filter((f) => f.id.sqlEquals($_column));
+    final item = $_typedResult.readTableOrNull(_pictogramIdTable($_db));
+    if (item == null) return manager;
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: [item]),
+    );
+  }
+}
+
+class $$RoutineStepsTableFilterComposer
+    extends Composer<_$AppDatabase, $RoutineStepsTable> {
+  $$RoutineStepsTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<int> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get position => $composableBuilder(
+    column: $table.position,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<bool> get done => $composableBuilder(
+    column: $table.done,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  $$RoutinesTableFilterComposer get routineId {
+    final $$RoutinesTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.routineId,
+      referencedTable: $db.routines,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$RoutinesTableFilterComposer(
+            $db: $db,
+            $table: $db.routines,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+
+  $$PictogramsTableFilterComposer get pictogramId {
+    final $$PictogramsTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.pictogramId,
+      referencedTable: $db.pictograms,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$PictogramsTableFilterComposer(
+            $db: $db,
+            $table: $db.pictograms,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+}
+
+class $$RoutineStepsTableOrderingComposer
+    extends Composer<_$AppDatabase, $RoutineStepsTable> {
+  $$RoutineStepsTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<int> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get position => $composableBuilder(
+    column: $table.position,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<bool> get done => $composableBuilder(
+    column: $table.done,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  $$RoutinesTableOrderingComposer get routineId {
+    final $$RoutinesTableOrderingComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.routineId,
+      referencedTable: $db.routines,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$RoutinesTableOrderingComposer(
+            $db: $db,
+            $table: $db.routines,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+
+  $$PictogramsTableOrderingComposer get pictogramId {
+    final $$PictogramsTableOrderingComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.pictogramId,
+      referencedTable: $db.pictograms,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$PictogramsTableOrderingComposer(
+            $db: $db,
+            $table: $db.pictograms,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+}
+
+class $$RoutineStepsTableAnnotationComposer
+    extends Composer<_$AppDatabase, $RoutineStepsTable> {
+  $$RoutineStepsTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<int> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<int> get position =>
+      $composableBuilder(column: $table.position, builder: (column) => column);
+
+  GeneratedColumn<bool> get done =>
+      $composableBuilder(column: $table.done, builder: (column) => column);
+
+  $$RoutinesTableAnnotationComposer get routineId {
+    final $$RoutinesTableAnnotationComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.routineId,
+      referencedTable: $db.routines,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$RoutinesTableAnnotationComposer(
+            $db: $db,
+            $table: $db.routines,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+
+  $$PictogramsTableAnnotationComposer get pictogramId {
+    final $$PictogramsTableAnnotationComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.pictogramId,
+      referencedTable: $db.pictograms,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$PictogramsTableAnnotationComposer(
+            $db: $db,
+            $table: $db.pictograms,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+}
+
+class $$RoutineStepsTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $RoutineStepsTable,
+          RoutineStep,
+          $$RoutineStepsTableFilterComposer,
+          $$RoutineStepsTableOrderingComposer,
+          $$RoutineStepsTableAnnotationComposer,
+          $$RoutineStepsTableCreateCompanionBuilder,
+          $$RoutineStepsTableUpdateCompanionBuilder,
+          (RoutineStep, $$RoutineStepsTableReferences),
+          RoutineStep,
+          PrefetchHooks Function({bool routineId, bool pictogramId})
+        > {
+  $$RoutineStepsTableTableManager(_$AppDatabase db, $RoutineStepsTable table)
+    : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$RoutineStepsTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$RoutineStepsTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$RoutineStepsTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                Value<int> routineId = const Value.absent(),
+                Value<int> pictogramId = const Value.absent(),
+                Value<int> position = const Value.absent(),
+                Value<bool> done = const Value.absent(),
+              }) => RoutineStepsCompanion(
+                id: id,
+                routineId: routineId,
+                pictogramId: pictogramId,
+                position: position,
+                done: done,
+              ),
+          createCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                required int routineId,
+                required int pictogramId,
+                required int position,
+                Value<bool> done = const Value.absent(),
+              }) => RoutineStepsCompanion.insert(
+                id: id,
+                routineId: routineId,
+                pictogramId: pictogramId,
+                position: position,
+                done: done,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map(
+                (e) => (
+                  e.readTable<$RoutineStepsTable, RoutineStep>(table),
+                  $$RoutineStepsTableReferences(db, table, e),
+                ),
+              )
+              .toList(),
+          prefetchHooksCallback: ({routineId = false, pictogramId = false}) {
+            return PrefetchHooks(
+              db: db,
+              explicitlyWatchedTables: [],
+              addJoins:
+                  <
+                    T extends TableManagerState<
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic
+                    >
+                  >(state) {
+                    if (routineId) {
+                      state = state.withJoin(
+                        currentTable: table,
+                        currentColumn: table.routineId,
+                        referencedTable: $$RoutineStepsTableReferences
+                            ._routineIdTable(db),
+                        referencedColumn: $$RoutineStepsTableReferences
+                            ._routineIdTable(db)
+                            .id,
+                      ) as T;
+                    }
+                    if (pictogramId) {
+                      state = state.withJoin(
+                        currentTable: table,
+                        currentColumn: table.pictogramId,
+                        referencedTable: $$RoutineStepsTableReferences
+                            ._pictogramIdTable(db),
+                        referencedColumn: $$RoutineStepsTableReferences
+                            ._pictogramIdTable(db)
+                            .id,
+                      ) as T;
+                    }
+
+                    return state;
+                  },
+              getPrefetchedDataCallback: (items) async {
+                return [];
+              },
+            );
+          },
+        ),
+      );
+}
+
+typedef $$RoutineStepsTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $RoutineStepsTable,
+      RoutineStep,
+      $$RoutineStepsTableFilterComposer,
+      $$RoutineStepsTableOrderingComposer,
+      $$RoutineStepsTableAnnotationComposer,
+      $$RoutineStepsTableCreateCompanionBuilder,
+      $$RoutineStepsTableUpdateCompanionBuilder,
+      (RoutineStep, $$RoutineStepsTableReferences),
+      RoutineStep,
+      PrefetchHooks Function({bool routineId, bool pictogramId})
+    >;
 
 class $AppDatabaseManager {
   final _$AppDatabase _db;
@@ -4428,4 +6136,8 @@ class $AppDatabaseManager {
       $$BoardItemsTableTableManager(_db, _db.boardItems);
   $$ProfileCategoriesTableTableManager get profileCategories =>
       $$ProfileCategoriesTableTableManager(_db, _db.profileCategories);
+  $$RoutinesTableTableManager get routines =>
+      $$RoutinesTableTableManager(_db, _db.routines);
+  $$RoutineStepsTableTableManager get routineSteps =>
+      $$RoutineStepsTableTableManager(_db, _db.routineSteps);
 }
