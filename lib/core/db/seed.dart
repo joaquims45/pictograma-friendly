@@ -99,6 +99,19 @@ Future<void> seedIfEmpty(AppDatabase db, {AssetBundle? bundle}) async {
           );
     }
 
+    var catPos = 0;
+    for (final id in catIds.values) {
+      await db
+          .into(db.profileCategories)
+          .insert(
+            ProfileCategoriesCompanion.insert(
+              profileId: kid,
+              categoryId: id,
+              position: catPos++,
+            ),
+          );
+    }
+
     final perCategory = <String, int>{};
     for (final it in items) {
       final cat = it['category'] as String;

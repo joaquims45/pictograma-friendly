@@ -22,10 +22,10 @@ void main() {
     final flat = await db.boardPictograms(twins.id, null);
     expect(flat.length, inInclusiveRange(4, 8));
     expect(flat.first.labelEs, 'quiero agua');
-    expect(await db.profileCategories(twins.id), isEmpty);
+    expect(await db.categoriesForProfile(twins.id), isEmpty);
 
     final kid = profiles.last;
-    final cats = await db.profileCategories(kid.id);
+    final cats = await db.categoriesForProfile(kid.id);
     expect(cats.length, 8);
     final first = await db.boardPictograms(kid.id, cats.first.id);
     expect(first, isNotEmpty);

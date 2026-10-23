@@ -1739,6 +1739,369 @@ class BoardItemsCompanion extends UpdateCompanion<BoardItem> {
   }
 }
 
+class $ProfileCategoriesTable extends ProfileCategories
+    with TableInfo<$ProfileCategoriesTable, ProfileCategory> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $ProfileCategoriesTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
+    'id',
+    aliasedName,
+    false,
+    hasAutoIncrement: true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'PRIMARY KEY AUTOINCREMENT',
+    ),
+  );
+  static const VerificationMeta _profileIdMeta = const VerificationMeta(
+    'profileId',
+  );
+  @override
+  late final GeneratedColumn<int> profileId = GeneratedColumn<int>(
+    'profile_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'REFERENCES profiles (id)',
+    ),
+  );
+  static const VerificationMeta _categoryIdMeta = const VerificationMeta(
+    'categoryId',
+  );
+  @override
+  late final GeneratedColumn<int> categoryId = GeneratedColumn<int>(
+    'category_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'REFERENCES categories (id)',
+    ),
+  );
+  static const VerificationMeta _positionMeta = const VerificationMeta(
+    'position',
+  );
+  @override
+  late final GeneratedColumn<int> position = GeneratedColumn<int>(
+    'position',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _hiddenMeta = const VerificationMeta('hidden');
+  @override
+  late final GeneratedColumn<bool> hidden = GeneratedColumn<bool>(
+    'hidden',
+    aliasedName,
+    false,
+    type: DriftSqlType.bool,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'CHECK ("hidden" IN (0, 1))',
+    ),
+    defaultValue: const Constant(false),
+  );
+  @override
+  List<GeneratedColumn> get $columns => [
+    id,
+    profileId,
+    categoryId,
+    position,
+    hidden,
+  ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'profile_categories';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<ProfileCategory> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('profile_id')) {
+      context.handle(
+        _profileIdMeta,
+        profileId.isAcceptableOrUnknown(data['profile_id']!, _profileIdMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_profileIdMeta);
+    }
+    if (data.containsKey('category_id')) {
+      context.handle(
+        _categoryIdMeta,
+        categoryId.isAcceptableOrUnknown(data['category_id']!, _categoryIdMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_categoryIdMeta);
+    }
+    if (data.containsKey('position')) {
+      context.handle(
+        _positionMeta,
+        position.isAcceptableOrUnknown(data['position']!, _positionMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_positionMeta);
+    }
+    if (data.containsKey('hidden')) {
+      context.handle(
+        _hiddenMeta,
+        hidden.isAcceptableOrUnknown(data['hidden']!, _hiddenMeta),
+      );
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  List<Set<GeneratedColumn>> get uniqueKeys => [
+    {profileId, categoryId},
+  ];
+  @override
+  ProfileCategory map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return ProfileCategory(
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}id'],
+      )!,
+      profileId: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}profile_id'],
+      )!,
+      categoryId: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}category_id'],
+      )!,
+      position: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}position'],
+      )!,
+      hidden: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}hidden'],
+      )!,
+    );
+  }
+
+  @override
+  $ProfileCategoriesTable createAlias(String alias) {
+    return $ProfileCategoriesTable(attachedDatabase, alias);
+  }
+}
+
+class ProfileCategory extends DataClass implements Insertable<ProfileCategory> {
+  final int id;
+  final int profileId;
+  final int categoryId;
+  final int position;
+  final bool hidden;
+  const ProfileCategory({
+    required this.id,
+    required this.profileId,
+    required this.categoryId,
+    required this.position,
+    required this.hidden,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<int>(id);
+    map['profile_id'] = Variable<int>(profileId);
+    map['category_id'] = Variable<int>(categoryId);
+    map['position'] = Variable<int>(position);
+    map['hidden'] = Variable<bool>(hidden);
+    return map;
+  }
+
+  ProfileCategoriesCompanion toCompanion(bool nullToAbsent) {
+    return ProfileCategoriesCompanion(
+      id: Value(id),
+      profileId: Value(profileId),
+      categoryId: Value(categoryId),
+      position: Value(position),
+      hidden: Value(hidden),
+    );
+  }
+
+  factory ProfileCategory.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return ProfileCategory(
+      id: serializer.fromJson<int>(json['id']),
+      profileId: serializer.fromJson<int>(json['profileId']),
+      categoryId: serializer.fromJson<int>(json['categoryId']),
+      position: serializer.fromJson<int>(json['position']),
+      hidden: serializer.fromJson<bool>(json['hidden']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'profileId': serializer.toJson<int>(profileId),
+      'categoryId': serializer.toJson<int>(categoryId),
+      'position': serializer.toJson<int>(position),
+      'hidden': serializer.toJson<bool>(hidden),
+    };
+  }
+
+  ProfileCategory copyWith({
+    int? id,
+    int? profileId,
+    int? categoryId,
+    int? position,
+    bool? hidden,
+  }) => ProfileCategory(
+    id: id ?? this.id,
+    profileId: profileId ?? this.profileId,
+    categoryId: categoryId ?? this.categoryId,
+    position: position ?? this.position,
+    hidden: hidden ?? this.hidden,
+  );
+  ProfileCategory copyWithCompanion(ProfileCategoriesCompanion data) {
+    return ProfileCategory(
+      id: data.id.present ? data.id.value : this.id,
+      profileId: data.profileId.present ? data.profileId.value : this.profileId,
+      categoryId: data.categoryId.present
+          ? data.categoryId.value
+          : this.categoryId,
+      position: data.position.present ? data.position.value : this.position,
+      hidden: data.hidden.present ? data.hidden.value : this.hidden,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('ProfileCategory(')
+          ..write('id: $id, ')
+          ..write('profileId: $profileId, ')
+          ..write('categoryId: $categoryId, ')
+          ..write('position: $position, ')
+          ..write('hidden: $hidden')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(id, profileId, categoryId, position, hidden);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is ProfileCategory &&
+          other.id == this.id &&
+          other.profileId == this.profileId &&
+          other.categoryId == this.categoryId &&
+          other.position == this.position &&
+          other.hidden == this.hidden);
+}
+
+class ProfileCategoriesCompanion extends UpdateCompanion<ProfileCategory> {
+  final Value<int> id;
+  final Value<int> profileId;
+  final Value<int> categoryId;
+  final Value<int> position;
+  final Value<bool> hidden;
+  const ProfileCategoriesCompanion({
+    this.id = const Value.absent(),
+    this.profileId = const Value.absent(),
+    this.categoryId = const Value.absent(),
+    this.position = const Value.absent(),
+    this.hidden = const Value.absent(),
+  });
+  ProfileCategoriesCompanion.insert({
+    this.id = const Value.absent(),
+    required int profileId,
+    required int categoryId,
+    required int position,
+    this.hidden = const Value.absent(),
+  }) : profileId = Value(profileId),
+       categoryId = Value(categoryId),
+       position = Value(position);
+  static Insertable<ProfileCategory> custom({
+    Expression<int>? id,
+    Expression<int>? profileId,
+    Expression<int>? categoryId,
+    Expression<int>? position,
+    Expression<bool>? hidden,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (profileId != null) 'profile_id': profileId,
+      if (categoryId != null) 'category_id': categoryId,
+      if (position != null) 'position': position,
+      if (hidden != null) 'hidden': hidden,
+    });
+  }
+
+  ProfileCategoriesCompanion copyWith({
+    Value<int>? id,
+    Value<int>? profileId,
+    Value<int>? categoryId,
+    Value<int>? position,
+    Value<bool>? hidden,
+  }) {
+    return ProfileCategoriesCompanion(
+      id: id ?? this.id,
+      profileId: profileId ?? this.profileId,
+      categoryId: categoryId ?? this.categoryId,
+      position: position ?? this.position,
+      hidden: hidden ?? this.hidden,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (profileId.present) {
+      map['profile_id'] = Variable<int>(profileId.value);
+    }
+    if (categoryId.present) {
+      map['category_id'] = Variable<int>(categoryId.value);
+    }
+    if (position.present) {
+      map['position'] = Variable<int>(position.value);
+    }
+    if (hidden.present) {
+      map['hidden'] = Variable<bool>(hidden.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('ProfileCategoriesCompanion(')
+          ..write('id: $id, ')
+          ..write('profileId: $profileId, ')
+          ..write('categoryId: $categoryId, ')
+          ..write('position: $position, ')
+          ..write('hidden: $hidden')
+          ..write(')'))
+        .toString();
+  }
+}
+
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   $AppDatabaseManager get managers => $AppDatabaseManager(this);
@@ -1746,6 +2109,8 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   late final $CategoriesTable categories = $CategoriesTable(this);
   late final $PictogramsTable pictograms = $PictogramsTable(this);
   late final $BoardItemsTable boardItems = $BoardItemsTable(this);
+  late final $ProfileCategoriesTable profileCategories =
+      $ProfileCategoriesTable(this);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
@@ -1755,6 +2120,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     categories,
     pictograms,
     boardItems,
+    profileCategories,
   ];
 }
 
@@ -1792,6 +2158,27 @@ final class $$ProfilesTableReferences
     ).filter((f) => f.profileId.id.sqlEquals($_itemColumn<int>('id')!));
 
     final cache = $_typedResult.readTableOrNull(_boardItemsRefsTable($_db));
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: cache),
+    );
+  }
+
+  static MultiTypedResultKey<$ProfileCategoriesTable, List<ProfileCategory>>
+  _profileCategoriesRefsTable(_$AppDatabase db) =>
+      MultiTypedResultKey.fromTable(
+        db.profileCategories,
+        aliasName: 'profiles__id__profile_categories__profile_id',
+      );
+
+  $$ProfileCategoriesTableProcessedTableManager get profileCategoriesRefs {
+    final manager = $$ProfileCategoriesTableTableManager(
+      $_db,
+      $_db.profileCategories,
+    ).filter((f) => f.profileId.id.sqlEquals($_itemColumn<int>('id')!));
+
+    final cache = $_typedResult.readTableOrNull(
+      _profileCategoriesRefsTable($_db),
+    );
     return ProcessedTableManager(
       manager.$state.copyWith(prefetchedData: cache),
     );
@@ -1853,6 +2240,31 @@ class $$ProfilesTableFilterComposer
           }) => $$BoardItemsTableFilterComposer(
             $db: $db,
             $table: $db.boardItems,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return f(composer);
+  }
+
+  Expression<bool> profileCategoriesRefs(
+    Expression<bool> Function($$ProfileCategoriesTableFilterComposer f) f,
+  ) {
+    final $$ProfileCategoriesTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.profileCategories,
+      getReferencedColumn: (t) => t.profileId,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$ProfileCategoriesTableFilterComposer(
+            $db: $db,
+            $table: $db.profileCategories,
             $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
             joinBuilder: joinBuilder,
             $removeJoinBuilderFromRootComposer:
@@ -1958,6 +2370,32 @@ class $$ProfilesTableAnnotationComposer
     );
     return f(composer);
   }
+
+  Expression<T> profileCategoriesRefs<T extends Object>(
+    Expression<T> Function($$ProfileCategoriesTableAnnotationComposer a) f,
+  ) {
+    final $$ProfileCategoriesTableAnnotationComposer composer =
+        $composerBuilder(
+          composer: this,
+          getCurrentColumn: (t) => t.id,
+          referencedTable: $db.profileCategories,
+          getReferencedColumn: (t) => t.profileId,
+          builder:
+              (
+                joinBuilder, {
+                $addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer,
+              }) => $$ProfileCategoriesTableAnnotationComposer(
+                $db: $db,
+                $table: $db.profileCategories,
+                $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+                joinBuilder: joinBuilder,
+                $removeJoinBuilderFromRootComposer:
+                    $removeJoinBuilderFromRootComposer,
+              ),
+        );
+    return f(composer);
+  }
 }
 
 class $$ProfilesTableTableManager
@@ -1973,7 +2411,10 @@ class $$ProfilesTableTableManager
           $$ProfilesTableUpdateCompanionBuilder,
           (Profile, $$ProfilesTableReferences),
           Profile,
-          PrefetchHooks Function({bool boardItemsRefs})
+          PrefetchHooks Function({
+            bool boardItemsRefs,
+            bool profileCategoriesRefs,
+          })
         > {
   $$ProfilesTableTableManager(_$AppDatabase db, $ProfilesTable table)
     : super(
@@ -2026,36 +2467,61 @@ class $$ProfilesTableTableManager
                 ),
               )
               .toList(),
-          prefetchHooksCallback: ({boardItemsRefs = false}) {
-            return PrefetchHooks(
-              db: db,
-              explicitlyWatchedTables: [if (boardItemsRefs) db.boardItems],
-              addJoins: null,
-              getPrefetchedDataCallback: (items) async {
-                return [
-                  if (boardItemsRefs)
-                    await $_getPrefetchedDataByColumns<
-                      Profile,
-                      $ProfilesTable,
-                      BoardItem,
-                      $BoardItemsTable
-                    >(
-                      currentTable: table,
-                      referencedTable: $$ProfilesTableReferences
-                          ._boardItemsRefsTable(db),
-                      managerFromTypedResult: (p0) => $$ProfilesTableReferences(
-                        db,
-                        table,
-                        p0,
-                      ).boardItemsRefs,
-                      currentColumn: 'id',
-                      referencedColumn: 'profile_id',
-                      typedResults: items,
-                    ),
-                ];
+          prefetchHooksCallback:
+              ({boardItemsRefs = false, profileCategoriesRefs = false}) {
+                return PrefetchHooks(
+                  db: db,
+                  explicitlyWatchedTables: [
+                    if (boardItemsRefs) db.boardItems,
+                    if (profileCategoriesRefs) db.profileCategories,
+                  ],
+                  addJoins: null,
+                  getPrefetchedDataCallback: (items) async {
+                    return [
+                      if (boardItemsRefs)
+                        await $_getPrefetchedDataByColumns<
+                          Profile,
+                          $ProfilesTable,
+                          BoardItem,
+                          $BoardItemsTable
+                        >(
+                          currentTable: table,
+                          referencedTable: $$ProfilesTableReferences
+                              ._boardItemsRefsTable(db),
+                          managerFromTypedResult: (p0) =>
+                              $$ProfilesTableReferences(
+                                db,
+                                table,
+                                p0,
+                              ).boardItemsRefs,
+                          currentColumn: 'id',
+                          referencedColumn: 'profile_id',
+                          typedResults: items,
+                        ),
+                      if (profileCategoriesRefs)
+                        await $_getPrefetchedDataByColumns<
+                          Profile,
+                          $ProfilesTable,
+                          ProfileCategory,
+                          $ProfileCategoriesTable
+                        >(
+                          currentTable: table,
+                          referencedTable: $$ProfilesTableReferences
+                              ._profileCategoriesRefsTable(db),
+                          managerFromTypedResult: (p0) =>
+                              $$ProfilesTableReferences(
+                                db,
+                                table,
+                                p0,
+                              ).profileCategoriesRefs,
+                          currentColumn: 'id',
+                          referencedColumn: 'profile_id',
+                          typedResults: items,
+                        ),
+                    ];
+                  },
+                );
               },
-            );
-          },
         ),
       );
 }
@@ -2072,7 +2538,7 @@ typedef $$ProfilesTableProcessedTableManager =
       $$ProfilesTableUpdateCompanionBuilder,
       (Profile, $$ProfilesTableReferences),
       Profile,
-      PrefetchHooks Function({bool boardItemsRefs})
+      PrefetchHooks Function({bool boardItemsRefs, bool profileCategoriesRefs})
     >;
 typedef $$CategoriesTableCreateCompanionBuilder = CategoriesCompanion Function({
   Value<int> id,
@@ -2124,6 +2590,27 @@ final class $$CategoriesTableReferences
     ).filter((f) => f.categoryId.id.sqlEquals($_itemColumn<int>('id')!));
 
     final cache = $_typedResult.readTableOrNull(_boardItemsRefsTable($_db));
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: cache),
+    );
+  }
+
+  static MultiTypedResultKey<$ProfileCategoriesTable, List<ProfileCategory>>
+  _profileCategoriesRefsTable(_$AppDatabase db) =>
+      MultiTypedResultKey.fromTable(
+        db.profileCategories,
+        aliasName: 'categories__id__profile_categories__category_id',
+      );
+
+  $$ProfileCategoriesTableProcessedTableManager get profileCategoriesRefs {
+    final manager = $$ProfileCategoriesTableTableManager(
+      $_db,
+      $_db.profileCategories,
+    ).filter((f) => f.categoryId.id.sqlEquals($_itemColumn<int>('id')!));
+
+    final cache = $_typedResult.readTableOrNull(
+      _profileCategoriesRefsTable($_db),
+    );
     return ProcessedTableManager(
       manager.$state.copyWith(prefetchedData: cache),
     );
@@ -2205,6 +2692,31 @@ class $$CategoriesTableFilterComposer
           }) => $$BoardItemsTableFilterComposer(
             $db: $db,
             $table: $db.boardItems,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return f(composer);
+  }
+
+  Expression<bool> profileCategoriesRefs(
+    Expression<bool> Function($$ProfileCategoriesTableFilterComposer f) f,
+  ) {
+    final $$ProfileCategoriesTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.profileCategories,
+      getReferencedColumn: (t) => t.categoryId,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$ProfileCategoriesTableFilterComposer(
+            $db: $db,
+            $table: $db.profileCategories,
             $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
             joinBuilder: joinBuilder,
             $removeJoinBuilderFromRootComposer:
@@ -2323,6 +2835,32 @@ class $$CategoriesTableAnnotationComposer
     );
     return f(composer);
   }
+
+  Expression<T> profileCategoriesRefs<T extends Object>(
+    Expression<T> Function($$ProfileCategoriesTableAnnotationComposer a) f,
+  ) {
+    final $$ProfileCategoriesTableAnnotationComposer composer =
+        $composerBuilder(
+          composer: this,
+          getCurrentColumn: (t) => t.id,
+          referencedTable: $db.profileCategories,
+          getReferencedColumn: (t) => t.categoryId,
+          builder:
+              (
+                joinBuilder, {
+                $addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer,
+              }) => $$ProfileCategoriesTableAnnotationComposer(
+                $db: $db,
+                $table: $db.profileCategories,
+                $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+                joinBuilder: joinBuilder,
+                $removeJoinBuilderFromRootComposer:
+                    $removeJoinBuilderFromRootComposer,
+              ),
+        );
+    return f(composer);
+  }
 }
 
 class $$CategoriesTableTableManager
@@ -2338,7 +2876,11 @@ class $$CategoriesTableTableManager
           $$CategoriesTableUpdateCompanionBuilder,
           (Category, $$CategoriesTableReferences),
           Category,
-          PrefetchHooks Function({bool pictogramsRefs, bool boardItemsRefs})
+          PrefetchHooks Function({
+            bool pictogramsRefs,
+            bool boardItemsRefs,
+            bool profileCategoriesRefs,
+          })
         > {
   $$CategoriesTableTableManager(_$AppDatabase db, $CategoriesTable table)
     : super(
@@ -2388,12 +2930,17 @@ class $$CategoriesTableTableManager
               )
               .toList(),
           prefetchHooksCallback:
-              ({pictogramsRefs = false, boardItemsRefs = false}) {
+              ({
+                pictogramsRefs = false,
+                boardItemsRefs = false,
+                profileCategoriesRefs = false,
+              }) {
                 return PrefetchHooks(
                   db: db,
                   explicitlyWatchedTables: [
                     if (pictogramsRefs) db.pictograms,
                     if (boardItemsRefs) db.boardItems,
+                    if (profileCategoriesRefs) db.profileCategories,
                   ],
                   addJoins: null,
                   getPrefetchedDataCallback: (items) async {
@@ -2438,6 +2985,26 @@ class $$CategoriesTableTableManager
                           referencedColumn: 'category_id',
                           typedResults: items,
                         ),
+                      if (profileCategoriesRefs)
+                        await $_getPrefetchedDataByColumns<
+                          Category,
+                          $CategoriesTable,
+                          ProfileCategory,
+                          $ProfileCategoriesTable
+                        >(
+                          currentTable: table,
+                          referencedTable: $$CategoriesTableReferences
+                              ._profileCategoriesRefsTable(db),
+                          managerFromTypedResult: (p0) =>
+                              $$CategoriesTableReferences(
+                                db,
+                                table,
+                                p0,
+                              ).profileCategoriesRefs,
+                          currentColumn: 'id',
+                          referencedColumn: 'category_id',
+                          typedResults: items,
+                        ),
                     ];
                   },
                 );
@@ -2458,7 +3025,11 @@ typedef $$CategoriesTableProcessedTableManager =
       $$CategoriesTableUpdateCompanionBuilder,
       (Category, $$CategoriesTableReferences),
       Category,
-      PrefetchHooks Function({bool pictogramsRefs, bool boardItemsRefs})
+      PrefetchHooks Function({
+        bool pictogramsRefs,
+        bool boardItemsRefs,
+        bool profileCategoriesRefs,
+      })
     >;
 typedef $$PictogramsTableCreateCompanionBuilder = PictogramsCompanion Function({
   Value<int> id,
@@ -3436,6 +4007,413 @@ typedef $$BoardItemsTableProcessedTableManager =
         bool pictogramId,
       })
     >;
+typedef $$ProfileCategoriesTableCreateCompanionBuilder =
+    ProfileCategoriesCompanion Function({
+      Value<int> id,
+      required int profileId,
+      required int categoryId,
+      required int position,
+      Value<bool> hidden,
+    });
+typedef $$ProfileCategoriesTableUpdateCompanionBuilder =
+    ProfileCategoriesCompanion Function({
+      Value<int> id,
+      Value<int> profileId,
+      Value<int> categoryId,
+      Value<int> position,
+      Value<bool> hidden,
+    });
+
+final class $$ProfileCategoriesTableReferences
+    extends
+        BaseReferences<
+          _$AppDatabase,
+          $ProfileCategoriesTable,
+          ProfileCategory
+        > {
+  $$ProfileCategoriesTableReferences(
+    super.$_db,
+    super.$_table,
+    super.$_typedResult,
+  );
+
+  static $ProfilesTable _profileIdTable(_$AppDatabase db) =>
+      db.profiles.createAlias('profile_categories__profile_id__profiles__id');
+
+  $$ProfilesTableProcessedTableManager get profileId {
+    final $_column = $_itemColumn<int>('profile_id')!;
+
+    final manager = $$ProfilesTableTableManager(
+      $_db,
+      $_db.profiles,
+    ).filter((f) => f.id.sqlEquals($_column));
+    final item = $_typedResult.readTableOrNull(_profileIdTable($_db));
+    if (item == null) return manager;
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: [item]),
+    );
+  }
+
+  static $CategoriesTable _categoryIdTable(_$AppDatabase db) => db.categories
+      .createAlias('profile_categories__category_id__categories__id');
+
+  $$CategoriesTableProcessedTableManager get categoryId {
+    final $_column = $_itemColumn<int>('category_id')!;
+
+    final manager = $$CategoriesTableTableManager(
+      $_db,
+      $_db.categories,
+    ).filter((f) => f.id.sqlEquals($_column));
+    final item = $_typedResult.readTableOrNull(_categoryIdTable($_db));
+    if (item == null) return manager;
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: [item]),
+    );
+  }
+}
+
+class $$ProfileCategoriesTableFilterComposer
+    extends Composer<_$AppDatabase, $ProfileCategoriesTable> {
+  $$ProfileCategoriesTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<int> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get position => $composableBuilder(
+    column: $table.position,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<bool> get hidden => $composableBuilder(
+    column: $table.hidden,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  $$ProfilesTableFilterComposer get profileId {
+    final $$ProfilesTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.profileId,
+      referencedTable: $db.profiles,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$ProfilesTableFilterComposer(
+            $db: $db,
+            $table: $db.profiles,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+
+  $$CategoriesTableFilterComposer get categoryId {
+    final $$CategoriesTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.categoryId,
+      referencedTable: $db.categories,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$CategoriesTableFilterComposer(
+            $db: $db,
+            $table: $db.categories,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+}
+
+class $$ProfileCategoriesTableOrderingComposer
+    extends Composer<_$AppDatabase, $ProfileCategoriesTable> {
+  $$ProfileCategoriesTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<int> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get position => $composableBuilder(
+    column: $table.position,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<bool> get hidden => $composableBuilder(
+    column: $table.hidden,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  $$ProfilesTableOrderingComposer get profileId {
+    final $$ProfilesTableOrderingComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.profileId,
+      referencedTable: $db.profiles,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$ProfilesTableOrderingComposer(
+            $db: $db,
+            $table: $db.profiles,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+
+  $$CategoriesTableOrderingComposer get categoryId {
+    final $$CategoriesTableOrderingComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.categoryId,
+      referencedTable: $db.categories,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$CategoriesTableOrderingComposer(
+            $db: $db,
+            $table: $db.categories,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+}
+
+class $$ProfileCategoriesTableAnnotationComposer
+    extends Composer<_$AppDatabase, $ProfileCategoriesTable> {
+  $$ProfileCategoriesTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<int> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<int> get position =>
+      $composableBuilder(column: $table.position, builder: (column) => column);
+
+  GeneratedColumn<bool> get hidden =>
+      $composableBuilder(column: $table.hidden, builder: (column) => column);
+
+  $$ProfilesTableAnnotationComposer get profileId {
+    final $$ProfilesTableAnnotationComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.profileId,
+      referencedTable: $db.profiles,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$ProfilesTableAnnotationComposer(
+            $db: $db,
+            $table: $db.profiles,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+
+  $$CategoriesTableAnnotationComposer get categoryId {
+    final $$CategoriesTableAnnotationComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.categoryId,
+      referencedTable: $db.categories,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$CategoriesTableAnnotationComposer(
+            $db: $db,
+            $table: $db.categories,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+}
+
+class $$ProfileCategoriesTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $ProfileCategoriesTable,
+          ProfileCategory,
+          $$ProfileCategoriesTableFilterComposer,
+          $$ProfileCategoriesTableOrderingComposer,
+          $$ProfileCategoriesTableAnnotationComposer,
+          $$ProfileCategoriesTableCreateCompanionBuilder,
+          $$ProfileCategoriesTableUpdateCompanionBuilder,
+          (ProfileCategory, $$ProfileCategoriesTableReferences),
+          ProfileCategory,
+          PrefetchHooks Function({bool profileId, bool categoryId})
+        > {
+  $$ProfileCategoriesTableTableManager(
+    _$AppDatabase db,
+    $ProfileCategoriesTable table,
+  ) : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$ProfileCategoriesTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$ProfileCategoriesTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$ProfileCategoriesTableAnnotationComposer(
+                $db: db,
+                $table: table,
+              ),
+          updateCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                Value<int> profileId = const Value.absent(),
+                Value<int> categoryId = const Value.absent(),
+                Value<int> position = const Value.absent(),
+                Value<bool> hidden = const Value.absent(),
+              }) => ProfileCategoriesCompanion(
+                id: id,
+                profileId: profileId,
+                categoryId: categoryId,
+                position: position,
+                hidden: hidden,
+              ),
+          createCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                required int profileId,
+                required int categoryId,
+                required int position,
+                Value<bool> hidden = const Value.absent(),
+              }) => ProfileCategoriesCompanion.insert(
+                id: id,
+                profileId: profileId,
+                categoryId: categoryId,
+                position: position,
+                hidden: hidden,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map(
+                (e) => (
+                  e.readTable<$ProfileCategoriesTable, ProfileCategory>(table),
+                  $$ProfileCategoriesTableReferences(db, table, e),
+                ),
+              )
+              .toList(),
+          prefetchHooksCallback: ({profileId = false, categoryId = false}) {
+            return PrefetchHooks(
+              db: db,
+              explicitlyWatchedTables: [],
+              addJoins:
+                  <
+                    T extends TableManagerState<
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic
+                    >
+                  >(state) {
+                    if (profileId) {
+                      state = state.withJoin(
+                        currentTable: table,
+                        currentColumn: table.profileId,
+                        referencedTable: $$ProfileCategoriesTableReferences
+                            ._profileIdTable(db),
+                        referencedColumn: $$ProfileCategoriesTableReferences
+                            ._profileIdTable(db)
+                            .id,
+                      ) as T;
+                    }
+                    if (categoryId) {
+                      state = state.withJoin(
+                        currentTable: table,
+                        currentColumn: table.categoryId,
+                        referencedTable: $$ProfileCategoriesTableReferences
+                            ._categoryIdTable(db),
+                        referencedColumn: $$ProfileCategoriesTableReferences
+                            ._categoryIdTable(db)
+                            .id,
+                      ) as T;
+                    }
+
+                    return state;
+                  },
+              getPrefetchedDataCallback: (items) async {
+                return [];
+              },
+            );
+          },
+        ),
+      );
+}
+
+typedef $$ProfileCategoriesTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $ProfileCategoriesTable,
+      ProfileCategory,
+      $$ProfileCategoriesTableFilterComposer,
+      $$ProfileCategoriesTableOrderingComposer,
+      $$ProfileCategoriesTableAnnotationComposer,
+      $$ProfileCategoriesTableCreateCompanionBuilder,
+      $$ProfileCategoriesTableUpdateCompanionBuilder,
+      (ProfileCategory, $$ProfileCategoriesTableReferences),
+      ProfileCategory,
+      PrefetchHooks Function({bool profileId, bool categoryId})
+    >;
 
 class $AppDatabaseManager {
   final _$AppDatabase _db;
@@ -3448,4 +4426,6 @@ class $AppDatabaseManager {
       $$PictogramsTableTableManager(_db, _db.pictograms);
   $$BoardItemsTableTableManager get boardItems =>
       $$BoardItemsTableTableManager(_db, _db.boardItems);
+  $$ProfileCategoriesTableTableManager get profileCategories =>
+      $$ProfileCategoriesTableTableManager(_db, _db.profileCategories);
 }

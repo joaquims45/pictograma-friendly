@@ -46,3 +46,17 @@ class BoardItems extends Table {
     {profileId, categoryId, position},
   ];
 }
+
+/// Categorías visibles en un perfil, con orden fijo (previsibilidad).
+class ProfileCategories extends Table {
+  IntColumn get id => integer().autoIncrement()();
+  IntColumn get profileId => integer().references(Profiles, #id)();
+  IntColumn get categoryId => integer().references(Categories, #id)();
+  IntColumn get position => integer()();
+  BoolColumn get hidden => boolean().withDefault(const Constant(false))();
+
+  @override
+  List<Set<Column>> get uniqueKeys => [
+    {profileId, categoryId},
+  ];
+}

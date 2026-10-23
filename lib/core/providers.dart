@@ -31,7 +31,8 @@ final profilesProvider = FutureProvider<List<Profile>>(
 );
 
 final profileCategoriesProvider = FutureProvider.family<List<Category>, int>(
-  (ref, profileId) => ref.watch(databaseProvider).profileCategories(profileId),
+  (ref, profileId) =>
+      ref.watch(databaseProvider).categoriesForProfile(profileId),
 );
 
 typedef BoardKey = ({int profileId, int? categoryId});
