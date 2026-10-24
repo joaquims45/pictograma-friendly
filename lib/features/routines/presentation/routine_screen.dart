@@ -5,6 +5,7 @@ import '../../../core/db/app_database.dart';
 import '../../../core/db/routine_queries.dart';
 import '../../../core/providers.dart';
 import '../../../core/theme/app_theme.dart';
+import '../../../core/widgets/forgiving_tap.dart';
 import '../../boards/presentation/pictogram_image.dart';
 import '../../boards/presentation/pictogram_tile.dart';
 import '../domain/routine_progress.dart';
@@ -133,13 +134,37 @@ class _Active extends StatelessWidget {
             ),
           ],
           const SizedBox(height: 12),
+          // Toque tolerante (dos dedos, deslizar un poco). El intervalo largo
+          // evita que un doble toque salte dos pasos de golpe.
           SizedBox(
             width: double.infinity,
             height: 72,
-            child: FilledButton.icon(
-              onPressed: onDone,
-              icon: const Icon(Icons.check, size: 32),
-              label: const Text('Listo', style: TextStyle(fontSize: 24)),
+            child: ForgivingTap(
+              semanticLabel: 'Listo',
+              minInterval: const Duration(milliseconds: 800),
+              onTap: onDone,
+              builder: (context, pressed) {
+                final color = Theme.of(context).colorScheme.primary;
+                return DecoratedBox(
+                  decoration: BoxDecoration(
+                    color: pressed
+                        ? Color.lerp(color, Colors.black, 0.2)
+                        : color,
+                    borderRadius: BorderRadius.circular(36),
+                  ),
+                  child: const Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(Icons.check, size: 32, color: Colors.white),
+                      SizedBox(width: 10),
+                      Text(
+                        'Listo',
+                        style: TextStyle(fontSize: 24, color: Colors.white),
+                      ),
+                    ],
+                  ),
+                );
+              },
             ),
           ),
         ],

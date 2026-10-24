@@ -9,6 +9,7 @@ import '../../../core/theme/app_theme.dart';
 import '../../phrase_bar/presentation/phrase_bar.dart';
 import '../../routines/presentation/routine_list_screen.dart';
 import '../../routines/presentation/routine_providers.dart';
+import '../../../core/widgets/forgiving_tap.dart';
 import 'pictogram_tile.dart';
 
 class BoardScreen extends ConsumerStatefulWidget {
@@ -140,9 +141,10 @@ class _CategoryRail extends StatelessWidget {
           for (final c in categories)
             Padding(
               padding: const EdgeInsets.only(bottom: 8),
-              child: GestureDetector(
+              child: ForgivingTap(
+                semanticLabel: c.nameEs,
                 onTap: () => onSelect(c.id),
-                child: Container(
+                builder: (context, _) => Container(
                   height: 64,
                   alignment: Alignment.center,
                   padding: const EdgeInsets.symmetric(horizontal: 6),

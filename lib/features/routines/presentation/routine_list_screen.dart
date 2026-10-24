@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/db/app_database.dart';
 import '../../../core/theme/app_theme.dart';
+import '../../../core/widgets/forgiving_tap.dart';
 import 'routine_providers.dart';
 import 'routine_screen.dart';
 
@@ -41,13 +42,14 @@ class RoutineListScreen extends ConsumerWidget {
               for (var i = 0; i < list.length; i++)
                 Padding(
                   padding: const EdgeInsets.only(bottom: 16),
-                  child: GestureDetector(
+                  child: ForgivingTap(
+                    semanticLabel: list[i].name,
                     onTap: () => Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (_) => RoutineScreen(routine: list[i]),
                       ),
                     ),
-                    child: Container(
+                    builder: (context, _) => Container(
                       height: 110,
                       alignment: Alignment.center,
                       decoration: BoxDecoration(
